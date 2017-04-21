@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>Hello, World！ | 罗储华的Blog</title>
+  <title>用GPUImage做难一点点的效果 | 罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords">
+  <meta name="description" content="用GPUImage做难一点点的效果 之前说过要写的博客。。关于使用GPUImage来做混合滤镜和水印等效果； 放了国庆假期之后。。终于想起来要填坑了。。。。于是现在来简单说一下GPUImage做混合滤镜的做法； 其实做混合滤镜，GPUImage一共有2种做法：一是使用GPUImageFilterGroup， 二是用多个GPUImageFilter来叠合； 这里先讲第一种： GPUImageFil">
+<meta name="keywords" content="iOS,GPUImage">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello, World！">
-<meta property="og:url" content="https://luochuhuazai.github.io/2017/04/21/hello-world/index.html">
+<meta property="og:title" content="用GPUImage做难一点点的效果">
+<meta property="og:url" content="https://luochuhuazai.github.io/2015/10/10/用GPUImage做难一点点的效果/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-04-21T08:18:13.000Z">
+<meta property="og:description" content="用GPUImage做难一点点的效果 之前说过要写的博客。。关于使用GPUImage来做混合滤镜和水印等效果； 放了国庆假期之后。。终于想起来要填坑了。。。。于是现在来简单说一下GPUImage做混合滤镜的做法； 其实做混合滤镜，GPUImage一共有2种做法：一是使用GPUImageFilterGroup， 二是用多个GPUImageFilter来叠合； 这里先讲第一种： GPUImageFil">
+<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010091102692">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010091844364">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010091946701">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010092057851">
+<meta property="og:updated_time" content="2017-04-21T09:45:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello, World！">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="用GPUImage做难一点点的效果">
+<meta name="twitter:description" content="用GPUImage做难一点点的效果 之前说过要写的博客。。关于使用GPUImage来做混合滤镜和水印等效果； 放了国庆假期之后。。终于想起来要填坑了。。。。于是现在来简单说一下GPUImage做混合滤镜的做法； 其实做混合滤镜，GPUImage一共有2种做法：一是使用GPUImageFilterGroup， 二是用多个GPUImageFilter来叠合； 这里先讲第一种： GPUImageFil">
+<meta name="twitter:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -150,37 +156,94 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-用GPUImage做难一点点的效果" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello, World！
+      用GPUImage做难一点点的效果
     </h1>
   
 
         
-        <a href="/2017/04/21/hello-world/" class="archive-article-date">
-  	<time datetime="2017-04-21T06:43:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
+        <a href="/2015/10/10/用GPUImage做难一点点的效果/" class="archive-article-date">
+  	<time datetime="2015-10-10T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-10-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<h3 id="this-is-an-code-Block"><a href="#this-is-an-code-Block" class="headerlink" title="this is an code Block"></a>this is an <code>code Block</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code Block Test</div></pre></td></tr></table></figure>
+        <h1 id="用GPUImage做难一点点的效果"><a href="#用GPUImage做难一点点的效果" class="headerlink" title=" 用GPUImage做难一点点的效果 "></a><a href="/u1031/article/details/48712163"> 用GPUImage做难一点点的效果 </a></h1><p>之前说过要写的博客。。关于使用GPUImage来做混合滤镜和水印等效果；</p>
+<p>放了国庆假期之后。。终于想起来要填坑了。。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"><br>。。于是现在来简单说一下GPUImage做混合滤镜的做法；</p>
+<p>其实做混合滤镜，GPUImage一共有2种做法：一是使用GPUImageFilterGroup， 二是用多个GPUImageFilter来叠合；</p>
+<p>这里先讲第一种： GPUImageFilterGroup</p>
+<p><img src="http://img.blog.csdn.net/20151010091102692" alt="">  </p>
+<p>GPUImageFilterGroup包括上面几个属性和方法;</p>
+<p>其中initialFilters指的是数据源的传入Filter(比如  GPUImageUIElement的target,<br>GPUImagePicture的target等  )</p>
+<p>terminalFilter指的是最后的Filter,它的target就是数据的输出口;</p>
+<p>具体可以看GPUImage的官方例子：FilterShowcase</p>
+<p>第二种方法：</p>
+<p>1. 最简单的Filter是这样用的：</p>
+<p><img src="http://img.blog.csdn.net/20151010091844364" alt=""></p>
+<p>2  . 如果做滤镜的叠合，其实就是多个Filter串联在一起：</p>
+<p><img src="http://img.blog.csdn.net/20151010091946701" alt=""></p>
+<p>3. 如果这些滤镜中，要做混合效果(强光混合之类的，就是需要2个输入源的话)</p>
+<p><img src="http://img.blog.csdn.net/20151010092057851" alt=""></p>
+<p>这里给出简单代码：</p>
+<pre><code>//输入的数据(image)
+   UIImage *img = [UIImage imageNamed:@&quot;secPersonDemo.png&quot;];
+   _pic = [[GPUImagePicture alloc] initWithImage:img];
 
+   //经过的渠道(filter)
+   _brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
+   [_brightnessFilter setBrightness:0];
+
+   _contrastFilter = [[GPUImageContrastFilter alloc] init];
+   [_contrastFilter setContrast:1.0];
+
+   _rgbFilter = [[GPUImageToneCurveFilter alloc] init];
+
+   _blurFilter = [[GPUImageiOSBlurFilter alloc] init];
+   [_blurFilter setBlurRadiusInPixels:-12.0f];
+
+   _vignetteFilter = [[GPUImageVignetteFilter alloc] init];
+
+   _bilateralFilter = [[GPUImageBilateralFilter alloc] init];
+   [_bilateralFilter setFirstDistanceNormalizationFactorUniform:15];
+   [_bilateralFilter setSecondDistanceNormalizationFactorUniform:25];
+
+   _rgbOpeningFilter = [[GPUImageRGBOpeningFilter alloc] initWithRadius:0.2];
+
+   _saturationFilter = [[GPUImageSaturationFilter alloc] init];
+
+   _softLightBlendFilter = [[GPUImageSoftLightBlendFilter alloc] init];
+
+   _pict = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@&quot;blend.png&quot;]];
+
+
+   //设置连接(target)
+   [_pic addTarget:_rgbFilter];
+   [_rgbFilter addTarget:_contrastFilter];
+   [_contrastFilter addTarget:_brightnessFilter];
+   [_brightnessFilter addTarget:_bilateralFilter];
+   //[_blurFilter addTarget:_vignetteFilter];
+   //[_vignetteFilter addTarget:_imageview];
+   //[_vignetteFilter addTarget:_bilateralFilter];
+   [_bilateralFilter addTarget:_rgbOpeningFilter];
+   [_rgbOpeningFilter addTarget:_saturationFilter];
+   //[_saturationFilter addTarget:_imageview];
+
+   [_saturationFilter addTarget:_softLightBlendFilter];
+   [_pict addTarget:_softLightBlendFilter];
+
+   [_softLightBlendFilter addTarget:_imageview];//_imageview是一个GPUImageView,用来显示结果的
+
+   [_pict processImage];
+   [_pic processImage];
+</code></pre>
       
 
       
@@ -209,6 +272,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -259,7 +337,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/04/21/hello-world/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2015/10/10/用GPUImage做难一点点的效果/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +351,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/03/07/GPUImage写双输入的滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/08/21/iOS上用GPUImage给视频加滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          GPUImage写双输入的滤镜
+          iOS上用GPUImage给视频加滤镜
         
       </div>
     </a>
   
   
-    <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UIWebView的间距和加载iFrame的坑</div>
+    <a href="/2016/03/02/用GPUImage来给视频加入水印/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用GPUImage来给视频加入水印</div>
       <i class="icon-circle-right"></i>
     </a>
   

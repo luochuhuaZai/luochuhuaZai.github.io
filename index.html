@@ -45,13 +45,13 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="null" class="js-avatar">
+			<img src="https://avatars2.githubusercontent.com/u/9651011?v=3&amp;s=460" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">罗储华</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">blog for LittleDeveloper</p>
+		<p class="header-subtitle">Little Developer</p>
 		
 
 		<nav class="header-menu">
@@ -59,7 +59,9 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/iOS/">iOS</a></li>
+	        
+				<li><a href="/tags/GPUImage/">GPUImage</a></li>
 	        
 			</ul>
 		</nav>
@@ -70,8 +72,6 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-    			
             
     			
     			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
@@ -81,13 +81,7 @@
 		<nav class="header-nav">
 			<div class="social">
 				
-					<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+					<a class="github" target="_blank" href="https://github.com/luochuhuaZai" title="github"><i class="icon-github"></i></a>
 		        
 			</div>
 		</nav>
@@ -105,15 +99,17 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="null" class="js-avatar">
+				<img src="https://avatars2.githubusercontent.com/u/9651011?v=3&amp;s=460" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">罗储华</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>blog for LittleDeveloper<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Little Developer<i class="icon icon-quo-right"></i></p>
 			
 			
+			
+				
 			
 				
 			
@@ -124,24 +120,20 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="#" title="github"><i class="icon-github"></i></a>
-			        
-						<a class="weibo" target="_blank" href="#" title="weibo"><i class="icon-weibo"></i></a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
+						<a class="github" target="_blank" href="https://github.com/luochuhuaZai" title="github"><i class="icon-github"></i></a>
 			        
 				</div>
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/iOS/">iOS</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/GPUImage/">GPUImage</a></li>
 		        
 				</ul>
 			</nav>
@@ -157,6 +149,85 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-UIWebView的间距和加载iFrame的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/21/UIWebView的间距和加载iFrame的坑/">UIWebView的间距和加载iFrame的坑</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" class="archive-article-date">
+  	<time datetime="2017-04-21T08:10:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="UIWebView的间距和加载iFrame的坑"><a href="#UIWebView的间距和加载iFrame的坑" class="headerlink" title="UIWebView的间距和加载iFrame的坑"></a>UIWebView的间距和加载iFrame的坑</h1><p>最近换了工作，新的项目中遇到了很多关于UIWebView的坑，所以就在这里简单说一下，以便以后填坑：</p>
+<ul>
+<li><strong>HTML标签加载</strong></li>
+<li><strong><em>Style</em>配置和<em>Font</em>变换</strong></li>
+<li><strong><em>iFrame</em>的设置和停止播放</strong></li>
+<li><strong>UITableView中的UIWebView</strong></li>
+</ul>
+<hr>
+<p>##简单介绍<br>    UIWebView是iOS中用来显示网页(H5页面)的控件，一般使用loadHTMLString(<em>:baseURL:)和loadRequest(</em>:)这两个方法来显示一个h5页面,简单地说就是一个嵌入到app中的Safari页面;一般可以用来做一些活动页面，因为在时间一到可以立刻修改服务器上的数据，从而禁止进入，H5页面修改起来也比原生app页面要好修改得多。</p>
+<h2 id="HTML标签加载"><a href="#HTML标签加载" class="headerlink" title="HTML标签加载"></a>HTML标签加载</h2><p>这里的HTML标签加载，是指当app需要去加载一些HTML的标签，比如<code>&lt;p&gt;that&#39;s a simple&lt;/p&gt;</code>这样的标签时，所需要做的一些操作，主要是使用UIWebView的loadHTMLString(_:baseURL:)来载入HTML标签，这里的HTML标签以NSString的形式作为传参，实际上我们是可以直接把这样的NSString直接传入的,UIWebView也是可以很好地处理,比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSString *HTMLStr = @&quot;section&gt;&lt;span style=\&quot;margin: 0px; padding: 0px; color: rgb(198, 7, 7); box-sizing: border-box;\&quot;&gt;that&apos;s an simple too&lt;/span&gt;&quot;;</div><div class="line">    [webView loadHTMLString:HTMLStr baseURL:nil];</div></pre></td></tr></table></figure></p>
+<p>这样直接的处理，UIWebView也是会加载在String里面声明的style的,但是在遇到某些style,比如万恶的微软雅黑……就会导致显示的界面出现问题，接下来马上就开始介绍如何给UIWebView加上style</p>
+<h2 id="Style配置和Font变换"><a href="#Style配置和Font变换" class="headerlink" title="Style配置和Font变换"></a><em>Style</em>配置和<em>Font</em>变换</h2><p>因为在UIWebView里面加载的HTML实际上是一个NSString,所以给加上style的方法有2种：拼接<code>&lt;head&gt;&lt;/head&gt;</code>和指定UIWebView加载的CSS文件,这两种方法都可以用来设置WebView的style。</p>
+<h3 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h3><p>所谓拼接，指的是在执行loadHTMLString(_:baseURL:)之前，把局部的HTML拼接成完整的,具有head、body的HTML，这样的话在拼接的时候，就能够像构建HTML页面一样进行样式的调整,下面给出对应代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">NSString *fontStyle = [[NSString alloc] initWithFormat:@&quot;body &#123;font-family: \&quot;%@\&quot;; font-size: 3; margin:0; padding:0; &#125;\n&quot;,[UIFont systemFontOfSize:12].fontName];</div><div class="line">    </div><div class="line">    NSString *HTML = [[NSString alloc] initWithFormat:@&quot;%@%@%@%@%@&quot;, @&quot;&lt;!DOCTYPE html&gt;&quot;</div><div class="line">                           &quot;&lt;html lang=\&quot;ja\&quot;&gt;&quot;</div><div class="line">                           &quot;&lt;head&gt;&quot;</div><div class="line">                           &quot;&lt;meta charset=\&quot;UTF-8\&quot;&gt;&quot;</div><div class="line">                           &quot;&lt;style type=\&quot;text/css\&quot;&gt;&quot;</div><div class="line">                           &quot;iframe&#123;&quot;</div><div class="line">                           &quot;margin:0;&quot;</div><div class="line">                           &quot;padding:0;&quot;</div><div class="line">                           &quot;&#125;&quot;</div><div class="line">                           &quot;.n-content&#123;&quot;</div><div class="line">                           &quot;padding: 10px 15px;&quot;</div><div class="line">                           &quot;font-size: 18px;&quot;</div><div class="line">                           &quot;line-height: 2.5;&quot;</div><div class="line">                           &quot;overflow-x: hidden;&quot;</div><div class="line">                           &quot;&#125;&quot;</div><div class="line">                           ,fontStyle,</div><div class="line">                           @&quot;&lt;/style&gt;&quot;</div><div class="line">                           &quot;&lt;/head&gt;&quot;</div><div class="line">                           &quot;&lt;body id=\&quot;page\&quot;&gt;&quot;</div><div class="line">                           &quot;&lt;div class=\&quot;n-content\&quot;&gt;&quot;</div><div class="line">                           ,originalHTMLString,@&quot;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&quot;];</div></pre></td></tr></table></figure>
+<p>简单地说，就是拼接补全HTML内容，把之前的局部HTML代码用一个div给包括起来，那就可以方便地使用Style了。</p>
+<h2 id="iFrame的设置和停止播放"><a href="#iFrame的设置和停止播放" class="headerlink" title="iFrame的设置和停止播放"></a><em>iFrame</em>的设置和停止播放</h2><p>在UIWebView中有的时候需要播放一些iframe视频,现在网上的资料,大部分对iframe的介绍都是通过youtubePlayer来进行播放，坦白说，这非常好用，完全可以作为内嵌的一款YouTube视频播放器，但是因为需求，这里我需要去播放一些挂在腾讯上的iframe，那就比较蛋疼了。。。。</p>
+<p>首先还是一样，通过拼接来进行HTML代码的补全，因为一般API所返回的都是iframe中的src，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSString *head = [NSString stringWithFormat:@&quot;&lt;iframe class=\&quot;video_iframe\&quot; type=\&quot;text/html\&quot; width=\&quot;100%%\&quot; height=\&quot;100%%\&quot; margin = 0; padding = 0 src=\&quot;&quot;];</div><div class="line"> </div><div class="line">   NSString *foot = @&quot;\&quot; frameborder=\&quot;0\&quot; allowfullscreen = 0&gt;&lt;/iframe&gt;&quot;;</div><div class="line">   NSString *imageHTML = [NSString stringWithFormat:@&quot;%@%@%@&quot;, head,[tempDict objectForKey:@&quot;src&quot;],foot];</div></pre></td></tr></table></figure>
+<p>比较蛋疼的一点是，使用iframe进行播放，在停止的时候需要加载一个空的html,而不是去进行webView的stoploading,因为在根本上，iframe显示出来的时候，loading就已经结束了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[_videoWebView loadHTMLString:@&quot;&quot; baseURL:nil];</div></pre></td></tr></table></figure>
+<h2 id="UITableView中的UIWebView"><a href="#UITableView中的UIWebView" class="headerlink" title="UITableView中的UIWebView"></a>UITableView中的UIWebView</h2><p>在TableViewCell中的webView跟其他控件没什么不同，只要在- (void)tableView:(UITableView <em>)tableView willDisplayCell:(UITableViewCell </em>)cell forRowAtIndexPath:(NSIndexPath *)indexPath里面进行webView的加载就好。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/21/UIWebView的间距和加载iFrame的坑/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
   
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -215,6 +286,901 @@
 
 
   
+    <article id="post-GPUImage写双输入的滤镜" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/07/GPUImage写双输入的滤镜/">GPUImage写双输入的滤镜</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/07/GPUImage写双输入的滤镜/" class="archive-article-date">
+  	<time datetime="2016-03-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天主要来讲一下怎么用GPUImage来手撸一个双输入(blend)的滤镜。</p>
+<p>那么先说一下为什么要自己手撸多输入的滤镜：</p>
+<ol>
+<li><p>双输入的滤镜其实是三输入(也就是多个输入端滤镜)的简单版，让大家比较容易上手。</p>
+</li>
+<li><p>在实际上写app的时候，往往一个滤镜效果是不能满足需求的，而像：0.5的亮度+0.87的透明度+柔光混合+RGB调整，这种分开做都比较简单，但是合并起来则会使代码变得超长超恶心的效果才是需求，当然可以是利用现成的GPUImage的Filter来叠加达到效果，教程请看：<a href="http://blog.csdn.net/u1031/article/details/48712163" target="_blank" rel="external">用GPUImage做难一点点的效果</a> 但是这里我们用一个fsh文件来写，那么代码量就大大滴减少了。</p>
+</li>
+</ol>
+<p>双输入的滤镜可以通过GPUImageTwoInputFilter来实现，只要实现了叠加的算法就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_downSoftLightBlendFilter = [[GPUImageTwoInputFilter alloc] initWithFragmentShaderFromFile:@&quot;customBlendShader&quot;];</div></pre></td></tr></table></figure>
+<p>customBlendShader.fsh 代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">varying highp vec2 textureCoordinate;</div><div class="line">varying highp vec2 textureCoordinate2;</div><div class="line"></div><div class="line">uniform sampler2D inputImageTexture;</div><div class="line">uniform sampler2D inputImageTexture2;</div><div class="line"></div><div class="line">void main()</div><div class="line">&#123;</div><div class="line">	//base就是add的target,overlay就是第二个,均用vec4来表示像素</div><div class="line">    mediump vec4 base = texture2D(inputImageTexture, textureCoordinate);</div><div class="line">    mediump vec4 overlay = texture2D(inputImageTexture2, textureCoordinate2);</div><div class="line">    </div><div class="line">    //为了防止第一个加入的图片(底图),有一些空白的像素点(指的是黑色,并不是白色)</div><div class="line">    lowp float alphaDivisor = base.a + step(base.a, 0.0); // Protect against a divide-by-zero blacking out things in the output</div><div class="line">    </div><div class="line">    //这个是柔光混合的算法：</div><div class="line">    //(2*A-1)*(B-B*B)+B</div><div class="line">    //(2*A-1)*(sqrt(B)-B)+B</div><div class="line">    //overlay &gt; vec4(0.5)  --&gt; (2*A-1)*(B-B*B)+B</div><div class="line">    //overlay &lt;= vec4(0.5) --&gt; (2*A-1)*(sqrt(B)-B)+B</div><div class="line">    </div><div class="line">    if (max(overlay, vec4(0.5)) == vec4(0.5))&#123;</div><div class="line">        gl_FragColor = (vec4(2) * overlay - vec4(1)) * (sqrt(base) - base) + base;</div><div class="line">    &#125;else &#123;</div><div class="line">       gl_FragColor = (vec4(2) * overlay - vec4(1)) * (base - base * base) + base;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然你也可以做别的一些操作，比如 先柔光混合，再让亮度+0.5：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">varying highp vec2 textureCoordinate;</div><div class="line">varying highp vec2 textureCoordinate2;</div><div class="line"></div><div class="line">uniform sampler2D inputImageTexture;</div><div class="line">uniform sampler2D inputImageTexture2;</div><div class="line"></div><div class="line">void main()</div><div class="line">&#123;</div><div class="line">	//base就是add的target,overlay就是第二个,均用vec4来表示像素</div><div class="line">    mediump vec4 base = texture2D(inputImageTexture, textureCoordinate);</div><div class="line">    mediump vec4 overlay = texture2D(inputImageTexture2, textureCoordinate2);</div><div class="line">    </div><div class="line">    //为了防止第一个加入的图片(底图),有一些空白的像素点(指的是黑色,并不是白色)</div><div class="line">    lowp float alphaDivisor = base.a + step(base.a, 0.0); // Protect against a divide-by-zero blacking out things in the output</div><div class="line">    </div><div class="line">    //这个是柔光混合的算法：</div><div class="line">    //(2*A-1)*(B-B*B)+B</div><div class="line">    //(2*A-1)*(sqrt(B)-B)+B</div><div class="line">    //overlay &gt; vec4(0.5)  --&gt; (2*A-1)*(B-B*B)+B</div><div class="line">    //overlay &lt;= vec4(0.5) --&gt; (2*A-1)*(sqrt(B)-B)+B</div><div class="line">    </div><div class="line">	mediump vec4 mixColor;</div><div class="line">	</div><div class="line">    if (max(overlay, vec4(0.5)) == vec4(0.5))&#123;</div><div class="line">        mixColor = (vec4(2) * overlay - vec4(1)) * (sqrt(base) - base) + base;</div><div class="line">    &#125;else &#123;</div><div class="line">       mixColor = (vec4(2) * overlay - vec4(1)) * (base - base * base) + base;</div><div class="line">    &#125;</div><div class="line">	gl_FragColor = vec4((mixColor.rgb + vec3(0.5)), mixColor.w);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样基本就能做只使用两张图片混合(例如加上水印)的所有滤镜效果了。</p>
+<p>用法也是非常简单，直接当成是GPUImageTwoInputFilter来用就好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   _downGPUImageView = [[GPUImageView alloc] initWithFrame:_imgViewDown.frame];</div><div class="line">   [self.view addSubview:_downGPUImageView];</div><div class="line">   </div><div class="line">   UIImage *demoImg = [UIImage imageNamed:@&quot;demo.jpg&quot;];</div><div class="line">   _downGPUImagePicture = [[GPUImagePicture alloc] initWithImage:demoImg];</div><div class="line"></div><div class="line">_downSoftLightBlendFilter = [[GPUImageTwoInputFilter alloc] initWithFragmentShaderFromFile:@&quot;customBlendShader&quot;];</div><div class="line"></div><div class="line">   [_downGPUImagePicture addTarget:_downSoftLightBlendFilter];</div><div class="line">   [_downBlendPicture addTarget:_downSoftLightBlendFilter];</div><div class="line">   [_downSoftLightBlendFilter addTarget:_downGPUImageView];</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/07/GPUImage写双输入的滤镜/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-用GPUImage做自己的滤镜" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/03/用GPUImage做自己的滤镜/">用GPUImage做自己的滤镜</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/03/用GPUImage做自己的滤镜/" class="archive-article-date">
+  	<time datetime="2016-03-03T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇博客主要说一下怎么用GPUImage这个库来撸一个自制滤镜。</p>
+<ol>
+<li><p>GPUImage中滤镜主要使用OpenGL ES来对图片和视频进行渲染，当然，要自制一个滤镜并不需要你对OpenGL ES有很深入的了解，但最好还是简单了解一下。这里给出一个<a href="http://www.apkbus.com/blog-99192-39584.html" target="_blank" rel="external">参考资料</a>；</p>
+</li>
+<li><p>手撸一个滤镜需要算法(像：Overlay(B,A) (A &lt; 128) ? (2 <em> A </em> B / 255) : (255 - 2 <em> (255 - A) </em> (255 - B) / 255) [强光混合算法])。</p>
+</li>
+<li><p>GPUImage里面手撸滤镜通过使用vec4来表示一个像素点的颜色，即rgb和a(RGB色通道和透明度)；</p>
+</li>
+</ol>
+<p>先写一个超级简单的例子，写一个把亮度改成0.5的滤镜</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//这里写2个,一个用手撸的滤镜，一个用GPUImage的，来验证效果</div><div class="line">_upGPUImageView = [[GPUImageView alloc] initWithFrame:_imgViewUp.frame];</div><div class="line">   _downGPUImageView = [[GPUImageView alloc] </div><div class="line">        initWithFrame:_imgViewDown.frame];</div><div class="line">   [self.view addSubview:_upGPUImageView];</div><div class="line">   [self.view addSubview:_downGPUImageView];</div><div class="line">   </div><div class="line">   UIImage *demoImg = [UIImage imageNamed:@&quot;demo.jpg&quot;];</div><div class="line">   _upGPUImagePicture = [[GPUImagePicture alloc] initWithImage:demoImg];</div><div class="line">   _downGPUImagePicture = [[GPUImagePicture alloc] initWithImage:demoImg];</div></pre></td></tr></table></figure>
+<p>来手撸一个滤镜<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//一定要是const的，不是常量可是会报错的</div><div class="line">NSString *const kGPUImageHalfBrightnessShaderString = SHADER_STRING</div><div class="line">    (</div><div class="line">    //这两个是输入,表示输入图片的像素</div><div class="line">     varying highp vec2 textureCoordinate;</div><div class="line">     </div><div class="line">     uniform sampler2D inputImageTexture;</div><div class="line">     </div><div class="line">     //main函数里面对像素进行处理</div><div class="line">     void main()</div><div class="line">     &#123;</div><div class="line">	     //这个textureColor就是结合了输入之后,表示图片像素的vec4</div><div class="line">        lowp vec4 textureColor = texture2D(inputImageTexture, textureCoordinate);</div><div class="line">        //w即透明度(我也不知道为什么不用a)</div><div class="line">        //这样就能让rgb的输入变成+0.5,也就是让亮度+0.5</div><div class="line">        gl_FragColor = vec4((textureColor.rgb + vec3(0.5)), textureColor.w);</div><div class="line">     &#125;</div><div class="line">    );</div><div class="line">    </div><div class="line">    //使用上面的函数来构建滤镜,之后就可以当GPUImageFilter直接用了</div><div class="line">    _upBrightnessFilter = [[GPUImageFilter alloc] initWithFragmentShaderFromString:kGPUImageHalfBrightnessShaderString];</div></pre></td></tr></table></figure></p>
+<p>也可以通过文件来手撸</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_upBrightnessFilter = [[GPUImageFilter alloc] initWithFragmentShaderFromFile:@&quot;custonShader&quot;];</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20160303155002509" alt="这里写图片描述"></p>
+<p>这个是对比组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">_downBrightnessFilter = [[GPUImageBrightnessFilter alloc] init];</div><div class="line">   _downBrightnessFilter.brightness = 0.5;</div></pre></td></tr></table></figure></p>
+<p>添加好target，看效果吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[_upGPUImagePicture addTarget:_upBrightnessFilter];</div><div class="line">   [_upBrightnessFilter addTarget:_upGPUImageView];</div><div class="line">   [_downGPUImagePicture addTarget:_downBrightnessFilter];</div><div class="line">   [_downBrightnessFilter addTarget:_downGPUImageView];</div><div class="line">   </div><div class="line">   [_downGPUImagePicture processImage];</div><div class="line">   [_upGPUImagePicture processImage];</div></pre></td></tr></table></figure></p>
+<p><img src="http://img.blog.csdn.net/20160303154720209" alt="这里写图片描述"></p>
+<p>好了，下次有空的时候会写一篇关于怎么用GPUImage手撸2个输入和3输入的滤镜。。。。。。一个不小心又给自己挖了个坑。。。希望这次有时间填上。。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/03/用GPUImage做自己的滤镜/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-用GPUImage来给视频加入水印" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/02/用GPUImage来给视频加入水印/">用GPUImage来给视频加入水印</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/02/用GPUImage来给视频加入水印/" class="archive-article-date">
+  	<time datetime="2016-03-02T05:22:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇博客原计划是在去年10月末写完的。。。但是因为之后开始人生第一次工作。。就一直拖到了现在。。。跳票了真是十分抱歉(鞠躬ing)</p>
+<p>那么如题，主要说一下怎么用GPUImage这个库来给视频添加水印。</p>
+<ol>
+<li><p>先要了解， 水印其实就是一张图片，给视频加上水印，其实就是给这个视频的每一帧叠加上一张图片，而且图片的位置和大小都是固定的，这样思路就很清晰了。 </p>
+</li>
+<li><p>因为是叠加，所以需要用到blendFilter(blendFilter有很多种，我这里就直接用了GPUImageAlphaBlendFilter，主要用来做半透明的混合的，简直是水印专用！)</p>
+</li>
+<li><p>因为某些水印是带有动画效果的，也就是随着视频的播放，水印的位置和大小虽然不变，但是水印的图片(image)可能会改变，这是做动画效果的一种方法；另外的方法当然就是改变位置和大小了。这样的效果可以通过使用GPUImageTransformFilter来制作，通过setAffineTransform:可以改变从GPUImageTransformFilter中流出的图像数据，具体请参考coreAnimation。</p>
+</li>
+</ol>
+<p>下面给出代码：<br>1.准备工作，导入要编辑的视频</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">NSURL *sampleURL = [[NSBundle mainBundle] URLForResource:@&quot;demo1&quot;    </div><div class="line">      withExtension:@&quot;mp4&quot;];</div><div class="line">   </div><div class="line">   _movieFile = [[GPUImageMovie alloc] initWithURL:sampleURL];</div><div class="line">   _movieFile.runBenchmark = YES;</div><div class="line">   _movieFile.playAtActualSpeed = NO;</div><div class="line">   </div><div class="line">   //获取视频的大小(画面大小)，来确定水印的位置和大小;</div><div class="line">   AVAsset *fileas = [AVAsset assetWithURL:sampleURL];</div><div class="line">   CGSize movieSize = fileas.naturalSize;</div></pre></td></tr></table></figure>
+<p>2.准备滤镜，因为如果直接使用blendFilter的话会把水印图像直接放大来做叠加，所以这里我用了GPUImageUIElement，设置一个跟视频画面大小一样的View，在这个View里面加入水印的ImageView，调整位置，之后把这个View给添加到视频里面去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">UIImage *image = [UIImage imageNamed:@&quot;sample01&quot;];</div><div class="line">   UIImageView *imv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 800, 560)];</div><div class="line">   [imv setImage:image];</div><div class="line">   UIView *vi = [[UIView alloc] initWithFrame:CGRectMake(0, 0, movieSize.width, movieSize.height)];</div><div class="line">   vi.backgroundColor = [UIColor clearColor];</div><div class="line">   imv.center = CGPointMake(vi.bounds.size.width, vi.bounds.size.height + 80);</div><div class="line">   [vi addSubview:imv];</div><div class="line">   </div><div class="line">   _landInput = [[GPUImageUIElement alloc] initWithView:vi];</div><div class="line">   _landBlendFilter = [[GPUImageAlphaBlendFilter alloc] init];</div><div class="line">   //mix即为叠加后的透明度,这里就直接写1.0了</div><div class="line">   _landBlendFilter.mix = 1.0f;</div></pre></td></tr></table></figure>
+<p> 给上输出路径，就是编辑好的视频的存放地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@&quot;Documents/Movie.mp4&quot;];</div><div class="line">   unlink([pathToMovie UTF8String]); //如果视频存在，删掉！</div><div class="line">   NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];</div></pre></td></tr></table></figure></p>
+<p>这里不知为何，我用GPUImageMovie直接读取出来的视频数据如果target是blendFilter就是nil…..先给一个普通的filter再给blendFilter就没有问题，所以就直接先add到GPUImageBrightnessFilter里面去，设置了亮度为平常程度，就不会有影响了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">_movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640.0, 480.0)];</div><div class="line">   _movieWriter.transform = CGAffineTransformMakeScale(0.3, 0.3);</div><div class="line">   </div><div class="line">   _brightnessFilter = [[GPUImageBrightnessFilter alloc] init];</div><div class="line">   _brightnessFilter.brightness = 0.0f;</div><div class="line">   </div><div class="line">   [_movieFile addTarget:_brightnessFilter];</div><div class="line">   [_brightnessFilter addTarget:_landBlendFilter];</div><div class="line">   [_landInput addTarget:_landBlendFilter];</div><div class="line">   </div><div class="line">   [_landBlendFilter addTarget:_movieWriter];</div></pre></td></tr></table></figure></p>
+<p>如果需要做动画效果的话<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[_blendFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime currentTime) &#123;</div><div class="line">        </div><div class="line">        //在这里改变水印的位置、大小等属性；</div><div class="line">        //直接改imageView的frame就好,修改了记得要update就好</div><div class="line">        [weakSelf.landInput update];</div><div class="line">    &#125;];</div></pre></td></tr></table></figure></p>
+<p>导出视频，写入相册；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">__weak ViewController *weakSelf = self;</div><div class="line">_movieWriter.shouldPassthroughAudio = YES;</div><div class="line">   _movieFile.audioEncodingTarget = _movieWriter;</div><div class="line">   [_movieFile enableSynchronizedEncodingUsingMovieWriter:_movieWriter];</div><div class="line">   </div><div class="line">   [_movieWriter startRecording];</div><div class="line">   [_movieFile startProcessing];</div><div class="line">   </div><div class="line">   [_movieWriter setCompletionBlock:^&#123;</div><div class="line">       [weakSelf.filter removeTarget:weakSelf.movieWriter];</div><div class="line">       [weakSelf.movieWriter finishRecording];</div><div class="line">       </div><div class="line">       dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">           </div><div class="line">           ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];</div><div class="line">           </div><div class="line">           [library writeVideoAtPathToSavedPhotosAlbum:[NSURL   </div><div class="line">                   fileURLWithPath:pathToMovie] </div><div class="line">                   completionBlock:^(NSURL *assetURL, NSError </div><div class="line">                   *error) &#123;</div><div class="line">               </div><div class="line">               dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                   NSLog(@&quot;---finished!!!!!&quot;);</div><div class="line">                   </div><div class="line">                   [[[UIAlertView alloc] initWithTitle:@&quot;&quot; message:@&quot;已经成功</div><div class="line">                   写入相册！&quot; delegate:nil cancelButtonTitle:@&quot;好的&quot; </div><div class="line">                   otherButtonTitles: nil] show];</div><div class="line">               &#125;);</div><div class="line">           &#125;];</div><div class="line">       &#125;);</div><div class="line">   &#125;];</div></pre></td></tr></table></figure></p>
+<p>最后给一个效果预览：<br><img src="http://img.blog.csdn.net/20160303144407080" alt="视频贴片"></p>
+<p>这里给出Demo的链接：<a href="http://pan.baidu.com/s/1eRzfP6a" target="_blank" rel="external">http://pan.baidu.com/s/1eRzfP6a</a> demo传到百度云上面去了，打包的时候把demo里面的视频和图片都去掉了，记得先把要编辑的视频URL给改掉。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/02/用GPUImage来给视频加入水印/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-用GPUImage做难一点点的效果" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/10/用GPUImage做难一点点的效果/">用GPUImage做难一点点的效果</a>
+    </h1>
+  
+
+        
+        <a href="/2015/10/10/用GPUImage做难一点点的效果/" class="archive-article-date">
+  	<time datetime="2015-10-10T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-10-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="用GPUImage做难一点点的效果"><a href="#用GPUImage做难一点点的效果" class="headerlink" title=" 用GPUImage做难一点点的效果 "></a><a href="/u1031/article/details/48712163"> 用GPUImage做难一点点的效果 </a></h1><p>之前说过要写的博客。。关于使用GPUImage来做混合滤镜和水印等效果；</p>
+<p>放了国庆假期之后。。终于想起来要填坑了。。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"><br>。。于是现在来简单说一下GPUImage做混合滤镜的做法；</p>
+<p>其实做混合滤镜，GPUImage一共有2种做法：一是使用GPUImageFilterGroup， 二是用多个GPUImageFilter来叠合；</p>
+<p>这里先讲第一种： GPUImageFilterGroup</p>
+<p><img src="http://img.blog.csdn.net/20151010091102692" alt="">  </p>
+<p>GPUImageFilterGroup包括上面几个属性和方法;</p>
+<p>其中initialFilters指的是数据源的传入Filter(比如  GPUImageUIElement的target,<br>GPUImagePicture的target等  )</p>
+<p>terminalFilter指的是最后的Filter,它的target就是数据的输出口;</p>
+<p>具体可以看GPUImage的官方例子：FilterShowcase</p>
+<p>第二种方法：</p>
+<p>1. 最简单的Filter是这样用的：</p>
+<p><img src="http://img.blog.csdn.net/20151010091844364" alt=""></p>
+<p>2  . 如果做滤镜的叠合，其实就是多个Filter串联在一起：</p>
+<p><img src="http://img.blog.csdn.net/20151010091946701" alt=""></p>
+<p>3. 如果这些滤镜中，要做混合效果(强光混合之类的，就是需要2个输入源的话)</p>
+<p><img src="http://img.blog.csdn.net/20151010092057851" alt=""></p>
+<p>这里给出简单代码：</p>
+<pre><code>//输入的数据(image)
+   UIImage *img = [UIImage imageNamed:@&quot;secPersonDemo.png&quot;];
+   _pic = [[GPUImagePicture alloc] initWithImage:img];
+
+   //经过的渠道(filter)
+   _brightnessFilter = [[GPUImageBrightnessFilter alloc] init];
+   [_brightnessFilter setBrightness:0];
+
+   _contrastFilter = [[GPUImageContrastFilter alloc] init];
+   [_contrastFilter setContrast:1.0];
+
+   _rgbFilter = [[GPUImageToneCurveFilter alloc] init];
+
+   _blurFilter = [[GPUImageiOSBlurFilter alloc] init];
+   [_blurFilter setBlurRadiusInPixels:-12.0f];
+
+   _vignetteFilter = [[GPUImageVignetteFilter alloc] init];
+
+   _bilateralFilter = [[GPUImageBilateralFilter alloc] init];
+   [_bilateralFilter setFirstDistanceNormalizationFactorUniform:15];
+   [_bilateralFilter setSecondDistanceNormalizationFactorUniform:25];
+
+   _rgbOpeningFilter = [[GPUImageRGBOpeningFilter alloc] initWithRadius:0.2];
+
+   _saturationFilter = [[GPUImageSaturationFilter alloc] init];
+
+   _softLightBlendFilter = [[GPUImageSoftLightBlendFilter alloc] init];
+
+   _pict = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@&quot;blend.png&quot;]];
+
+
+   //设置连接(target)
+   [_pic addTarget:_rgbFilter];
+   [_rgbFilter addTarget:_contrastFilter];
+   [_contrastFilter addTarget:_brightnessFilter];
+   [_brightnessFilter addTarget:_bilateralFilter];
+   //[_blurFilter addTarget:_vignetteFilter];
+   //[_vignetteFilter addTarget:_imageview];
+   //[_vignetteFilter addTarget:_bilateralFilter];
+   [_bilateralFilter addTarget:_rgbOpeningFilter];
+   [_rgbOpeningFilter addTarget:_saturationFilter];
+   //[_saturationFilter addTarget:_imageview];
+
+   [_saturationFilter addTarget:_softLightBlendFilter];
+   [_pict addTarget:_softLightBlendFilter];
+
+   [_softLightBlendFilter addTarget:_imageview];//_imageview是一个GPUImageView,用来显示结果的
+
+   [_pict processImage];
+   [_pic processImage];
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/10/10/用GPUImage做难一点点的效果/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-iOS上用GPUImage给视频加滤镜" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/21/iOS上用GPUImage给视频加滤镜/">iOS上用GPUImage给视频加滤镜</a>
+    </h1>
+  
+
+        
+        <a href="/2015/08/21/iOS上用GPUImage给视频加滤镜/" class="archive-article-date">
+  	<time datetime="2015-08-21T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS上用GPUImage给视频加滤镜"><a href="#iOS上用GPUImage给视频加滤镜" class="headerlink" title=" iOS上用GPUImage给视频加滤镜 "></a><a href="/u1031/article/details/47811947"> iOS上用GPUImage给视频加滤镜 </a></h1><p>最近在做一个需要给已有视频加滤镜的app，不是实时滤镜，而是给已经存在的视频加滤镜。</p>
+<p>虽然网上有很多关于GPUImage的博客，但大多都是给图片加上滤镜或者是直接在摄像头上加上的实时滤镜，找了很久之后…..</p>
+<p>发现在github上本来就有…..<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"></p>
+<p>但是在网上找，却没有说很多人给出这样的滤镜教程，这里简单给分享一下下。</p>
+<p>1. 首先，什么是GPUImage？详细请度娘之，简单点来说，就是一个用GPU来处理图片和视频的第三方库。</p>
+<p>2. 给图像加滤镜，如果是只加滤镜，那么网上有很多的教程，这里就不细说了，这里主要说一下怎么找要用的滤镜和这个滤镜需要设定什么参数。</p>
+<p>2.1 寻找要用的滤镜， 其实在无论是很多人推荐的GPUImage还是苹果官方的CoreImage，滤镜的名字本身就已经很能说明这个滤镜的作用了：</p>
+<p><img src="http://img.blog.csdn.net/20150821222939505?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt=""></p>
+<p>另外  ，在GPUImage里面，每个滤镜类Filter，都会有详细的注释来说明这个Filter的作用</p>
+<p><img src="http://img.blog.csdn.net/20150821222918378?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt=""></p>
+<p>当然  ，全是英文就是了。。。。。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"></p>
+<p>2.2 配置参数。</p>
+<p>在GPUImage中，其实没有CoreImage可以直接用方法来获取当前滤镜需要用的参数那么方便，而是要通过点击进入对应filter的.h文件里面查询。</p>
+<p><img src="http://img.blog.csdn.net/20150821224137660?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt=""></p>
+<p>如图  ，里面的red、green和blue就是要设定的配置参数。</p>
+<p>3. 给已有视频加上滤镜，这个在GPUImage的github上就有官方的实例。。。。大家可以去看看。</p>
+<pre><code>/* 下面尝试使用GPUImage来给视频加上滤镜。
+     */
+    GPUImageContrastFilter *secondFilter = [[GPUImageContrastFilter alloc] init];
+
+    [secondFilter setContrast:1.80];
+
+    GPUImageBrightnessFilter *firstFilter = [[GPUImageBrightnessFilter alloc] init];
+
+    [firstFilter setBrightness:0.1];
+
+    //GPUImageColorBurnBlendFilter
+    GPUImageRGBFilter *filter = [[GPUImageRGBFilter alloc] init];
+    filter.red = 0.8;
+    filter.green = 1;
+    filter.blue = 1.2;
+
+    NSURL *vedioURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@&quot;s2&quot; ofType:@&quot;mp4&quot;]];
+
+    GPUImageMovie *movie = [[GPUImageMovie alloc] initWithURL:vedioURL];
+
+    movie.runBenchmark = YES;
+
+    //[movie addTarget:filter];
+    [movie addTarget:secondFilter];
+
+    GPUImageMovieWriter *vedioWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:[NSURL fileURLWithPath:@&quot;/Users/huazai/Desktop/t/t16.mov&quot;] size:CGSizeMake(1280, 800)];
+
+    movie.audioEncodingTarget = nil;
+
+    vedioWriter.shouldPassthroughAudio = YES;
+
+    movie.playAtActualSpeed = NO;
+
+    [movie startProcessing];
+
+    [filter addTarget:vedioWriter];
+    //[secondFilter addTarget:vedioWriter];
+
+    [vedioWriter startRecording];
+
+    [vedioWriter setCompletionBlock:^{
+        NSLog(@&quot;已完成！！！&quot;);
+    }];
+</code></pre><p>往后  我会再写几篇博客，关于怎么用GPUImage写水印，混合滤镜，敬请期待。。。。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/08/21/iOS上用GPUImage给视频加滤镜/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-怎么用CIFilter给图片加上各种各样的滤镜" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/">怎么用CIFilter给图片加上各种各样的滤镜</a>
+    </h1>
+  
+
+        
+        <a href="/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/" class="archive-article-date">
+  	<time datetime="2015-07-04T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-07-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="怎么用CIFilter给图片加上各种各样的滤镜"><a href="#怎么用CIFilter给图片加上各种各样的滤镜" class="headerlink" title=" 怎么用CIFilter给图片加上各种各样的滤镜 "></a><a href="/u1031/article/details/46755079"> 怎么用CIFilter给图片加上各种各样的滤镜 </a></h1><p>最近在做对图像处理的app，而要对图像进行处理，CoreImage是离不开的框架。</p>
+<p>上网Google了一下，大部分的博客都是只讲了怎么给图像加上怀旧（CISepiaTone）、模糊（  <strong> CIBloom </strong> ）这几种效果。</p>
+<p>其实在CoreImage滤镜的时候更重要的是具体怎么找滤镜和这个滤镜需要什么参数。。。这个我在官方文档上也很难找啊<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"><br>。。</p>
+<p>而对于一般的app来说，就这么几个效果显然是不够用的，经过一天的劳累心酸，终于知道具体怎么做其他的100多种效果，在这里详细说明一下。</p>
+<p>1. 首先要知道的是，苹果给我们提供了140+种滤镜，但是这些滤镜并不是所有都可以随便用的，大致分为以下几类（种类太多，这里就只显示几种了。。。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"><br>）：</p>
+<p><img src="http://img.blog.csdn.net/20150704142153428?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt="">  </p>
+<p>这里先说一下怎么找想要做的滤镜：</p>
+<p><img src="http://img.blog.csdn.net/20150704143013891?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt="">  </p>
+<p>这样就可以知道kCICategoryBuiltIn里面包含哪些滤镜，而在打的时候，xcode本身就会有提示说这一组滤镜大概是做什么的，如下图，英语不好的有道<br>去吧 <img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/laugh.gif" alt="大笑"><br>。。。</p>
+<p><img src="http://img.blog.csdn.net/20150704143233387?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt="">  </p>
+<p>通过打印，就可以知道这个组别的滤镜有哪些</p>
+<p><img src="http://img.blog.csdn.net/20150704143548063?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt="">  </p>
+<p>好了。。。这么多滤镜，选一个吧。</p>
+<p>滤镜选完了，就需要实际去对图片加滤镜了。。。</p>
+<p>这里接着说怎样具体地给图片加滤镜效果。。前的准备工作。。。。</p>
+<p>1. 在找到想用的滤镜名字之后，需要知道这个滤镜到底需要什么参数。。如下图</p>
+<p><img src="http://img.blog.csdn.net/20150704144843562?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast" alt="">  </p>
+<p>这里打印出来的，就是当前的滤镜的全部参数。。。如下图</p>
+<p><img src="http://img.blog.csdn.net/20150704145001256?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast" alt="">  </p>
+<p>而在CIAttributeFilterName下面的参数，就是需要设置的属性。。。这里就是inputColor、inputImage、inputIntens<br>ity这3个</p>
+<p>其中CIAttributeClass表明这个属性需要的是什么类型的值。</p>
+<p>设置属性的方法如下：</p>
+<p><img src="http://img.blog.csdn.net/20150704145333501?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast" alt="">  </p>
+<p>通过使用setValue forKey的方法来设置属性。。。这个key就是  k+属性名+Key</p>
+<p>在属性设置完之后，就可以输出了！。。这里直接用  CIColorMonochrome这个滤镜来做演示。。</p>
+<ul>
+<li>(UIImage <em>)imageFilter:(UIImage </em>)photo Value:(float)value<br>{<br>CIContext <em>context = [CIContext contextWithOptions:nil];               // 1<br>CIImage </em>image = [[CIImage alloc] initWithImage:photo];                // 2</li>
+</ul>
+<p>CIFilter *filter = [CIFilter filterWithName:@”CIColorMonochrome”];           // 3</p>
+<p>NSLog(@”%@”, [filter attributes]);</p>
+<p>[filter setValue:image forKey:kCIInputImageKey];<br>[filter setValue:[CIColor colorWithRed:100/255 green:0.4 blue:1] forKey:kCIInputColorKey];</p>
+<p>CIImage *result = [filter valueForKey:kCIOutputImageKey];              // 4<br>CGRect extent = [result extent];<br>CGImageRef cgImage = [context createCGImage:result fromRect:extent];// 5</p>
+<p>return [UIImage imageWithCGImage:cgImage];<br>}</p>
+<p>到这为止。。。return的UIImage就是叠加上滤镜的图片了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-Swift学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/19/Swift学习笔记/">Swift学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2015/05/19/Swift学习笔记/" class="archive-article-date">
+  	<time datetime="2015-05-19T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Swift学习笔记"><a href="#Swift学习笔记" class="headerlink" title=" Swift学习笔记 "></a><a href="/u1031/article/details/45361627"> Swift学习笔记 </a></h1><pre><code>好久没有写博客了，最近在做一个Swift的项目，项目本身比较简单，但是因为自己还是不熟悉Swift，导致各种心酸泪啊。主要把这些都写下来，大家分享分享。
+</code></pre><ol>
+<li>OC混编<br>其实Swift跟OC混编是比较容易的事情，就是在一个工程中，既有.swift文件，又有.m和.h文件。<br>因为本身在Swift中所有的.swift不用导入，能够直接使用，但是在使用OC写的类前，需要先导入头文件。<br>在Swift中导入文件并不是直接import进去的，需要一个桥文件<br>在桥文件中import进入的OC类，就可以直接在所有的.swift文件里面用了，但是在用的时候要遵循的是Swift的语法，比如 HZView *view =<br>[[HZView alloc] init]; 在swift里面就要用var view:HZView = HZView();<br><img src="http://img.blog.csdn.net/20150429175509384" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150429175647384" alt="这里写图片描述"></li>
+</ol>
+<p>在调用HZView()之后，会自动调用HZView的init方法，而如果是带有参数的方法，就把参数写在括号里面来调用，比如：<br><img src="http://img.blog.csdn.net/20150429180119542" alt="这里写图片描述"></p>
+<ol>
+<li>协议<br>跟OC不一样，虽然在Swift中还是单继承的，但是继承的类跟实现的协议名放在一起了。(0_0)!<br>如下图：<br><img src="http://img.blog.csdn.net/20150429173909421" alt="这里是继承的类和协议"><br>其中，第一个为这个类(HZSecViewController)的父类(UIViewController)，剩下的是这个类所要实现的协议。</li>
+</ol>
+<p>3. 还是OC混编</p>
+<p>这次的混编跟之前的不一样，这里是在OC文件里面引用swift文件，主要是因为在Swift中苹果给出了更多地API，这样我们可以通过这些API去做更多地事情。</p>
+<p>而且因为像CoreImage等一些框架，用swift写起来会比较方便，而如果项目的整体用OC来写，而在一些需要做效果的组件使用swift来写，</p>
+<p>那就会造成一个局面，就是</p>
+<p>1）写效果不用再像OC这么繁琐，用swift非常简洁；</p>
+<p>2）而在主体（ViewController）里面用OC写，代码容易读懂，错误也比较好修改，最起码不用烦那个该死的初始化问题<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"><br>。。。那个  required  init  (coder aDecoder:  NSCoder  )把我恶心的。。。。。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"></p>
+<p>那么下面来说一下怎么做：</p>
+<p>1. 新建工程，建OC的工程，这个就不说了</p>
+<p>2. 新建一个Swift类：</p>
+<p><img src="http://img.blog.csdn.net/20150519100915116" alt=""></p>
+<p>这里会出现提示：系统会自动建一个桥文件，如果在swift类中要用OC类，就在这个文件里面import要用的OC类</p>
+<p><img src="http://img.blog.csdn.net/20150519100925084" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20150519100933071" alt="">  </p>
+<p>3. 更改配置</p>
+<p>在build setting里面找到Packaging</p>
+<p><img src="http://img.blog.csdn.net/20150519101046715" alt="">  </p>
+<p>这时Product Name应该是项目的名字，如果不是要改成项目的名字</p>
+<p><img src="http://img.blog.csdn.net/20150519101140804" alt="">  </p>
+<p>然后去修改一下Defines Module为Yes</p>
+<p><img src="http://img.blog.csdn.net/20150519101746219" alt=""></p>
+<p>4. 在OC类中导入Swift</p>
+<p>这里要先导入之前提醒你之后系统建德桥文件，然后再导入项目名-Swift.h这个文件就好，这个文件是系统生成的，不要手贱去自己建一个啊</p>
+<p><img src="http://img.blog.csdn.net/20150519101827431" alt="">  </p>
+<p>5. OK了，现在可以在OC类里面使用Swift了</p>
+<p><img src="http://img.blog.csdn.net/20150519101915171" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Swift</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/05/19/Swift学习笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-用XMPP协议来创建自己的即时聊天app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/">用XMPP协议来创建自己的即时聊天app</a>
+    </h1>
+  
+
+        
+        <a href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/" class="archive-article-date">
+  	<time datetime="2015-03-15T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="用XMPP协议来创建自己的即时聊天app"><a href="#用XMPP协议来创建自己的即时聊天app" class="headerlink" title=" 用XMPP协议来创建自己的即时聊天app "></a><a href="/u1031/article/details/44277871"> 用XMPP协议来创建自己的即时聊天app </a></h1><p>因为在之前项目需要用到即时聊天的功能.在逛了好多论坛之后,才终于实现了即时聊天的功能。</p>
+<p>使用xmpp+openfire+iOS客户端来制作聊天app的demo、教程网上都有很多，在这里简单地说一下核心做法。</p>
+<p>1.<br>首先就要制作服务器，这块我是用的openfire的服务器，数据库也不是用嵌入在openfire里面的，而是用的mySQL，性能相当不错，而且不会丢消息。</p>
+<p>1.1 到<a href="http://www.igniterealtime.org/downloads/index.jsp去下载最新的openfire" target="_blank" rel="external">http://www.igniterealtime.org/downloads/index.jsp去下载最新的openfire</a></p>
+<p><img src="http://img.blog.csdn.net/20150315162637702?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>为了验证服务器搭建完成没有，或者验证app到底能不能正常通信，可以下Spqrk来试验，它就是一个聊天工具，等登陆上且能给手机模拟器正常聊天，那聊天功能就成<br>功了！</p>
+<p>1.2 安装openfire，本人是在Mac10.10下安装的，之后去用户偏好里面就能打开设置页，设置好了就能够拿电脑当服务器使了，而windows跟lin<br>ux的没有用过，不过网上很多  教程这里转发一个：<a href="http://wiki.jabbercn.org/Openfire:%E5%AE%89%E8%A3%85%" target="_blank" rel="external">http://wiki.jabbercn.org/Openfire:%E5%AE%89%E8%A3%85%</a><br>E6%8C%87%E5%8D%97</p>
+<p>再发一个在mac上搭建的教程： <a href="http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html" target="_blank" rel="external">http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html</a></p>
+<p>好了，到这里服务器应该已经搭建好了，使用spark去登陆一下。</p>
+<p>2. iOS端制作</p>
+<p>2.1 导入框架，iOS端使用xmpp需要导入对应的库: XMPPFramework<br>，这个库在Github、code4app上面都有，导入过程也不复杂，但是本人还是习惯性的去使用CocoaPods,</p>
+<p>毕竟用来导入实在太方便了。CocoaPods是一种开发工具，在终端上几行代码就能够给项目导入好库，有依赖的库也会给导入好，具体教程网上一抓一大把。</p>
+<p>2.2  大家应该已经猜出来了，其实就是使用XMPPFramework里面的代理方法和xmppStream来跟服务器发送和收到消息。</p>
+<p>先建立跟服务器的连接：</p>
+<p><img src="http://img.blog.csdn.net/20150315165118816?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>然后连接服务器：</p>
+<p><img src="http://img.blog.csdn.net/20150315165135586?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>PS：如果服务器不是自己电脑，需要把Server给改成服务器的IP地址。</p>
+<p>记得给实现XMPPStreamDelegate,当服务器发送消息，比如别人发的消息、好友上线消息等都会回调里面的方法，之前建立连接的时候设定的delegat<br>e就是让服务  器回调的时候能有回调的方法给执行。</p>
+<p>需要实现的有：</p>
+<pre><code>#pragma mark -- XMPPStream Delegate 
+//连接服务器
+- (void)xmppStreamDidConnect:(XMPPStream *)sender{
+
+    NSLog(@&quot;did Connected&quot;);
+    NSError *error = nil;
+    //验证密码
+    if (![[self xmppStream] authenticateWithPassword:password error:&amp;error]){
+        NSLog(@&quot;Authenticate Error: %@&quot;, [[error userInfo] description]);
+    }
+}
+
+//验证通过
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender{
+
+    NSLog(@&quot;验证已通过.........&quot;);
+    [self goOnline];
+}
+
+//收到消息
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
+
+    //    NSLog(@&quot;message = %@&quot;, message);
+
+    NSString *msg = [[message elementForName:@&quot;body&quot;] stringValue];
+    NSString *from = [[message attributeForName:@&quot;from&quot;] stringValue];
+
+    NSLog(@&quot;receive message :%@ from :%@&quot;,msg, from);
+
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:msg forKey:@&quot;MSG&quot;];
+    [dict setObject:from forKey:@&quot;SENDER&quot;];
+
+    //消息委托,就是收到的消息怎么处理
+    [self.messageViewController MessageReceived:dict];
+}
+
+//收到好友状态
+- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence{
+
+    //取得好友状态
+    NSString *presenceType = [presence type]; //online/offline
+    //当前用户
+    NSString *userId = [[sender myJID] user];
+    //在线用户
+    NSString *presenceFromUser = [[presence from] user];
+
+
+    NSLog(@&quot;id: %@&quot;,userId);
+    NSLog(@&quot;user: %@&quot;, presenceFromUser);
+    NSLog(@&quot;type: %@&quot;, presenceType);
+
+    /*这里应该做当有好友上线之后的操作，比如改变对应头像颜色之类的*/
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
+    NSLog(@&quot;did not authenticate....error :%@&quot;, error);
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@&quot;错误&quot; message:@&quot;账号/密码输入出错！&quot; delegate:nil cancelButtonTitle:@&quot;cancel&quot; otherButtonTitles:nil];
+    [alertView show];
+}
+</code></pre><p>做到这里就能收到消息了，建议都给放在appDelegate上面，这样xmppStream不会被释放掉</p>
+<p>下面是发送消息功能的实现</p>
+<pre><code>- (IBAction)sendClick:(id)sender {
+
+    NSString *message = self.messageTextField.text;
+    NSMutableString *toName = [NSMutableString stringWithString:self.toTextField.text];
+    [toName appendString:@&quot;@127.0.0.1&quot;];
+
+    //xmpp通过kissxmpp来上传消息
+    if (message.length &gt; 0) {
+
+        //下面几行就是自己发送消息之后做的事(屏幕上给出现自己发的消息)
+        NSMutableString *messages =  [NSMutableString stringWithString:self.messageTextView.text];
+        NSString *selfName = [[NSUserDefaults standardUserDefaults] stringForKey:@&quot;USERID&quot;];
+
+        [messages appendString:[NSString stringWithFormat:@&quot;\n          %@&quot;,selfName]];
+        [messages appendString:[NSString stringWithFormat:@&quot;\n          %@&quot;, self.messageTextField.text]];
+        self.messageTextView.text = messages;
+
+        //生成&lt;body&gt;文档
+        NSXMLElement *body = [NSXMLElement elementWithName:@&quot;body&quot;];
+        [body setStringValue:message];
+
+        //生成XML消息文档
+        NSXMLElement *mes = [NSXMLElement elementWithName:@&quot;message&quot;];
+        //消息类型
+        [mes addAttributeWithName:@&quot;type&quot; stringValue:@&quot;chat&quot;];
+        //发送给谁
+        [mes addAttributeWithName:@&quot;to&quot; stringValue:toName];
+
+        //由谁发送
+        [mes addAttributeWithName:@&quot;from&quot; stringValue:[[NSUserDefaults standardUserDefaults] stringForKey:@&quot;USERID&quot;]];
+        //组合
+        [mes addChild:body];
+
+        //发送消息
+        [[self xmppStream] sendElement:mes];
+
+        self.messageTextField.text = @&quot;&quot;;
+        [self.messageTextField resignFirstResponder];
+    }
+
+}
+</code></pre><p>最后声明，本人自学中，感谢各大网络网友的支持，有疑问请联系：384345982(QQ)，不过能力有限，望大家不要见怪。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/tongue.gif" alt="吐舌头"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -245,7 +1211,7 @@
 		open_in_new: false,
 		root: "/",
 		innerArchive: true,
-		showTags: false
+		showTags: true
 	}
 </script>
 
@@ -262,8 +1228,6 @@
       
     
       
-      
-      
     
       
       
@@ -275,15 +1239,13 @@
     
     
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
-      
         
       
-      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -302,6 +1264,26 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">iOS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GPUImage</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Swift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">视频播放</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -347,43 +1329,11 @@
     
 
     
-    	<section class="tools-section tools-section-friends" q-show="friends">
-  		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
-            </li>
-          
-        </ul>
-  		
-    	</section>
-    
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自广州的胖子&lt;br&gt;&lt;br&gt;现在魔都做着iOS开发&lt;br&gt;真正的理想是吃吃吃</div>
   	  	
     	</section>
     

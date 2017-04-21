@@ -6,19 +6,44 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>Hello, World！ | 罗储华的Blog</title>
+  <title>怎么用CIFilter给图片加上各种各样的滤镜 | 罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords">
+  <meta name="description" content="怎么用CIFilter给图片加上各种各样的滤镜 最近在做对图像处理的app，而要对图像进行处理，CoreImage是离不开的框架。 上网Google了一下，大部分的博客都是只讲了怎么给图像加上怀旧（CISepiaTone）、模糊（   CIBloom  ）这几种效果。 其实在CoreImage滤镜的时候更重要的是具体怎么找滤镜和这个滤镜需要什么参数。。。这个我在官方文档上也很难找啊。。 而对于一">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello, World！">
-<meta property="og:url" content="https://luochuhuazai.github.io/2017/04/21/hello-world/index.html">
+<meta property="og:title" content="怎么用CIFilter给图片加上各种各样的滤镜">
+<meta property="og:url" content="https://luochuhuazai.github.io/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-04-21T08:18:13.000Z">
+<meta property="og:description" content="怎么用CIFilter给图片加上各种各样的滤镜 最近在做对图像处理的app，而要对图像进行处理，CoreImage是离不开的框架。 上网Google了一下，大部分的博客都是只讲了怎么给图像加上怀旧（CISepiaTone）、模糊（   CIBloom  ）这几种效果。 其实在CoreImage滤镜的时候更重要的是具体怎么找滤镜和这个滤镜需要什么参数。。。这个我在官方文档上也很难找啊。。 而对于一">
+<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif">
+<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif">
+<meta property="og:image" content="http://img.blog.csdn.net/20150704142153428?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150704143013891?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast">
+<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/laugh.gif">
+<meta property="og:image" content="http://img.blog.csdn.net/20150704143233387?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150704143548063?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150704144843562?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150704145001256?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150704145333501?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast">
+<meta property="og:updated_time" content="2017-04-21T09:43:38.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello, World！">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="怎么用CIFilter给图片加上各种各样的滤镜">
+<meta name="twitter:description" content="怎么用CIFilter给图片加上各种各样的滤镜 最近在做对图像处理的app，而要对图像进行处理，CoreImage是离不开的框架。 上网Google了一下，大部分的博客都是只讲了怎么给图像加上怀旧（CISepiaTone）、模糊（   CIBloom  ）这几种效果。 其实在CoreImage滤镜的时候更重要的是具体怎么找滤镜和这个滤镜需要什么参数。。。这个我在官方文档上也很难找啊。。 而对于一">
+<meta name="twitter:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -150,36 +175,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-怎么用CIFilter给图片加上各种各样的滤镜" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello, World！
+      怎么用CIFilter给图片加上各种各样的滤镜
     </h1>
   
 
         
-        <a href="/2017/04/21/hello-world/" class="archive-article-date">
-  	<time datetime="2017-04-21T06:43:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
+        <a href="/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/" class="archive-article-date">
+  	<time datetime="2015-07-04T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-07-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<h3 id="this-is-an-code-Block"><a href="#this-is-an-code-Block" class="headerlink" title="this is an code Block"></a>this is an <code>code Block</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code Block Test</div></pre></td></tr></table></figure>
+        <h1 id="怎么用CIFilter给图片加上各种各样的滤镜"><a href="#怎么用CIFilter给图片加上各种各样的滤镜" class="headerlink" title=" 怎么用CIFilter给图片加上各种各样的滤镜 "></a><a href="/u1031/article/details/46755079"> 怎么用CIFilter给图片加上各种各样的滤镜 </a></h1><p>最近在做对图像处理的app，而要对图像进行处理，CoreImage是离不开的框架。</p>
+<p>上网Google了一下，大部分的博客都是只讲了怎么给图像加上怀旧（CISepiaTone）、模糊（  <strong> CIBloom </strong> ）这几种效果。</p>
+<p>其实在CoreImage滤镜的时候更重要的是具体怎么找滤镜和这个滤镜需要什么参数。。。这个我在官方文档上也很难找啊<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"><br>。。</p>
+<p>而对于一般的app来说，就这么几个效果显然是不够用的，经过一天的劳累心酸，终于知道具体怎么做其他的100多种效果，在这里详细说明一下。</p>
+<p>1. 首先要知道的是，苹果给我们提供了140+种滤镜，但是这些滤镜并不是所有都可以随便用的，大致分为以下几类（种类太多，这里就只显示几种了。。。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"><br>）：</p>
+<p><img src="http://img.blog.csdn.net/20150704142153428?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt="">  </p>
+<p>这里先说一下怎么找想要做的滤镜：</p>
+<p><img src="http://img.blog.csdn.net/20150704143013891?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt="">  </p>
+<p>这样就可以知道kCICategoryBuiltIn里面包含哪些滤镜，而在打的时候，xcode本身就会有提示说这一组滤镜大概是做什么的，如下图，英语不好的有道<br>去吧 <img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/laugh.gif" alt="大笑"><br>。。。</p>
+<p><img src="http://img.blog.csdn.net/20150704143233387?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt="">  </p>
+<p>通过打印，就可以知道这个组别的滤镜有哪些</p>
+<p><img src="http://img.blog.csdn.net/20150704143548063?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt="">  </p>
+<p>好了。。。这么多滤镜，选一个吧。</p>
+<p>滤镜选完了，就需要实际去对图片加滤镜了。。。</p>
+<p>这里接着说怎样具体地给图片加滤镜效果。。前的准备工作。。。。</p>
+<p>1. 在找到想用的滤镜名字之后，需要知道这个滤镜到底需要什么参数。。如下图</p>
+<p><img src="http://img.blog.csdn.net/20150704144843562?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast" alt="">  </p>
+<p>这里打印出来的，就是当前的滤镜的全部参数。。。如下图</p>
+<p><img src="http://img.blog.csdn.net/20150704145001256?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast" alt="">  </p>
+<p>而在CIAttributeFilterName下面的参数，就是需要设置的属性。。。这里就是inputColor、inputImage、inputIntens<br>ity这3个</p>
+<p>其中CIAttributeClass表明这个属性需要的是什么类型的值。</p>
+<p>设置属性的方法如下：</p>
+<p><img src="http://img.blog.csdn.net/20150704145333501?watermark/2/text/aHR0cDovL2Jsb2
+    cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+    y/SouthEast" alt="">  </p>
+<p>通过使用setValue forKey的方法来设置属性。。。这个key就是  k+属性名+Key</p>
+<p>在属性设置完之后，就可以输出了！。。这里直接用  CIColorMonochrome这个滤镜来做演示。。</p>
+<ul>
+<li>(UIImage <em>)imageFilter:(UIImage </em>)photo Value:(float)value<br>{<br>CIContext <em>context = [CIContext contextWithOptions:nil];               // 1<br>CIImage </em>image = [[CIImage alloc] initWithImage:photo];                // 2</li>
+</ul>
+<p>CIFilter *filter = [CIFilter filterWithName:@”CIColorMonochrome”];           // 3</p>
+<p>NSLog(@”%@”, [filter attributes]);</p>
+<p>[filter setValue:image forKey:kCIInputImageKey];<br>[filter setValue:[CIColor colorWithRed:100/255 green:0.4 blue:1] forKey:kCIInputColorKey];</p>
+<p>CIImage *result = [filter valueForKey:kCIOutputImageKey];              // 4<br>CGRect extent = [result extent];<br>CGImageRef cgImage = [context createCGImage:result fromRect:extent];// 5</p>
+<p>return [UIImage imageWithCGImage:cgImage];<br>}</p>
+<p>到这为止。。。return的UIImage就是叠加上滤镜的图片了。</p>
 
       
 
@@ -209,6 +272,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -259,7 +333,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/04/21/hello-world/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +347,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/03/07/GPUImage写双输入的滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/05/19/Swift学习笔记/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          GPUImage写双输入的滤镜
+          Swift学习笔记
         
       </div>
     </a>
   
   
-    <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UIWebView的间距和加载iFrame的坑</div>
+    <a href="/2015/08/21/iOS上用GPUImage给视频加滤镜/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS上用GPUImage给视频加滤镜</div>
       <i class="icon-circle-right"></i>
     </a>
   

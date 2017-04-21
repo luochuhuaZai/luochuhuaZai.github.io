@@ -6,19 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>Hello, World！ | 罗储华的Blog</title>
+  <title>罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hello, World！">
-<meta property="og:url" content="https://luochuhuazai.github.io/2017/04/21/hello-world/index.html">
+  <meta name="description" content="一个iOS小小开发者的技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="罗储华的Blog">
+<meta property="og:url" content="https://luochuhuazai.github.io/page/2/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-04-21T08:18:13.000Z">
+<meta property="og:description" content="一个iOS小小开发者的技术博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello, World！">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="罗储华的Blog">
+<meta name="twitter:description" content="一个iOS小小开发者的技术博客">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -150,145 +148,489 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-UIScrollView的视差滚动实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Hello, World！
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/19/UIScrollView的视差滚动实现/">UIScrollView的视差滚动实现</a>
     </h1>
   
 
         
-        <a href="/2017/04/21/hello-world/" class="archive-article-date">
-  	<time datetime="2017-04-21T06:43:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
+        <a href="/2015/01/19/UIScrollView的视差滚动实现/" class="archive-article-date">
+  	<time datetime="2015-01-19T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-01-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<h3 id="this-is-an-code-Block"><a href="#this-is-an-code-Block" class="headerlink" title="this is an code Block"></a>this is an <code>code Block</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code Block Test</div></pre></td></tr></table></figure>
+        <h1 id="UIScrollView的视差滚动实现"><a href="#UIScrollView的视差滚动实现" class="headerlink" title=" UIScrollView的视差滚动实现 "></a><a href="/u1031/article/details/42872121"> UIScrollView的视差滚动实现 </a></h1><p>最近在做的项目要做到在同一个UIScrollView里面给不同的label或者UITextView分层。<br>分层的话，一开始的想法是用多个UIScrollView来做分层，之后设置不同的滚动速度和通过代理来实现同时滚动就可以了。<br>但是结果是有问题的，因为每一次滚动的时候会调用delegate的DidScroll方法，这时候就会有一点延迟，多个ScrollView就不会一起滚动，而是在<br>一个滚动的时候，过一会会有几个跟着来滚动，效果不是太好。</p>
+<p>之后上网找了很多的例子，终于做到了分层滚动的效果，其实是用了别人的控件<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"><br>。。。在这里先标明例子的出处：<a href="http://code4app.com/ios/SWParallaxScrollView/53254e0d933bf0a63d" target="_blank" rel="external">http://code4app.com/ios/SWParallaxScrollView/53254e0d933bf0a63d</a><br>8b4977  是非常容易使用的分层UIScrollView。</p>
+<p>这里简单说一下使用方法</p>
+<p>1. 给配置上环境。</p>
+<p>就是下过来，拖过去，而且没有用到别的什么框架,比较好用,但是本楼主是直接用的cocoapods来导入的,在github上就有。如果是想再项目中用到的请注意，<br>因为是用到了  c++写的，记得改.m为.mm，可能还要去配置一下buildPhases。</p>
+<p>2. 导入使用</p>
+<p>具体就是一个类，2个文件：SWParallaxScrollView.h和SWParallaxScrollView.mm</p>
+<p>在导入完了之后把SWParallaxScrollView当做UIScrollView来使用：</p>
+<pre><code>self.scrollview = [[SWParallaxScrollView alloc] initWithFrame:self.view.bounds];
+
+    self.scrollview.contentSize = CGSizeMake(960, 480);
+</code></pre><p>但是在把view加入到ScrollView中去的时候用下面的方法</p>
+<pre><code>[self.scrollview addSubview:self.textView onLayer:1];
+</code></pre><p>这样layer比较大的会在上面,而且移动的速度会更快，但是因为底层还是通过位移来做出视差滚动的效果,所以就要做frame的调整</p>
+<p>下面给出效果图</p>
+<p><img src="http://img.blog.csdn.net/20150119132339437?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""> <img src="http://img.blog.csdn.net/20150119132500444?watermark/
+2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0
+JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
 
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
-      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
       
 
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/01/19/UIScrollView的视差滚动实现/">展开全文 >></a>
+        </p>
+      
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/04/21/hello-world/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
+
+
+
+
   
-<nav id="article-nav">
-  
-    <a href="/2016/03/07/GPUImage写双输入的滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
+    <article id="post-通过ASIHTTPRequest实现简单流媒体视频播放下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
         
-          GPUImage写双输入的滤镜
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/12/24/通过ASIHTTPRequest实现简单流媒体视频播放下载/">通过ASIHTTPRequest实现简单流媒体视频播放下载</a>
+    </h1>
+  
+
         
-      </div>
-    </a>
+        <a href="/2014/12/24/通过ASIHTTPRequest实现简单流媒体视频播放下载/" class="archive-article-date">
+  	<time datetime="2014-12-24T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-12-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="通过ASIHTTPRequest实现简单流媒体视频播放下载"><a href="#通过ASIHTTPRequest实现简单流媒体视频播放下载" class="headerlink" title=" 通过ASIHTTPRequest实现简单流媒体视频播放下载 "></a><a href="/u1031/article/details/42119431"> 通过ASIHTTPRequest实现简单流媒体视频播放下载 </a></h1><p>最近在做网络视频的播放，在经过很多错误之后，终于做到了流媒体的播放，这里来资源共享一下<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/laugh.gif" alt="大笑"></p>
+<p>1. 视频边播边下的实质是通过使用ASIHTTPRequest的setTemporaryFileDownloadPath来设置临时下载路径，和</p>
+<p>setDownloadDestinationPath来设置下载路径。ASIHTTPRequest包装好了流媒体的播放，使用起来非常简单，</p>
+<p>核心的代码如下：</p>
+<pre><code>//下载完存储目录
+[request setDownloadDestinationPath:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;vedi2.mp4&quot;]]];
+//临时存储目录
+[request setTemporaryFileDownloadPath:[webPath stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;vedi2.mp4&quot;]]];
+
+[request setBytesReceivedBlock:^(unsigned long long size, unsigned long long total) {
+
+    //用file_length把total放到userDefault里面去;
+    //这时userDefault里面的file_length就是视频的总大小
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setDouble:total forKey:@&quot;file_length&quot;];
+
+    Recordull += size;//Recordull全局变量，记录已下载的文件的大小
+
+    //设置最大缓冲,最多400M
+    if (!isPlay&amp;&amp;Recordull &gt; 400000) {
+        isPlay = !isPlay; //如果缓冲过了400M,直接开始播放
+        [self playVideo];
+    }
+}];
+
+//断点续载
+[request setAllowResumeForFileDownloads:YES];
+
+[request startAsynchronous]; //开始请求数据,即开始下载
+</code></pre><p>那么在播放视频这一块，可以直接使用官方给的MPMoviePlayerController,具体如何使用在这里就不一一细说了，大家谷歌一下出来一大堆。</p>
+<p>但是记得在一开始的时候给加上消息推送，用来通知视频播放完毕后的动作，一般是把播放器设nil等操作。</p>
+<p>2. 边播边下地具体实现</p>
+<p>首先要设定下载的路径：</p>
+<pre><code>NSString *tempPath  = [NSHomeDirectory() stringByAppendingPathComponent:@&quot;Library/Private Documents/Temp&quot;];
+NSString *cachePath = [NSHomeDirectory() stringByAppendingPathComponent:@&quot;Library/Private Documents/Cache&quot;];
+</code></pre><p>在设定完路径之后，记得先去看看路径是否存在，不然会报错。</p>
+<pre><code>NSFileManager *fileManager=[NSFileManager defaultManager];
+
+//视频存放的目录是否存在，不存在就创建出来。
+if(![fileManager fileExistsAtPath:cachePath])
+{
+&lt;span style=&quot;white-space:pre&quot;&gt;    &lt;/span&gt;[fileManager createDirectoryAtPath:cachePath withIntermediateDirectories:YES attributes:nil error:nil];
+}
+</code></pre><p>之后就应该开始播放视频了，先看看视频下载过了没有，肯定不能每一次看都要重新下载。如果视频存在于cachePath里面，说明该视频已经下载过了，可以直接本地看</p>
+<pre><code>if ([fileManager fileExistsAtPath:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;vedioName.mp4&quot;]]])
+{
+     MPMoviePlayerViewController *playerViewController = [[MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;vedioName.mp4&quot;]]]];
+
+     //调用这个方法去播放视频
+     [self presentMoviePlayerViewControllerAnimated:playerViewController];
+     //此时不需要再下载了，所以就直接设nil;
+     videoRequest = nil;
+}
+</code></pre><p>如果这个视频是新的，没有下载过的，在设定完视频网络下载URL之后，就可以通过上面的核心代码块来进行下载了。</p>
+<pre><code>//设定视频的下载地址
+ASIHTTPRequest *request=[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:@&quot;http://static.tripbe.com/videofiles/20121214/9533522808.f4v.mp4&quot;]];
+
+
+
+//下载完存储目录
+[request setDownloadDestinationPath:[cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;vedi2.mp4&quot;]]];
+//临时存储目录
+[request setTemporaryFileDownloadPath:[webPath stringByAppendingPathComponent:[NSString stringWithFormat:@&quot;vedi2.mp4&quot;]]];
+
+[request setBytesReceivedBlock:^(unsigned long long size, unsigned long long total) {
+
+&lt;span style=&quot;white-space:pre&quot;&gt;    &lt;/span&gt;//用file_length把total放到userDefault里面去;
+        //这时userDefault里面的就是视频的总大小
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setDouble:total forKey:@&quot;file_length&quot;];
+
+            Recordull += size;//Recordull全局变量，记录已下载的文件的大小
+
+            //设置最大缓冲,最多400M
+            if (!isPlay&amp;&amp;Recordull &gt; 400000) {
+                isPlay = !isPlay; //如果缓冲过了400M,直接开始播放
+                [self playVideo]; //在这个方法里用MPMoviePlayerViewController开始播放视频
+            }
+        }];
+
+//断点续载
+[request setAllowResumeForFileDownloads:YES];
+
+[request startAsynchronous]; //开始请求数据,即开始下载
+videoRequest = request
+</code></pre><p>例子的下载地址已经找不到了…<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/knock.gif" alt="敲打"><br>,我把例子上传到gitHub上给需要的大家下载吧:<a href="https://github.com/luochuhuaZai/VideoTest" target="_blank" rel="external">https://github.com/luochuhuaZai/VideoTest</a>  </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/12/24/通过ASIHTTPRequest实现简单流媒体视频播放下载/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
   
+    <article id="post-iOS关于适配屏幕的问题_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-    <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UIWebView的间距和加载iFrame的坑</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/26/iOS关于适配屏幕的问题_1/">iOS关于适配屏幕的问题_1</a>
+    </h1>
   
-</nav>
+
+        
+        <a href="/2014/11/26/iOS关于适配屏幕的问题_1/" class="archive-article-date">
+  	<time datetime="2014-11-26T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS关于适配屏幕的问题-1"><a href="#iOS关于适配屏幕的问题-1" class="headerlink" title=" iOS关于适配屏幕的问题_1 "></a><a href="/u1031/article/details/41511161"> iOS关于适配屏幕的问题_1 </a></h1><p>在以前，只要虽然苹果就由3.5寸跟4寸屏，但是宽度都是没有变化的，所以适配屏幕的问题还是很好做的。</p>
+<p>现在因为4.7寸的iPhone6和5.5寸的iPhone6 plus的宽度大了，适配起来就更加麻烦了<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"><br>…</p>
+<p>在网上找了很久，很多人说的都是图像、图标的像素问题，没有提到怎么适配。在这里简单说一下</p>
+<p>归根到底，app适配多种屏幕有3种方法：</p>
+<p>1. 做多套的storyboard,在appDelegate里面判断屏幕大小， <img src="http://img.blog.csdn.net/20141126
+094445718?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/
+fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>从而判断到底到底加载哪一套storyboard,当然如果用到了xib也要做多<br>套。但是LZ用的时xcode6.1,居然发现了6、6plus的[UIScreen mainScreen].bounds.size<br>跟5s的时一模一样的…都是320x568…这到底是要闹哪样<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"><br>。。。。</p>
+<p>但是这样还是能辨别出4s跟5的,这里给出宏定义。</p>
+<pre><code>#define iPhone4inch ([UIScreen mainScreen].bounds.size.height == 568.0 &amp;&amp; [UIScreen mainScreen].bounds.size.width == 320) ? YES : NO
+
+#define iPhone3p5inch ([UIScreen mainScreen].bounds.size.height == 480.0 &amp;&amp; [UIScreen mainScreen].bounds.size.width == 320) ? YES : NO
+
+#define iPhone4p7inch ([UIScreen mainScreen].bounds.size.height == 667.0 &amp;&amp; [UIScreen mainScreen].bounds.size.width == 375) ? YES : NO
+
+#define iPhone5p5inch ([UIScreen mainScreen].bounds.size.height == 736.0 &amp;&amp; [UIScreen mainScreen].bounds.size.width == 414) ? YES : NO
+</code></pre><p>之后在两套storyboard的对应controller里面用一样的  Id <img src="http://img.blog.csdn.net/2014112610
+0601912?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fo
+ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加载的时候先加载对应的storyboard,然后再加载对应  的controller，就OK了</p>
+<pre><code>if (iPhone4inch)
+    {
+        storyboard = [UIStoryboard storyboardWithName:@&quot;Main_4inch&quot; bundle:[NSBundle mainBundle]];
+    }
+
+
+
+
+
+
+&lt;span style=&quot;font-family: Arial, Helvetica, sans-serif;&quot;&gt;self.controller = [storyboard instantiateViewControllerWithIdentifier:@&quot;1&quot;];&lt;/span&gt;
+</code></pre><p>关于如何适配iPhone6、iPhone6 plus在下一篇里面讲一下</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/11/26/iOS关于适配屏幕的问题_1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-iOS关于适配屏幕的问题_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/26/iOS关于适配屏幕的问题_2/">iOS关于适配屏幕的问题_2</a>
+    </h1>
+  
+
+        
+        <a href="/2014/11/26/iOS关于适配屏幕的问题_2/" class="archive-article-date">
+  	<time datetime="2014-11-26T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS关于适配屏幕的问题-2"><a href="#iOS关于适配屏幕的问题-2" class="headerlink" title=" iOS关于适配屏幕的问题_2 "></a><a href="/u1031/article/details/41511983"> iOS关于适配屏幕的问题_2 </a></h1><p>上一篇说了怎么适配iPhone4S 跟 iPhone5的问题。。。因为用[UIScreen<br>mainScreen].bounds.size居然不能识别iPhone6和iPhone6 plus，</p>
+<p>这里说一下怎么让一套storyboard适配iPhone5、6、plus的屏幕,当然也可以用这种方法来适应所有屏幕。。缺点下面会说</p>
+<p>2. 先用4inch的storyboard或者xib来构建UI界面，然后通过给各个view添加约束来控制view的位置、大小，而当屏幕变大时，view会根<br>据屏幕的大小来自动拉伸变大，或者改  变位置。</p>
+<p>步骤：1. 选中要添加约束的view：</p>
+<p><img src="http://img.blog.csdn.net/20141126103831468?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/Center" alt=""></p>
+<p>2. xcode左上方的菜单中Editor -&gt; Pin来添加约束 <img src="http://img.blog.csdn.net/20141126104025
+156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsi
+ze/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>3. 每一个约束会控制view的大小或者距离边框长度或者距离别的view的长度：（按住shift<br>选中两个view,就可以添加Pin中之前不能添加的4个约束。）</p>
+<p>这里给出用4英寸来做的适配6plus的图</p>
+<p>5s的模拟器下: <img src="http://img.blog.csdn.net/20141126104642178?watermark/2/text/aHR0c
+DovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/d
+issolve/70/gravity/Center" alt=""></p>
+<p>plus下： <img src="http://img.blog.csdn.net/20141126104650181?watermark/2/text/aHR0cDo
+vL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dis
+solve/70/gravity/Center" alt=""></p>
+<p>这时候，你应该就会说，那直接用Pin来做适配不就好了吗，当然是好的，但是Pin太太太麻烦了。。。这调约束的感觉就像在做PS啊<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"><br>。。。。</p>
+<p>3. 第三种解决适配问题的方法是最合适的：代码生成,全代码，不用interfaceBuilder,直接用代码写。但是开发会很慢，而且得出的效果很多时候会跟<br>你想的不一致。。当然，有时间的话还是建议用代码来实现,当写view的时候就这样来设置frame;</p>
+<pre><code>self.btn= [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.origin.x * 0.5, [UIScreen mainScreen].bounds.origin.y * 0.5, 100, 200)];
+</code></pre><p>这样无论什么屏幕，btn都会出现在中间。。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/11/26/iOS关于适配屏幕的问题_2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-用MobileVLCKit播放rmvb视频" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/23/用MobileVLCKit播放rmvb视频/">用MobileVLCKit播放rmvb视频</a>
+    </h1>
+  
+
+        
+        <a href="/2014/11/23/用MobileVLCKit播放rmvb视频/" class="archive-article-date">
+  	<time datetime="2014-11-23T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="用MobileVLCKit播放rmvb视频"><a href="#用MobileVLCKit播放rmvb视频" class="headerlink" title=" 用MobileVLCKit播放rmvb视频 "></a><a href="/u1031/article/details/41408731"> 用MobileVLCKit播放rmvb视频 </a></h1><p>在做一个项目的时候需要在iPhone上播放rmvb格式的视频</p>
+<p>在网上找了一下之后，发现用MobileVLCKit就能很好解决问题。这里简单说一下怎么用</p>
+<p>1. 导入</p>
+<p>到<a href="https://github.com/wuqiong/MobileVLCKit-" target="_blank" rel="external">https://github.com/wuqiong/MobileVLCKit-</a><br>SDK/blob/master/README.md去下载SDK，但我是用cocoapods来导入的，方便快捷，很少有错。</p>
+<p>这里给一下cocoapods的教程<a href="http://my.oschina.net/vimfung/blog/182427" target="_blank" rel="external">http://my.oschina.net/vimfung/blog/182427</a></p>
+<p>安装好之后在终端用 pod search VLCKit 就会出来</p>
+<p>导入完了，要把用到的第一个controller改成.mm,应该是因为MobileVLCKit用到了c++的关系。</p>
+<p>2. 使用</p>
+<p>2.1.  声明2个属性 <strong> </strong> VLCMediaPlayer &amp; VLCMedia</p>
+<p>2.2.  给VLCMediaPlayer和VLCMedia设置几个属性</p>
+<pre><code>@property (strong, nonatomic) VLCMediaPlayer *player;
+@property (strong, nonatomic) VLCMedia *media;
+@property (weak, nonatomic) IBOutlet UIView *playView;
+@property (strong, nonatomic) NSTimer *timer;
+
+
+
+
+
+&lt;span style=&quot;white-space:pre&quot;&gt;        &lt;/span&gt;self.filepath = [[NSBundle mainBundle] pathForResource:@&quot;Smith&quot; ofType:@&quot;rmvb&quot;];
+            NSURL *url = [NSURL fileURLWithPath:self.filepath];
+          self.player = [[VLCMediaPlayer alloc] initWithOptions:nil];
+            self.player.drawable = self.playView;
+
+
+&lt;span style=&quot;white-space:pre&quot;&gt;        &lt;/span&gt;self.player.delegate = self;
+           self.media = [VLCMedia mediaWithURL:url];
+            self.player.media = self.media;
+</code></pre><p>2.3  通过play方法来播放影片 [  self  .  player  play  ]</p>
+<p>3. ps： 用这个库的话，播放的控制不会自动生成，要自己搭建，好处是可以做的更好看，但是会很麻烦</p>
+<p>4. 第一次写文章<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"><br>…..有问题联系：huazaizuiqiangda@gmail.com 或者384345982(QQ)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">视频播放</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/11/23/用MobileVLCKit播放rmvb视频/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
 
 
 
@@ -296,10 +638,9 @@
 
   
   
-  
-
-  
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -322,8 +663,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

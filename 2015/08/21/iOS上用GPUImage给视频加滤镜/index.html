@@ -6,19 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>Hello, World！ | 罗储华的Blog</title>
+  <title>iOS上用GPUImage给视频加滤镜 | 罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords">
+  <meta name="description" content="iOS上用GPUImage给视频加滤镜 最近在做一个需要给已有视频加滤镜的app，不是实时滤镜，而是给已经存在的视频加滤镜。 虽然网上有很多关于GPUImage的博客，但大多都是给图片加上滤镜或者是直接在摄像头上加上的实时滤镜，找了很久之后….. 发现在github上本来就有….. 但是在网上找，却没有说很多人给出这样的滤镜教程，这里简单给分享一下下。 1. 首先，什么是GPUImage？详细请">
+<meta name="keywords" content="iOS,GPUImage">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello, World！">
-<meta property="og:url" content="https://luochuhuazai.github.io/2017/04/21/hello-world/index.html">
+<meta property="og:title" content="iOS上用GPUImage给视频加滤镜">
+<meta property="og:url" content="https://luochuhuazai.github.io/2015/08/21/iOS上用GPUImage给视频加滤镜/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-04-21T08:18:13.000Z">
+<meta property="og:description" content="iOS上用GPUImage给视频加滤镜 最近在做一个需要给已有视频加滤镜的app，不是实时滤镜，而是给已经存在的视频加滤镜。 虽然网上有很多关于GPUImage的博客，但大多都是给图片加上滤镜或者是直接在摄像头上加上的实时滤镜，找了很久之后….. 发现在github上本来就有….. 但是在网上找，却没有说很多人给出这样的滤镜教程，这里简单给分享一下下。 1. 首先，什么是GPUImage？详细请">
+<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif">
+<meta property="og:image" content="http://img.blog.csdn.net/20150821222939505?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150821222918378?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast">
+<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif">
+<meta property="og:image" content="http://img.blog.csdn.net/20150821224137660?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast">
+<meta property="og:updated_time" content="2017-04-21T09:45:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello, World！">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="iOS上用GPUImage给视频加滤镜">
+<meta name="twitter:description" content="iOS上用GPUImage给视频加滤镜 最近在做一个需要给已有视频加滤镜的app，不是实时滤镜，而是给已经存在的视频加滤镜。 虽然网上有很多关于GPUImage的博客，但大多都是给图片加上滤镜或者是直接在摄像头上加上的实时滤镜，找了很久之后….. 发现在github上本来就有….. 但是在网上找，却没有说很多人给出这样的滤镜教程，这里简单给分享一下下。 1. 首先，什么是GPUImage？详细请">
+<meta name="twitter:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -150,36 +162,92 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-iOS上用GPUImage给视频加滤镜" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello, World！
+      iOS上用GPUImage给视频加滤镜
     </h1>
   
 
         
-        <a href="/2017/04/21/hello-world/" class="archive-article-date">
-  	<time datetime="2017-04-21T06:43:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
+        <a href="/2015/08/21/iOS上用GPUImage给视频加滤镜/" class="archive-article-date">
+  	<time datetime="2015-08-21T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<h3 id="this-is-an-code-Block"><a href="#this-is-an-code-Block" class="headerlink" title="this is an code Block"></a>this is an <code>code Block</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code Block Test</div></pre></td></tr></table></figure>
+        <h1 id="iOS上用GPUImage给视频加滤镜"><a href="#iOS上用GPUImage给视频加滤镜" class="headerlink" title=" iOS上用GPUImage给视频加滤镜 "></a><a href="/u1031/article/details/47811947"> iOS上用GPUImage给视频加滤镜 </a></h1><p>最近在做一个需要给已有视频加滤镜的app，不是实时滤镜，而是给已经存在的视频加滤镜。</p>
+<p>虽然网上有很多关于GPUImage的博客，但大多都是给图片加上滤镜或者是直接在摄像头上加上的实时滤镜，找了很久之后…..</p>
+<p>发现在github上本来就有…..<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"></p>
+<p>但是在网上找，却没有说很多人给出这样的滤镜教程，这里简单给分享一下下。</p>
+<p>1. 首先，什么是GPUImage？详细请度娘之，简单点来说，就是一个用GPU来处理图片和视频的第三方库。</p>
+<p>2. 给图像加滤镜，如果是只加滤镜，那么网上有很多的教程，这里就不细说了，这里主要说一下怎么找要用的滤镜和这个滤镜需要设定什么参数。</p>
+<p>2.1 寻找要用的滤镜， 其实在无论是很多人推荐的GPUImage还是苹果官方的CoreImage，滤镜的名字本身就已经很能说明这个滤镜的作用了：</p>
+<p><img src="http://img.blog.csdn.net/20150821222939505?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt=""></p>
+<p>另外  ，在GPUImage里面，每个滤镜类Filter，都会有详细的注释来说明这个Filter的作用</p>
+<p><img src="http://img.blog.csdn.net/20150821222918378?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt=""></p>
+<p>当然  ，全是英文就是了。。。。。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"></p>
+<p>2.2 配置参数。</p>
+<p>在GPUImage中，其实没有CoreImage可以直接用方法来获取当前滤镜需要用的参数那么方便，而是要通过点击进入对应filter的.h文件里面查询。</p>
+<p><img src="http://img.blog.csdn.net/20150821224137660?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravit
+y/SouthEast" alt=""></p>
+<p>如图  ，里面的red、green和blue就是要设定的配置参数。</p>
+<p>3. 给已有视频加上滤镜，这个在GPUImage的github上就有官方的实例。。。。大家可以去看看。</p>
+<pre><code>/* 下面尝试使用GPUImage来给视频加上滤镜。
+     */
+    GPUImageContrastFilter *secondFilter = [[GPUImageContrastFilter alloc] init];
+
+    [secondFilter setContrast:1.80];
+
+    GPUImageBrightnessFilter *firstFilter = [[GPUImageBrightnessFilter alloc] init];
+
+    [firstFilter setBrightness:0.1];
+
+    //GPUImageColorBurnBlendFilter
+    GPUImageRGBFilter *filter = [[GPUImageRGBFilter alloc] init];
+    filter.red = 0.8;
+    filter.green = 1;
+    filter.blue = 1.2;
+
+    NSURL *vedioURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@&quot;s2&quot; ofType:@&quot;mp4&quot;]];
+
+    GPUImageMovie *movie = [[GPUImageMovie alloc] initWithURL:vedioURL];
+
+    movie.runBenchmark = YES;
+
+    //[movie addTarget:filter];
+    [movie addTarget:secondFilter];
+
+    GPUImageMovieWriter *vedioWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:[NSURL fileURLWithPath:@&quot;/Users/huazai/Desktop/t/t16.mov&quot;] size:CGSizeMake(1280, 800)];
+
+    movie.audioEncodingTarget = nil;
+
+    vedioWriter.shouldPassthroughAudio = YES;
+
+    movie.playAtActualSpeed = NO;
+
+    [movie startProcessing];
+
+    [filter addTarget:vedioWriter];
+    //[secondFilter addTarget:vedioWriter];
+
+    [vedioWriter startRecording];
+
+    [vedioWriter setCompletionBlock:^{
+        NSLog(@&quot;已完成！！！&quot;);
+    }];
+</code></pre><p>往后  我会再写几篇博客，关于怎么用GPUImage写水印，混合滤镜，敬请期待。。。。。</p>
 
       
 
@@ -209,6 +277,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -259,7 +342,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/04/21/hello-world/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2015/08/21/iOS上用GPUImage给视频加滤镜/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +356,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/03/07/GPUImage写双输入的滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          GPUImage写双输入的滤镜
+          怎么用CIFilter给图片加上各种各样的滤镜
         
       </div>
     </a>
   
   
-    <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UIWebView的间距和加载iFrame的坑</div>
+    <a href="/2015/10/10/用GPUImage做难一点点的效果/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">用GPUImage做难一点点的效果</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,19 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>Hello, World！ | 罗储华的Blog</title>
+  <title>用XMPP协议来创建自己的即时聊天app | 罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords">
+  <meta name="description" content="用XMPP协议来创建自己的即时聊天app 因为在之前项目需要用到即时聊天的功能.在逛了好多论坛之后,才终于实现了即时聊天的功能。 使用xmpp+openfire+iOS客户端来制作聊天app的demo、教程网上都有很多，在这里简单地说一下核心做法。 1.首先就要制作服务器，这块我是用的openfire的服务器，数据库也不是用嵌入在openfire里面的，而是用的mySQL，性能相当不错，而且不会">
+<meta name="keywords" content="iOS,网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello, World！">
-<meta property="og:url" content="https://luochuhuazai.github.io/2017/04/21/hello-world/index.html">
+<meta property="og:title" content="用XMPP协议来创建自己的即时聊天app">
+<meta property="og:url" content="https://luochuhuazai.github.io/2015/03/15/用XMPP协议来创建自己的即时聊天app/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-04-21T08:18:13.000Z">
+<meta property="og:description" content="用XMPP协议来创建自己的即时聊天app 因为在之前项目需要用到即时聊天的功能.在逛了好多论坛之后,才终于实现了即时聊天的功能。 使用xmpp+openfire+iOS客户端来制作聊天app的demo、教程网上都有很多，在这里简单地说一下核心做法。 1.首先就要制作服务器，这块我是用的openfire的服务器，数据库也不是用嵌入在openfire里面的，而是用的mySQL，性能相当不错，而且不会">
+<meta property="og:image" content="http://img.blog.csdn.net/20150315162637702?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150315165118816?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20150315165135586?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast">
+<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/tongue.gif">
+<meta property="og:updated_time" content="2017-04-21T09:30:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello, World！">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="用XMPP协议来创建自己的即时聊天app">
+<meta name="twitter:description" content="用XMPP协议来创建自己的即时聊天app 因为在之前项目需要用到即时聊天的功能.在逛了好多论坛之后,才终于实现了即时聊天的功能。 使用xmpp+openfire+iOS客户端来制作聊天app的demo、教程网上都有很多，在这里简单地说一下核心做法。 1.首先就要制作服务器，这块我是用的openfire的服务器，数据库也不是用嵌入在openfire里面的，而是用的mySQL，性能相当不错，而且不会">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150315162637702?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -150,36 +163,156 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-用XMPP协议来创建自己的即时聊天app" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello, World！
+      用XMPP协议来创建自己的即时聊天app
     </h1>
   
 
         
-        <a href="/2017/04/21/hello-world/" class="archive-article-date">
-  	<time datetime="2017-04-21T06:43:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
+        <a href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/" class="archive-article-date">
+  	<time datetime="2015-03-15T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-03-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<h3 id="this-is-an-code-Block"><a href="#this-is-an-code-Block" class="headerlink" title="this is an code Block"></a>this is an <code>code Block</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code Block Test</div></pre></td></tr></table></figure>
+        <h1 id="用XMPP协议来创建自己的即时聊天app"><a href="#用XMPP协议来创建自己的即时聊天app" class="headerlink" title=" 用XMPP协议来创建自己的即时聊天app "></a><a href="/u1031/article/details/44277871"> 用XMPP协议来创建自己的即时聊天app </a></h1><p>因为在之前项目需要用到即时聊天的功能.在逛了好多论坛之后,才终于实现了即时聊天的功能。</p>
+<p>使用xmpp+openfire+iOS客户端来制作聊天app的demo、教程网上都有很多，在这里简单地说一下核心做法。</p>
+<p>1.<br>首先就要制作服务器，这块我是用的openfire的服务器，数据库也不是用嵌入在openfire里面的，而是用的mySQL，性能相当不错，而且不会丢消息。</p>
+<p>1.1 到<a href="http://www.igniterealtime.org/downloads/index.jsp去下载最新的openfire" target="_blank" rel="external">http://www.igniterealtime.org/downloads/index.jsp去下载最新的openfire</a></p>
+<p><img src="http://img.blog.csdn.net/20150315162637702?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>为了验证服务器搭建完成没有，或者验证app到底能不能正常通信，可以下Spqrk来试验，它就是一个聊天工具，等登陆上且能给手机模拟器正常聊天，那聊天功能就成<br>功了！</p>
+<p>1.2 安装openfire，本人是在Mac10.10下安装的，之后去用户偏好里面就能打开设置页，设置好了就能够拿电脑当服务器使了，而windows跟lin<br>ux的没有用过，不过网上很多  教程这里转发一个：<a href="http://wiki.jabbercn.org/Openfire:%E5%AE%89%E8%A3%85%" target="_blank" rel="external">http://wiki.jabbercn.org/Openfire:%E5%AE%89%E8%A3%85%</a><br>E6%8C%87%E5%8D%97</p>
+<p>再发一个在mac上搭建的教程： <a href="http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html" target="_blank" rel="external">http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html</a></p>
+<p>好了，到这里服务器应该已经搭建好了，使用spark去登陆一下。</p>
+<p>2. iOS端制作</p>
+<p>2.1 导入框架，iOS端使用xmpp需要导入对应的库: XMPPFramework<br>，这个库在Github、code4app上面都有，导入过程也不复杂，但是本人还是习惯性的去使用CocoaPods,</p>
+<p>毕竟用来导入实在太方便了。CocoaPods是一种开发工具，在终端上几行代码就能够给项目导入好库，有依赖的库也会给导入好，具体教程网上一抓一大把。</p>
+<p>2.2  大家应该已经猜出来了，其实就是使用XMPPFramework里面的代理方法和xmppStream来跟服务器发送和收到消息。</p>
+<p>先建立跟服务器的连接：</p>
+<p><img src="http://img.blog.csdn.net/20150315165118816?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>然后连接服务器：</p>
+<p><img src="http://img.blog.csdn.net/20150315165135586?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>PS：如果服务器不是自己电脑，需要把Server给改成服务器的IP地址。</p>
+<p>记得给实现XMPPStreamDelegate,当服务器发送消息，比如别人发的消息、好友上线消息等都会回调里面的方法，之前建立连接的时候设定的delegat<br>e就是让服务  器回调的时候能有回调的方法给执行。</p>
+<p>需要实现的有：</p>
+<pre><code>#pragma mark -- XMPPStream Delegate 
+//连接服务器
+- (void)xmppStreamDidConnect:(XMPPStream *)sender{
+
+    NSLog(@&quot;did Connected&quot;);
+    NSError *error = nil;
+    //验证密码
+    if (![[self xmppStream] authenticateWithPassword:password error:&amp;error]){
+        NSLog(@&quot;Authenticate Error: %@&quot;, [[error userInfo] description]);
+    }
+}
+
+//验证通过
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender{
+
+    NSLog(@&quot;验证已通过.........&quot;);
+    [self goOnline];
+}
+
+//收到消息
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
+
+    //    NSLog(@&quot;message = %@&quot;, message);
+
+    NSString *msg = [[message elementForName:@&quot;body&quot;] stringValue];
+    NSString *from = [[message attributeForName:@&quot;from&quot;] stringValue];
+
+    NSLog(@&quot;receive message :%@ from :%@&quot;,msg, from);
+
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:msg forKey:@&quot;MSG&quot;];
+    [dict setObject:from forKey:@&quot;SENDER&quot;];
+
+    //消息委托,就是收到的消息怎么处理
+    [self.messageViewController MessageReceived:dict];
+}
+
+//收到好友状态
+- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence{
+
+    //取得好友状态
+    NSString *presenceType = [presence type]; //online/offline
+    //当前用户
+    NSString *userId = [[sender myJID] user];
+    //在线用户
+    NSString *presenceFromUser = [[presence from] user];
+
+
+    NSLog(@&quot;id: %@&quot;,userId);
+    NSLog(@&quot;user: %@&quot;, presenceFromUser);
+    NSLog(@&quot;type: %@&quot;, presenceType);
+
+    /*这里应该做当有好友上线之后的操作，比如改变对应头像颜色之类的*/
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
+    NSLog(@&quot;did not authenticate....error :%@&quot;, error);
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@&quot;错误&quot; message:@&quot;账号/密码输入出错！&quot; delegate:nil cancelButtonTitle:@&quot;cancel&quot; otherButtonTitles:nil];
+    [alertView show];
+}
+</code></pre><p>做到这里就能收到消息了，建议都给放在appDelegate上面，这样xmppStream不会被释放掉</p>
+<p>下面是发送消息功能的实现</p>
+<pre><code>- (IBAction)sendClick:(id)sender {
+
+    NSString *message = self.messageTextField.text;
+    NSMutableString *toName = [NSMutableString stringWithString:self.toTextField.text];
+    [toName appendString:@&quot;@127.0.0.1&quot;];
+
+    //xmpp通过kissxmpp来上传消息
+    if (message.length &gt; 0) {
+
+        //下面几行就是自己发送消息之后做的事(屏幕上给出现自己发的消息)
+        NSMutableString *messages =  [NSMutableString stringWithString:self.messageTextView.text];
+        NSString *selfName = [[NSUserDefaults standardUserDefaults] stringForKey:@&quot;USERID&quot;];
+
+        [messages appendString:[NSString stringWithFormat:@&quot;\n          %@&quot;,selfName]];
+        [messages appendString:[NSString stringWithFormat:@&quot;\n          %@&quot;, self.messageTextField.text]];
+        self.messageTextView.text = messages;
+
+        //生成&lt;body&gt;文档
+        NSXMLElement *body = [NSXMLElement elementWithName:@&quot;body&quot;];
+        [body setStringValue:message];
+
+        //生成XML消息文档
+        NSXMLElement *mes = [NSXMLElement elementWithName:@&quot;message&quot;];
+        //消息类型
+        [mes addAttributeWithName:@&quot;type&quot; stringValue:@&quot;chat&quot;];
+        //发送给谁
+        [mes addAttributeWithName:@&quot;to&quot; stringValue:toName];
+
+        //由谁发送
+        [mes addAttributeWithName:@&quot;from&quot; stringValue:[[NSUserDefaults standardUserDefaults] stringForKey:@&quot;USERID&quot;]];
+        //组合
+        [mes addChild:body];
+
+        //发送消息
+        [[self xmppStream] sendElement:mes];
+
+        self.messageTextField.text = @&quot;&quot;;
+        [self.messageTextField resignFirstResponder];
+    }
+
+}
+</code></pre><p>最后声明，本人自学中，感谢各大网络网友的支持，有疑问请联系：384345982(QQ)，不过能力有限，望大家不要见怪。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/tongue.gif" alt="吐舌头"></p>
 
       
 
@@ -209,6 +342,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -259,7 +407,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/04/21/hello-world/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2015/03/15/用XMPP协议来创建自己的即时聊天app/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +421,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/03/07/GPUImage写双输入的滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/01/19/UIScrollView的视差滚动实现/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          GPUImage写双输入的滤镜
+          UIScrollView的视差滚动实现
         
       </div>
     </a>
   
   
-    <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UIWebView的间距和加载iFrame的坑</div>
+    <a href="/2015/05/19/Swift学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Swift学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   

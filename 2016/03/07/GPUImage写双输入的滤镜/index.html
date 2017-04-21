@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>Hello, World！ | 罗储华的Blog</title>
+  <title>GPUImage写双输入的滤镜 | 罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords">
+  <meta name="description" content="今天主要来讲一下怎么用GPUImage来手撸一个双输入(blend)的滤镜。 那么先说一下为什么要自己手撸多输入的滤镜：  双输入的滤镜其实是三输入(也就是多个输入端滤镜)的简单版，让大家比较容易上手。  在实际上写app的时候，往往一个滤镜效果是不能满足需求的，而像：0.5的亮度+0.87的透明度+柔光混合+RGB调整，这种分开做都比较简单，但是合并起来则会使代码变得超长超恶心的效果才是需求，当">
+<meta name="keywords" content="iOS,GPUImage">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello, World！">
-<meta property="og:url" content="https://luochuhuazai.github.io/2017/04/21/hello-world/index.html">
+<meta property="og:title" content="GPUImage写双输入的滤镜">
+<meta property="og:url" content="https://luochuhuazai.github.io/2016/03/07/GPUImage写双输入的滤镜/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-04-21T08:18:13.000Z">
+<meta property="og:description" content="今天主要来讲一下怎么用GPUImage来手撸一个双输入(blend)的滤镜。 那么先说一下为什么要自己手撸多输入的滤镜：  双输入的滤镜其实是三输入(也就是多个输入端滤镜)的简单版，让大家比较容易上手。  在实际上写app的时候，往往一个滤镜效果是不能满足需求的，而像：0.5的亮度+0.87的透明度+柔光混合+RGB调整，这种分开做都比较简单，但是合并起来则会使代码变得超长超恶心的效果才是需求，当">
+<meta property="og:updated_time" content="2017-04-21T08:17:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello, World！">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="GPUImage写双输入的滤镜">
+<meta name="twitter:description" content="今天主要来讲一下怎么用GPUImage来手撸一个双输入(blend)的滤镜。 那么先说一下为什么要自己手撸多输入的滤镜：  双输入的滤镜其实是三输入(也就是多个输入端滤镜)的简单版，让大家比较容易上手。  在实际上写app的时候，往往一个滤镜效果是不能满足需求的，而像：0.5的亮度+0.87的透明度+柔光混合+RGB调整，这种分开做都比较简单，但是合并起来则会使代码变得超长超恶心的效果才是需求，当">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -150,37 +150,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-GPUImage写双输入的滤镜" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello, World！
+      GPUImage写双输入的滤镜
     </h1>
   
 
         
-        <a href="/2017/04/21/hello-world/" class="archive-article-date">
-  	<time datetime="2017-04-21T06:43:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
+        <a href="/2016/03/07/GPUImage写双输入的滤镜/" class="archive-article-date">
+  	<time datetime="2016-03-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<h3 id="this-is-an-code-Block"><a href="#this-is-an-code-Block" class="headerlink" title="this is an code Block"></a>this is an <code>code Block</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">code Block Test</div></pre></td></tr></table></figure>
-
+        <p>今天主要来讲一下怎么用GPUImage来手撸一个双输入(blend)的滤镜。</p>
+<p>那么先说一下为什么要自己手撸多输入的滤镜：</p>
+<ol>
+<li><p>双输入的滤镜其实是三输入(也就是多个输入端滤镜)的简单版，让大家比较容易上手。</p>
+</li>
+<li><p>在实际上写app的时候，往往一个滤镜效果是不能满足需求的，而像：0.5的亮度+0.87的透明度+柔光混合+RGB调整，这种分开做都比较简单，但是合并起来则会使代码变得超长超恶心的效果才是需求，当然可以是利用现成的GPUImage的Filter来叠加达到效果，教程请看：<a href="http://blog.csdn.net/u1031/article/details/48712163" target="_blank" rel="external">用GPUImage做难一点点的效果</a> 但是这里我们用一个fsh文件来写，那么代码量就大大滴减少了。</p>
+</li>
+</ol>
+<p>双输入的滤镜可以通过GPUImageTwoInputFilter来实现，只要实现了叠加的算法就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_downSoftLightBlendFilter = [[GPUImageTwoInputFilter alloc] initWithFragmentShaderFromFile:@&quot;customBlendShader&quot;];</div></pre></td></tr></table></figure>
+<p>customBlendShader.fsh 代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">varying highp vec2 textureCoordinate;</div><div class="line">varying highp vec2 textureCoordinate2;</div><div class="line"></div><div class="line">uniform sampler2D inputImageTexture;</div><div class="line">uniform sampler2D inputImageTexture2;</div><div class="line"></div><div class="line">void main()</div><div class="line">&#123;</div><div class="line">	//base就是add的target,overlay就是第二个,均用vec4来表示像素</div><div class="line">    mediump vec4 base = texture2D(inputImageTexture, textureCoordinate);</div><div class="line">    mediump vec4 overlay = texture2D(inputImageTexture2, textureCoordinate2);</div><div class="line">    </div><div class="line">    //为了防止第一个加入的图片(底图),有一些空白的像素点(指的是黑色,并不是白色)</div><div class="line">    lowp float alphaDivisor = base.a + step(base.a, 0.0); // Protect against a divide-by-zero blacking out things in the output</div><div class="line">    </div><div class="line">    //这个是柔光混合的算法：</div><div class="line">    //(2*A-1)*(B-B*B)+B</div><div class="line">    //(2*A-1)*(sqrt(B)-B)+B</div><div class="line">    //overlay &gt; vec4(0.5)  --&gt; (2*A-1)*(B-B*B)+B</div><div class="line">    //overlay &lt;= vec4(0.5) --&gt; (2*A-1)*(sqrt(B)-B)+B</div><div class="line">    </div><div class="line">    if (max(overlay, vec4(0.5)) == vec4(0.5))&#123;</div><div class="line">        gl_FragColor = (vec4(2) * overlay - vec4(1)) * (sqrt(base) - base) + base;</div><div class="line">    &#125;else &#123;</div><div class="line">       gl_FragColor = (vec4(2) * overlay - vec4(1)) * (base - base * base) + base;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然你也可以做别的一些操作，比如 先柔光混合，再让亮度+0.5：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">varying highp vec2 textureCoordinate;</div><div class="line">varying highp vec2 textureCoordinate2;</div><div class="line"></div><div class="line">uniform sampler2D inputImageTexture;</div><div class="line">uniform sampler2D inputImageTexture2;</div><div class="line"></div><div class="line">void main()</div><div class="line">&#123;</div><div class="line">	//base就是add的target,overlay就是第二个,均用vec4来表示像素</div><div class="line">    mediump vec4 base = texture2D(inputImageTexture, textureCoordinate);</div><div class="line">    mediump vec4 overlay = texture2D(inputImageTexture2, textureCoordinate2);</div><div class="line">    </div><div class="line">    //为了防止第一个加入的图片(底图),有一些空白的像素点(指的是黑色,并不是白色)</div><div class="line">    lowp float alphaDivisor = base.a + step(base.a, 0.0); // Protect against a divide-by-zero blacking out things in the output</div><div class="line">    </div><div class="line">    //这个是柔光混合的算法：</div><div class="line">    //(2*A-1)*(B-B*B)+B</div><div class="line">    //(2*A-1)*(sqrt(B)-B)+B</div><div class="line">    //overlay &gt; vec4(0.5)  --&gt; (2*A-1)*(B-B*B)+B</div><div class="line">    //overlay &lt;= vec4(0.5) --&gt; (2*A-1)*(sqrt(B)-B)+B</div><div class="line">    </div><div class="line">	mediump vec4 mixColor;</div><div class="line">	</div><div class="line">    if (max(overlay, vec4(0.5)) == vec4(0.5))&#123;</div><div class="line">        mixColor = (vec4(2) * overlay - vec4(1)) * (sqrt(base) - base) + base;</div><div class="line">    &#125;else &#123;</div><div class="line">       mixColor = (vec4(2) * overlay - vec4(1)) * (base - base * base) + base;</div><div class="line">    &#125;</div><div class="line">	gl_FragColor = vec4((mixColor.rgb + vec3(0.5)), mixColor.w);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样基本就能做只使用两张图片混合(例如加上水印)的所有滤镜效果了。</p>
+<p>用法也是非常简单，直接当成是GPUImageTwoInputFilter来用就好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">   _downGPUImageView = [[GPUImageView alloc] initWithFrame:_imgViewDown.frame];</div><div class="line">   [self.view addSubview:_downGPUImageView];</div><div class="line">   </div><div class="line">   UIImage *demoImg = [UIImage imageNamed:@&quot;demo.jpg&quot;];</div><div class="line">   _downGPUImagePicture = [[GPUImagePicture alloc] initWithImage:demoImg];</div><div class="line"></div><div class="line">_downSoftLightBlendFilter = [[GPUImageTwoInputFilter alloc] initWithFragmentShaderFromFile:@&quot;customBlendShader&quot;];</div><div class="line"></div><div class="line">   [_downGPUImagePicture addTarget:_downSoftLightBlendFilter];</div><div class="line">   [_downBlendPicture addTarget:_downSoftLightBlendFilter];</div><div class="line">   [_downSoftLightBlendFilter addTarget:_downGPUImageView];</div></pre></td></tr></table></figure>
       
 
       
@@ -209,6 +215,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -259,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/04/21/hello-world/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2016/03/07/GPUImage写双输入的滤镜/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -273,18 +294,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/03/07/GPUImage写双输入的滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/03/03/用GPUImage做自己的滤镜/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          GPUImage写双输入的滤镜
+          用GPUImage做自己的滤镜
         
       </div>
     </a>
   
   
-    <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UIWebView的间距和加载iFrame的坑</div>
+    <a href="/2017/04/21/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello, World！</div>
       <i class="icon-circle-right"></i>
     </a>
   
