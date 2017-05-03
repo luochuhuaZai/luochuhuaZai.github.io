@@ -155,6 +155,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-UIScrollView的视差滚动实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/01/19/UIScrollView的视差滚动实现/">UIScrollView的视差滚动实现</a>
+    </h1>
+  
+
+        
+        <a href="/2015/01/19/UIScrollView的视差滚动实现/" class="archive-article-date">
+  	<time datetime="2015-01-19T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-01-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="UIScrollView的视差滚动实现"><a href="#UIScrollView的视差滚动实现" class="headerlink" title=" UIScrollView的视差滚动实现 "></a><a href="/u1031/article/details/42872121"> UIScrollView的视差滚动实现 </a></h1><p>最近在做的项目要做到在同一个UIScrollView里面给不同的label或者UITextView分层。<br>分层的话，一开始的想法是用多个UIScrollView来做分层，之后设置不同的滚动速度和通过代理来实现同时滚动就可以了。<br>但是结果是有问题的，因为每一次滚动的时候会调用delegate的DidScroll方法，这时候就会有一点延迟，多个ScrollView就不会一起滚动，而是在<br>一个滚动的时候，过一会会有几个跟着来滚动，效果不是太好。</p>
+<p>之后上网找了很多的例子，终于做到了分层滚动的效果，其实是用了别人的控件<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"><br>。。。在这里先标明例子的出处：<a href="http://code4app.com/ios/SWParallaxScrollView/53254e0d933bf0a63d" target="_blank" rel="external">http://code4app.com/ios/SWParallaxScrollView/53254e0d933bf0a63d</a><br>8b4977  是非常容易使用的分层UIScrollView。</p>
+<p>这里简单说一下使用方法</p>
+<p>1. 给配置上环境。</p>
+<p>就是下过来，拖过去，而且没有用到别的什么框架,比较好用,但是本楼主是直接用的cocoapods来导入的,在github上就有。如果是想再项目中用到的请注意，<br>因为是用到了  c++写的，记得改.m为.mm，可能还要去配置一下buildPhases。</p>
+<p>2. 导入使用</p>
+<p>具体就是一个类，2个文件：SWParallaxScrollView.h和SWParallaxScrollView.mm</p>
+<p>在导入完了之后把SWParallaxScrollView当做UIScrollView来使用：</p>
+<pre><code>self.scrollview = [[SWParallaxScrollView alloc] initWithFrame:self.view.bounds];
+
+    self.scrollview.contentSize = CGSizeMake(960, 480);
+</code></pre><p>但是在把view加入到ScrollView中去的时候用下面的方法</p>
+<pre><code>[self.scrollview addSubview:self.textView onLayer:1];
+</code></pre><p>这样layer比较大的会在上面,而且移动的速度会更快，但是因为底层还是通过位移来做出视差滚动的效果,所以就要做frame的调整</p>
+<p>下面给出效果图</p>
+<p><img src="http://img.blog.csdn.net/20150119132339437?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""> <img src="http://img.blog.csdn.net/20150119132500444?watermark/
+2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0
+JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/01/19/UIScrollView的视差滚动实现/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-通过ASIHTTPRequest实现简单流媒体视频播放下载" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -303,86 +381,6 @@ videoRequest = request
 
 
   
-    <article id="post-iOS关于适配屏幕的问题_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/26/iOS关于适配屏幕的问题_2/">iOS关于适配屏幕的问题_2</a>
-    </h1>
-  
-
-        
-        <a href="/2014/11/26/iOS关于适配屏幕的问题_2/" class="archive-article-date">
-  	<time datetime="2014-11-26T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS关于适配屏幕的问题-2"><a href="#iOS关于适配屏幕的问题-2" class="headerlink" title=" iOS关于适配屏幕的问题_2 "></a><a href="/u1031/article/details/41511983"> iOS关于适配屏幕的问题_2 </a></h1><p>上一篇说了怎么适配iPhone4S 跟 iPhone5的问题。。。因为用[UIScreen<br>mainScreen].bounds.size居然不能识别iPhone6和iPhone6 plus，</p>
-<p>这里说一下怎么让一套storyboard适配iPhone5、6、plus的屏幕,当然也可以用这种方法来适应所有屏幕。。缺点下面会说</p>
-<p>2. 先用4inch的storyboard或者xib来构建UI界面，然后通过给各个view添加约束来控制view的位置、大小，而当屏幕变大时，view会根<br>据屏幕的大小来自动拉伸变大，或者改  变位置。</p>
-<p>步骤：1. 选中要添加约束的view：</p>
-<p><img src="http://img.blog.csdn.net/20141126103831468?watermark/2/text/aHR0cDovL2Jsb2
-cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
-0/gravity/Center" alt=""></p>
-<p>2. xcode左上方的菜单中Editor -&gt; Pin来添加约束 <img src="http://img.blog.csdn.net/20141126104025
-156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsi
-ze/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p>3. 每一个约束会控制view的大小或者距离边框长度或者距离别的view的长度：（按住shift<br>选中两个view,就可以添加Pin中之前不能添加的4个约束。）</p>
-<p>这里给出用4英寸来做的适配6plus的图</p>
-<p>5s的模拟器下: <img src="http://img.blog.csdn.net/20141126104642178?watermark/2/text/aHR0c
-DovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/d
-issolve/70/gravity/Center" alt=""></p>
-<p>plus下： <img src="http://img.blog.csdn.net/20141126104650181?watermark/2/text/aHR0cDo
-vL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dis
-solve/70/gravity/Center" alt=""></p>
-<p>这时候，你应该就会说，那直接用Pin来做适配不就好了吗，当然是好的，但是Pin太太太麻烦了。。。这调约束的感觉就像在做PS啊<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"><br>。。。。</p>
-<p>3. 第三种解决适配问题的方法是最合适的：代码生成,全代码，不用interfaceBuilder,直接用代码写。但是开发会很慢，而且得出的效果很多时候会跟<br>你想的不一致。。当然，有时间的话还是建议用代码来实现,当写view的时候就这样来设置frame;</p>
-<pre><code>self.btn= [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.origin.x * 0.5, [UIScreen mainScreen].bounds.origin.y * 0.5, 100, 200)];
-</code></pre><p>这样无论什么屏幕，btn都会出现在中间。。。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2014/11/26/iOS关于适配屏幕的问题_2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
     <article id="post-iOS关于适配屏幕的问题_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -457,6 +455,86 @@ ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2014/11/26/iOS关于适配屏幕的问题_1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-iOS关于适配屏幕的问题_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/26/iOS关于适配屏幕的问题_2/">iOS关于适配屏幕的问题_2</a>
+    </h1>
+  
+
+        
+        <a href="/2014/11/26/iOS关于适配屏幕的问题_2/" class="archive-article-date">
+  	<time datetime="2014-11-26T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS关于适配屏幕的问题-2"><a href="#iOS关于适配屏幕的问题-2" class="headerlink" title=" iOS关于适配屏幕的问题_2 "></a><a href="/u1031/article/details/41511983"> iOS关于适配屏幕的问题_2 </a></h1><p>上一篇说了怎么适配iPhone4S 跟 iPhone5的问题。。。因为用[UIScreen<br>mainScreen].bounds.size居然不能识别iPhone6和iPhone6 plus，</p>
+<p>这里说一下怎么让一套storyboard适配iPhone5、6、plus的屏幕,当然也可以用这种方法来适应所有屏幕。。缺点下面会说</p>
+<p>2. 先用4inch的storyboard或者xib来构建UI界面，然后通过给各个view添加约束来控制view的位置、大小，而当屏幕变大时，view会根<br>据屏幕的大小来自动拉伸变大，或者改  变位置。</p>
+<p>步骤：1. 选中要添加约束的view：</p>
+<p><img src="http://img.blog.csdn.net/20141126103831468?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/Center" alt=""></p>
+<p>2. xcode左上方的菜单中Editor -&gt; Pin来添加约束 <img src="http://img.blog.csdn.net/20141126104025
+156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsi
+ze/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>3. 每一个约束会控制view的大小或者距离边框长度或者距离别的view的长度：（按住shift<br>选中两个view,就可以添加Pin中之前不能添加的4个约束。）</p>
+<p>这里给出用4英寸来做的适配6plus的图</p>
+<p>5s的模拟器下: <img src="http://img.blog.csdn.net/20141126104642178?watermark/2/text/aHR0c
+DovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/d
+issolve/70/gravity/Center" alt=""></p>
+<p>plus下： <img src="http://img.blog.csdn.net/20141126104650181?watermark/2/text/aHR0cDo
+vL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dis
+solve/70/gravity/Center" alt=""></p>
+<p>这时候，你应该就会说，那直接用Pin来做适配不就好了吗，当然是好的，但是Pin太太太麻烦了。。。这调约束的感觉就像在做PS啊<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"><br>。。。。</p>
+<p>3. 第三种解决适配问题的方法是最合适的：代码生成,全代码，不用interfaceBuilder,直接用代码写。但是开发会很慢，而且得出的效果很多时候会跟<br>你想的不一致。。当然，有时间的话还是建议用代码来实现,当写view的时候就这样来设置frame;</p>
+<pre><code>self.btn= [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.origin.x * 0.5, [UIScreen mainScreen].bounds.origin.y * 0.5, 100, 200)];
+</code></pre><p>这样无论什么屏幕，btn都会出现在中间。。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/11/26/iOS关于适配屏幕的问题_2/">展开全文 >></a>
         </p>
       
 
@@ -665,11 +743,11 @@ ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">视频播放</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">视频播放</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
             
             <div class="clearfix"></div>
@@ -720,7 +798,7 @@ ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自广州的胖子&lt;br&gt;&lt;br&gt;现在魔都做着iOS开发&lt;br&gt;真正的理想是吃吃吃&lt;br&gt;联系方式:384345982(QQ)</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自广州的胖子&lt;br&gt;&lt;br&gt;现在魔都做着iOS开发&lt;br&gt;真正的理想是吃吃吃&lt;br&gt;联系方式:384345982(QQ)&lt;br&gt;简历可以在左边最下面的链接icon处下载</div>
   	  	
     	</section>
     

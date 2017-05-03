@@ -155,6 +155,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-移动支付" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/03/移动支付/">支付宝支付SDK集成</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/03/移动支付/" class="archive-article-date">
+  	<time datetime="2017-05-03T05:39:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS端移动支付的一些坑"><a href="#iOS端移动支付的一些坑" class="headerlink" title="iOS端移动支付的一些坑"></a>iOS端移动支付的一些坑</h1><p>已经很久没有写博客了，最近刚好工作比较轻松，希望能重新捡起来。</p>
+<p>那么来简单说一下在iOS上做支付的一些东西 (￣▽￣*) 这里主要说支付宝和微信这样的第三方支付,像iOS本身的支付不做探究，话说，这个30%的过路费。。。简直不人道啊。。。。</p>
+<ul>
+<li><strong>简单介绍</strong></li>
+<li><strong>支付宝的一些坑</strong></li>
+</ul>
+<hr>
+<h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>移动支付在iOS中主要指使用支付宝或则微信支付(调起app进行支付)，那么期间整体的流程应该是这样的：</p>
+<p>iOS发起订单生成请求 -&gt; 服务器生成订单信息 -&gt; iOS端根据订单信息调用第三方支付的SDK -&gt; 等待第三方SDK唤起app执行回调 -&gt; 回调里获取支付的结果(支付成功/失败) -&gt; 与服务器进行校验,确定交易是否成功(有可能支付成功了，但是交易失败)</p>
+<p>流程确定好了，在最开始生成订单信息的时候，因为支付宝跟微信支付所需要的订单信息完全不同，当然，如果做银联支付或者内购功能的话，所需生成的订单信息也是完全不同的，毕竟是不同的第三方提供的SDK么ㄟ( ▔ —— ▔ )ㄏ </p>
+<p>所以支付宝跟微信我接下来分开聊</p>
+<hr>
+<h2 id="支付宝的一些坑"><a href="#支付宝的一些坑" class="headerlink" title="支付宝的一些坑"></a>支付宝的一些坑</h2><p>iOS集成支付宝，其实在众多的第三方SDK中，支付宝的开发文档是真的很良心的，基本只要跟着开发文档走就能做完整个支付模块，开发文档要去蚂蚁金服里面找，这里给一下URL地址：<a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.MEvDcW&amp;treeId=204&amp;articleId=105295&amp;docType=1" target="_blank" rel="external">支付宝开发文档</a></p>
+<p>在这里我简单归纳一下下，就是在你需要进行支付的时候，支付模块需要访问一个API接口来获取订单信息，具体到支付宝所需要的订单信息有：</p>
+<ol>
+<li><em>appid</em>      :这个是申请的时候获取的，是支付模块的一个常量</li>
+<li><em>privateKey</em> :跟appid一样，也是申请的时候拿到的,这个比较长，是一大串字符，注重安全的话，这些应该放到服务器上，然后做加密</li>
+<li><em>notify_url</em> :这是一个坑(敲黑板)，因为不写也可以走完支付的流程，但是支付成功之后你的服务端不会受到回调，也就是说付了钱，但是没有通知你的服务器说用户付钱啦.</li>
+<li><em>timestamp</em>  :时间戳,当前时间点,这个跟着demo走就行，没下demo的话就去看看开发文档的吧，要求<em>yyyy-MM-dd HH:mm:ss</em>这样的formatter</li>
+<li><em>version</em>    :这个是写好的1.0</li>
+<li><em>sign_type</em>  :RSA，这个指的是RSA签名规范，跟着demo走就好</li>
+<li><em>biz_content</em>:商品的数据(这个是一个单独的类，而不是像上面的是一些NSString)</li>
+</ol>
+<p>特别指出商品数据应该怎么来构建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// NOTE: 商品数据</div><div class="line">order.biz_content = [BizContent new];</div><div class="line">order.biz_content.body = @&quot;我是测试数据&quot;;</div><div class="line">order.biz_content.subject = @&quot;1&quot;;</div><div class="line">order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）</div><div class="line">order.biz_content.timeout_express = @&quot;30m&quot;; //超时时间设置</div><div class="line">order.biz_content.total_amount = [NSString stringWithFormat:@&quot;%.2f&quot;, 0.01]; //商品价格</div></pre></td></tr></table></figure></p>
+<p>到这里其实订单的数据就已经准备好了，接下来做的是加密部分,加密完就可以调起支付宝SDK了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//将商品信息拼接成字符串</div><div class="line">NSString *orderInfo = [order orderInfoEncoded:NO];</div><div class="line">NSString *orderInfoEncoded = [order orderInfoEncoded:YES];</div><div class="line">    </div><div class="line">// NOTE: 获取私钥并将商户信息签名，外部商户的加签过程请务必放在服务端，防止公私钥数据泄露；</div><div class="line">//       需要遵循RSA签名规范，并将签名字符串base64编码和UrlEncode</div><div class="line">id&lt;DataSigner&gt; signer = CreateRSADataSigner(privateKey);</div><div class="line">NSString *signedString = [signer signString:orderInfo];</div></pre></td></tr></table></figure></p>
+<p>从上面的代码可以看到,加密之后字符串(orderInfoEncoded)与未加密的(orderInfo)是下面调起支付宝SDK要用到的，而signer只是用来判断是否订单信息是不是已经正确填写了<code>if (signedString != nil)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//应用注册scheme,在AliSDKDemo-Info.plist定义URL types</div><div class="line">NSString *appScheme = @&quot;alisdkdemo&quot;;</div><div class="line">     </div><div class="line">// NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式</div><div class="line">NSString *orderString = [NSString stringWithFormat:@&quot;%@&amp;sign=%@&quot;,</div><div class="line">                             orderInfoEncoded, signedString];</div><div class="line">// NOTE: 调用支付结果开始支付</div><div class="line">[[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) &#123;</div><div class="line">    NSLog(@&quot;reslut = %@&quot;,resultDic);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>上面代码块中的appScheme就是你app的scheme,当正确设置的时候,使用Safari打开网址<code>scheme://</code>会打开你的app,这里填写时为了在支付之后重新唤醒你的app.</p>
+<p>调用SDK的callback回调block在支付宝回调你的app时并不会执行,app的回调我们接下来讲,这里的回调block会在当用户的iPhone并没有安装支付宝的时候,也就是支付宝SDK调起网页进行支付,不论用户直接返回还是正常进行支付流程,<br>当返回的时候会执行这个block里面的代码.</p>
+<p>支付宝app的回调会执行AppDelgate的下面两个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//(iOS版本不同执行不同方法,iOS9以上会执行第一个方法....)</div><div class="line">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;</div><div class="line">//iOS8调用这个方法</div><div class="line">-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey,id&gt; *)options;</div></pre></td></tr></table></figure></p>
+<p>但是两者的返回处理是一致的，返回方法参数里面url可以用来识别是不是支付宝调起的返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if ([url.host isEqualToString:@&quot;safepay&quot;])&#123;</div><div class="line">	//是支付宝调起的返回,处理返回结果</div><div class="line">	[[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) &#123;</div><div class="line">            NSLog(@&quot;result = %@&quot;,resultDic);</div><div class="line">     &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>那么iOS集成支付宝就说到这里.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/03/移动支付/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-UIWebView的间距和加载iFrame的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1125,84 +1215,6 @@ cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
 
 
   
-    <article id="post-UIScrollView的视差滚动实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/01/19/UIScrollView的视差滚动实现/">UIScrollView的视差滚动实现</a>
-    </h1>
-  
-
-        
-        <a href="/2015/01/19/UIScrollView的视差滚动实现/" class="archive-article-date">
-  	<time datetime="2015-01-19T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-01-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="UIScrollView的视差滚动实现"><a href="#UIScrollView的视差滚动实现" class="headerlink" title=" UIScrollView的视差滚动实现 "></a><a href="/u1031/article/details/42872121"> UIScrollView的视差滚动实现 </a></h1><p>最近在做的项目要做到在同一个UIScrollView里面给不同的label或者UITextView分层。<br>分层的话，一开始的想法是用多个UIScrollView来做分层，之后设置不同的滚动速度和通过代理来实现同时滚动就可以了。<br>但是结果是有问题的，因为每一次滚动的时候会调用delegate的DidScroll方法，这时候就会有一点延迟，多个ScrollView就不会一起滚动，而是在<br>一个滚动的时候，过一会会有几个跟着来滚动，效果不是太好。</p>
-<p>之后上网找了很多的例子，终于做到了分层滚动的效果，其实是用了别人的控件<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/awkward.gif" alt="尴尬"><br>。。。在这里先标明例子的出处：<a href="http://code4app.com/ios/SWParallaxScrollView/53254e0d933bf0a63d" target="_blank" rel="external">http://code4app.com/ios/SWParallaxScrollView/53254e0d933bf0a63d</a><br>8b4977  是非常容易使用的分层UIScrollView。</p>
-<p>这里简单说一下使用方法</p>
-<p>1. 给配置上环境。</p>
-<p>就是下过来，拖过去，而且没有用到别的什么框架,比较好用,但是本楼主是直接用的cocoapods来导入的,在github上就有。如果是想再项目中用到的请注意，<br>因为是用到了  c++写的，记得改.m为.mm，可能还要去配置一下buildPhases。</p>
-<p>2. 导入使用</p>
-<p>具体就是一个类，2个文件：SWParallaxScrollView.h和SWParallaxScrollView.mm</p>
-<p>在导入完了之后把SWParallaxScrollView当做UIScrollView来使用：</p>
-<pre><code>self.scrollview = [[SWParallaxScrollView alloc] initWithFrame:self.view.bounds];
-
-    self.scrollview.contentSize = CGSizeMake(960, 480);
-</code></pre><p>但是在把view加入到ScrollView中去的时候用下面的方法</p>
-<pre><code>[self.scrollview addSubview:self.textView onLayer:1];
-</code></pre><p>这样layer比较大的会在上面,而且移动的速度会更快，但是因为底层还是通过位移来做出视差滚动的效果,所以就要做frame的调整</p>
-<p>下面给出效果图</p>
-<p><img src="http://img.blog.csdn.net/20150119132339437?watermark/2/text/aHR0cDovL2Jsb2
-cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
-0/gravity/SouthEast" alt=""> <img src="http://img.blog.csdn.net/20150119132500444?watermark/
-2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0
-JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/01/19/UIScrollView的视差滚动实现/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1304,11 +1316,11 @@ JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+                <a href="javascript:void(0)" class="js-tag color5">视频播放</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">视频播放</a>
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1359,7 +1371,7 @@ JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自广州的胖子&lt;br&gt;&lt;br&gt;现在魔都做着iOS开发&lt;br&gt;真正的理想是吃吃吃&lt;br&gt;联系方式:384345982(QQ)</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自广州的胖子&lt;br&gt;&lt;br&gt;现在魔都做着iOS开发&lt;br&gt;真正的理想是吃吃吃&lt;br&gt;联系方式:384345982(QQ)&lt;br&gt;简历可以在左边最下面的链接icon处下载</div>
   	  	
     	</section>
     

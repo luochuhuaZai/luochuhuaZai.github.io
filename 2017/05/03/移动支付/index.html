@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>Archives: 2015 | 罗储华的Blog</title>
+  <title>支付宝支付SDK集成 | 罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个iOS小小开发者的技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="罗储华的Blog">
-<meta property="og:url" content="https://luochuhuazai.github.io/archives/2015/index.html">
+  <meta name="description" content="iOS端移动支付的一些坑已经很久没有写博客了，最近刚好工作比较轻松，希望能重新捡起来。 那么来简单说一下在iOS上做支付的一些东西 (￣▽￣*) 这里主要说支付宝和微信这样的第三方支付,像iOS本身的支付不做探究，话说，这个30%的过路费。。。简直不人道啊。。。。  简单介绍 支付宝的一些坑   简单介绍移动支付在iOS中主要指使用支付宝或则微信支付(调起app进行支付)，那么期间整体的流程应该是">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="支付宝支付SDK集成">
+<meta property="og:url" content="https://luochuhuazai.github.io/2017/05/03/移动支付/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="一个iOS小小开发者的技术博客">
+<meta property="og:description" content="iOS端移动支付的一些坑已经很久没有写博客了，最近刚好工作比较轻松，希望能重新捡起来。 那么来简单说一下在iOS上做支付的一些东西 (￣▽￣*) 这里主要说支付宝和微信这样的第三方支付,像iOS本身的支付不做探究，话说，这个30%的过路费。。。简直不人道啊。。。。  简单介绍 支付宝的一些坑   简单介绍移动支付在iOS中主要指使用支付宝或则微信支付(调起app进行支付)，那么期间整体的流程应该是">
+<meta property="og:updated_time" content="2017-05-03T08:07:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="罗储华的Blog">
-<meta name="twitter:description" content="一个iOS小小开发者的技术博客">
+<meta name="twitter:title" content="支付宝支付SDK集成">
+<meta name="twitter:description" content="iOS端移动支付的一些坑已经很久没有写博客了，最近刚好工作比较轻松，希望能重新捡起来。 那么来简单说一下在iOS上做支付的一些东西 (￣▽￣*) 这里主要说支付宝和微信这样的第三方支付,像iOS本身的支付不做探究，话说，这个30%的过路费。。。简直不人道啊。。。。  简单介绍 支付宝的一些坑   简单介绍移动支付在iOS中主要指使用支付宝或则微信支付(调起app进行支付)，那么期间整体的流程应该是">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -153,120 +155,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-移动支付" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      支付宝支付SDK集成
+    </h1>
+  
+
+        
+        <a href="/2017/05/03/移动支付/" class="archive-article-date">
+  	<time datetime="2017-05-03T05:39:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-03</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS端移动支付的一些坑"><a href="#iOS端移动支付的一些坑" class="headerlink" title="iOS端移动支付的一些坑"></a>iOS端移动支付的一些坑</h1><p>已经很久没有写博客了，最近刚好工作比较轻松，希望能重新捡起来。</p>
+<p>那么来简单说一下在iOS上做支付的一些东西 (￣▽￣*) 这里主要说支付宝和微信这样的第三方支付,像iOS本身的支付不做探究，话说，这个30%的过路费。。。简直不人道啊。。。。</p>
+<ul>
+<li><strong>简单介绍</strong></li>
+<li><strong>支付宝的一些坑</strong></li>
+</ul>
+<hr>
+<h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>移动支付在iOS中主要指使用支付宝或则微信支付(调起app进行支付)，那么期间整体的流程应该是这样的：</p>
+<p>iOS发起订单生成请求 -&gt; 服务器生成订单信息 -&gt; iOS端根据订单信息调用第三方支付的SDK -&gt; 等待第三方SDK唤起app执行回调 -&gt; 回调里获取支付的结果(支付成功/失败) -&gt; 与服务器进行校验,确定交易是否成功(有可能支付成功了，但是交易失败)</p>
+<p>流程确定好了，在最开始生成订单信息的时候，因为支付宝跟微信支付所需要的订单信息完全不同，当然，如果做银联支付或者内购功能的话，所需生成的订单信息也是完全不同的，毕竟是不同的第三方提供的SDK么ㄟ( ▔ —— ▔ )ㄏ </p>
+<p>所以支付宝跟微信我接下来分开聊</p>
+<hr>
+<h2 id="支付宝的一些坑"><a href="#支付宝的一些坑" class="headerlink" title="支付宝的一些坑"></a>支付宝的一些坑</h2><p>iOS集成支付宝，其实在众多的第三方SDK中，支付宝的开发文档是真的很良心的，基本只要跟着开发文档走就能做完整个支付模块，开发文档要去蚂蚁金服里面找，这里给一下URL地址：<a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.MEvDcW&amp;treeId=204&amp;articleId=105295&amp;docType=1" target="_blank" rel="external">支付宝开发文档</a></p>
+<p>在这里我简单归纳一下下，就是在你需要进行支付的时候，支付模块需要访问一个API接口来获取订单信息，具体到支付宝所需要的订单信息有：</p>
+<ol>
+<li><em>appid</em>      :这个是申请的时候获取的，是支付模块的一个常量</li>
+<li><em>privateKey</em> :跟appid一样，也是申请的时候拿到的,这个比较长，是一大串字符，注重安全的话，这些应该放到服务器上，然后做加密</li>
+<li><em>notify_url</em> :这是一个坑(敲黑板)，因为不写也可以走完支付的流程，但是支付成功之后你的服务端不会受到回调，也就是说付了钱，但是没有通知你的服务器说用户付钱啦.</li>
+<li><em>timestamp</em>  :时间戳,当前时间点,这个跟着demo走就行，没下demo的话就去看看开发文档的吧，要求<em>yyyy-MM-dd HH:mm:ss</em>这样的formatter</li>
+<li><em>version</em>    :这个是写好的1.0</li>
+<li><em>sign_type</em>  :RSA，这个指的是RSA签名规范，跟着demo走就好</li>
+<li><em>biz_content</em>:商品的数据(这个是一个单独的类，而不是像上面的是一些NSString)</li>
+</ol>
+<p>特别指出商品数据应该怎么来构建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// NOTE: 商品数据</div><div class="line">order.biz_content = [BizContent new];</div><div class="line">order.biz_content.body = @&quot;我是测试数据&quot;;</div><div class="line">order.biz_content.subject = @&quot;1&quot;;</div><div class="line">order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）</div><div class="line">order.biz_content.timeout_express = @&quot;30m&quot;; //超时时间设置</div><div class="line">order.biz_content.total_amount = [NSString stringWithFormat:@&quot;%.2f&quot;, 0.01]; //商品价格</div></pre></td></tr></table></figure></p>
+<p>到这里其实订单的数据就已经准备好了，接下来做的是加密部分,加密完就可以调起支付宝SDK了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//将商品信息拼接成字符串</div><div class="line">NSString *orderInfo = [order orderInfoEncoded:NO];</div><div class="line">NSString *orderInfoEncoded = [order orderInfoEncoded:YES];</div><div class="line">    </div><div class="line">// NOTE: 获取私钥并将商户信息签名，外部商户的加签过程请务必放在服务端，防止公私钥数据泄露；</div><div class="line">//       需要遵循RSA签名规范，并将签名字符串base64编码和UrlEncode</div><div class="line">id&lt;DataSigner&gt; signer = CreateRSADataSigner(privateKey);</div><div class="line">NSString *signedString = [signer signString:orderInfo];</div></pre></td></tr></table></figure></p>
+<p>从上面的代码可以看到,加密之后字符串(orderInfoEncoded)与未加密的(orderInfo)是下面调起支付宝SDK要用到的，而signer只是用来判断是否订单信息是不是已经正确填写了<code>if (signedString != nil)</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//应用注册scheme,在AliSDKDemo-Info.plist定义URL types</div><div class="line">NSString *appScheme = @&quot;alisdkdemo&quot;;</div><div class="line">     </div><div class="line">// NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式</div><div class="line">NSString *orderString = [NSString stringWithFormat:@&quot;%@&amp;sign=%@&quot;,</div><div class="line">                             orderInfoEncoded, signedString];</div><div class="line">// NOTE: 调用支付结果开始支付</div><div class="line">[[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) &#123;</div><div class="line">    NSLog(@&quot;reslut = %@&quot;,resultDic);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
+<p>上面代码块中的appScheme就是你app的scheme,当正确设置的时候,使用Safari打开网址<code>scheme://</code>会打开你的app,这里填写时为了在支付之后重新唤醒你的app.</p>
+<p>调用SDK的callback回调block在支付宝回调你的app时并不会执行,app的回调我们接下来讲,这里的回调block会在当用户的iPhone并没有安装支付宝的时候,也就是支付宝SDK调起网页进行支付,不论用户直接返回还是正常进行支付流程,<br>当返回的时候会执行这个block里面的代码.</p>
+<p>支付宝app的回调会执行AppDelgate的下面两个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//(iOS版本不同执行不同方法,iOS9以上会执行第一个方法....)</div><div class="line">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;</div><div class="line">//iOS8调用这个方法</div><div class="line">-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey,id&gt; *)options;</div></pre></td></tr></table></figure></p>
+<p>但是两者的返回处理是一致的，返回方法参数里面url可以用来识别是不是支付宝调起的返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if ([url.host isEqualToString:@&quot;safepay&quot;])&#123;</div><div class="line">	//是支付宝调起的返回,处理返回结果</div><div class="line">	[[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) &#123;</div><div class="line">            NSLog(@&quot;result = %@&quot;,resultDic);</div><div class="line">     &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>那么iOS集成支付宝就说到这里.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/10/10/用GPUImage做难一点点的效果/" class="archive-article-date">
-  	<time datetime="2015-10-10T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-10-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/10/用GPUImage做难一点点的效果/">用GPUImage做难一点点的效果</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/08/21/iOS上用GPUImage给视频加滤镜/" class="archive-article-date">
-  	<time datetime="2015-08-21T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/08/21/iOS上用GPUImage给视频加滤镜/">iOS上用GPUImage给视频加滤镜</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/" class="archive-article-date">
-  	<time datetime="2015-07-04T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/">怎么用CIFilter给图片加上各种各样的滤镜</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -278,141 +226,113 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/05/03/移动支付/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/05/19/Swift学习笔记/" class="archive-article-date">
-  	<time datetime="2015-05-19T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-05-19</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/05/19/Swift学习笔记/">Swift学习笔记</a>
-    </h1>
+    <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          UIWebView的间距和加载iFrame的坑
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="移动支付" data-title="支付宝支付SDK集成" data-url="https://luochuhuazai.github.io/2017/05/03/移动支付/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Swift</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/" class="archive-article-date">
-  	<time datetime="2015-03-15T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/">用XMPP协议来创建自己的即时聊天app</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/01/19/UIScrollView的视差滚动实现/" class="archive-article-date">
-  	<time datetime="2015-01-19T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-01-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/01/19/UIScrollView的视差滚动实现/">UIScrollView的视差滚动实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -435,8 +355,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
