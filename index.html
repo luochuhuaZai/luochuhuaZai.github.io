@@ -179,7 +179,8 @@
 <p>那么来简单说一下在iOS上做支付的一些东西 (￣▽￣*) 这里主要说支付宝和微信这样的第三方支付,像iOS本身的支付不做探究，话说，这个30%的过路费。。。简直不人道啊。。。。</p>
 <ul>
 <li><strong>简单介绍</strong></li>
-<li><strong>支付宝的一些坑</strong></li>
+<li><strong>支付宝SDK接入</strong></li>
+<li><strong>微信支付接入</strong></li>
 </ul>
 <hr>
 <h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h2><p>移动支付在iOS中主要指使用支付宝或则微信支付(调起app进行支付)，那么期间整体的流程应该是这样的：</p>
@@ -187,7 +188,7 @@
 <p>流程确定好了，在最开始生成订单信息的时候，因为支付宝跟微信支付所需要的订单信息完全不同，当然，如果做银联支付或者内购功能的话，所需生成的订单信息也是完全不同的，毕竟是不同的第三方提供的SDK么ㄟ( ▔ —— ▔ )ㄏ </p>
 <p>所以支付宝跟微信我接下来分开聊</p>
 <hr>
-<h2 id="支付宝的一些坑"><a href="#支付宝的一些坑" class="headerlink" title="支付宝的一些坑"></a>支付宝的一些坑</h2><p>iOS集成支付宝，其实在众多的第三方SDK中，支付宝的开发文档是真的很良心的，基本只要跟着开发文档走就能做完整个支付模块，开发文档要去蚂蚁金服里面找，这里给一下URL地址：<a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.MEvDcW&amp;treeId=204&amp;articleId=105295&amp;docType=1" target="_blank" rel="external">支付宝开发文档</a></p>
+<h2 id="支付宝SDK接入"><a href="#支付宝SDK接入" class="headerlink" title="支付宝SDK接入"></a>支付宝SDK接入</h2><p>iOS集成支付宝，其实在众多的第三方SDK中，支付宝的开发文档是真的很良心的，基本只要跟着开发文档走就能做完整个支付模块，开发文档要去蚂蚁金服里面找，这里给一下URL地址：<a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.MEvDcW&amp;treeId=204&amp;articleId=105295&amp;docType=1" target="_blank" rel="external">支付宝开发文档</a></p>
 <p>在这里我简单归纳一下下，就是在你需要进行支付的时候，支付模块需要访问一个API接口来获取订单信息，具体到支付宝所需要的订单信息有：</p>
 <ol>
 <li><em>appid</em>      :这个是申请的时候获取的，是支付模块的一个常量</li>
@@ -207,6 +208,22 @@
 <p>支付宝app的回调会执行AppDelgate的下面两个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//(iOS版本不同执行不同方法,iOS9以上会执行第一个方法....)</div><div class="line">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;</div><div class="line">//iOS8调用这个方法</div><div class="line">-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey,id&gt; *)options;</div></pre></td></tr></table></figure></p>
 <p>但是两者的返回处理是一致的，返回方法参数里面url可以用来识别是不是支付宝调起的返回<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">if ([url.host isEqualToString:@&quot;safepay&quot;])&#123;</div><div class="line">	//是支付宝调起的返回,处理返回结果</div><div class="line">	[[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) &#123;</div><div class="line">            NSLog(@&quot;result = %@&quot;,resultDic);</div><div class="line">     &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>那么iOS集成支付宝就说到这里.</p>
+<hr>
+<h2 id="微信支付接入"><a href="#微信支付接入" class="headerlink" title="微信支付接入"></a>微信支付接入</h2><p>相对于支付宝专门做的支付SDK,微信支付是从属于微信SDK的一个功能模块，与微信SDK的交互其实跟使用微信SDK来做分享是一样一样的，都是使用了‘[WXApi sendReq:req];’这个方法。</p>
+<p>但是跟微信分享不一样的地方在于，传入的req不再是SendMessageToWXReq了，而是PayReq了，当然PayReq也是继续至BaseReq的，照着开发文档来就好，这个如果是在已经有微信分享功能的app里面添加，甚至看看SDK代码和注释就好，根本用不着仔细看开发文档ㄟ( ▔, ▔ )ㄏ 。</p>
+<p>下面来看看PayReq要怎么构造</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">PayReq* req             = [[PayReq alloc] init];</div><div class="line">req.partnerId           = [data objectForKey:@&quot;partnerid&quot;];</div><div class="line">req.prepayId            = [data objectForKey:@&quot;prepayid&quot;];</div><div class="line">req.nonceStr            = [data objectForKey:@&quot;noncestr&quot;];</div><div class="line">req.timeStamp           = [[data objectForKey:@&quot;timestamp&quot;] intValue];</div><div class="line">req.package             = [data objectForKey:@&quot;package&quot;];</div><div class="line">req.sign                = [data objectForKey:@&quot;sign&quot;];</div></pre></td></tr></table></figure>
+<p>跟支付宝不一样，微信支付的订单生成是服务端去做的(支付宝实际上服务端是生成订单信息，然后由支付宝的SDK调用来进行订单生成)，所以在支付订单信息里面的timeStamp需要服务端生成订单时候的时间戳，而不是手机系统的时间戳。</p>
+<p>构建好了request之后，调用WXApi来发送</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[WXApi sendReq:req];</div></pre></td></tr></table></figure>
+<h3 id="接下来说说回调"><a href="#接下来说说回调" class="headerlink" title="接下来说说回调"></a>接下来说说回调</h3><p>跟支付宝的回到类似，微信SDK通过微信app唤起你的app，来进行回调，所以入口同样是下面的两个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//(iOS版本不同执行不同方法,iOS9以上会执行第一个方法....)</div><div class="line">- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;</div><div class="line">//iOS8调用这个方法</div><div class="line">-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey,id&gt; *)options;</div></pre></td></tr></table></figure>
+<p>而分辨方法在于：传参的url里面，微信的回调会返回你申请时候获取的APPID</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/*** 微信回调(支付、登录、分享) ***/</div><div class="line">//if is has prefix wx</div><div class="line">if ([url.absoluteString hasPrefix:@&quot;你的微信appId&quot;]) &#123;</div><div class="line">    return[WXApi handleOpenURL:url delegate:self];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从上面的代码块可以看到，其实微信的支付、登录和分享都会共享回调，而分辨则是通过delegate来实现的，也就是说上面的代码块<code>[WXApi handleOpenURL:url delegate:self];</code>，你传入的delegate必须实现WXApiDelegate协议。</p>
+<p>最重要的是实现下面的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/*! @brief 发送一个sendReq后，收到微信的回应</div><div class="line"> *</div><div class="line"> * 收到一个来自微信的处理结果。调用一次sendReq后会收到onResp。</div><div class="line"> * 可能收到的处理结果有SendMessageToWXResp、SendAuthResp等。</div><div class="line"> * @param resp具体的回应内容，是自动释放的</div><div class="line"> */</div><div class="line">-(void) onResp:(BaseResp*)resp;</div></pre></td></tr></table></figure></p>
+<p>其中，可以通过resp的类型判断来识别是什么操作的回调<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if([resp isKindOfClass:[PayResp class]])&#123;</div><div class="line">        </div><div class="line">    //支付成功！</div><div class="line">    //这里只返回支付过程是否成功,但支付过后,可能会出现别的原因,导致交易失败,但是支付过程是成功的...</div><div class="line">    if (resp.errCode == 0) &#123;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    //这里应该拿着支付结果再进行API访问，校验交易结果</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>那么第三方支付这块就聊到这里吧。</p>
 
       
 
