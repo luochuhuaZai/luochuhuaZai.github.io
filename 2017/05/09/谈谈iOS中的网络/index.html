@@ -6,28 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>iOS关于适配屏幕的问题_1 | 罗储华的Blog</title>
+  <title>谈谈iOS中的网络 | 罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS关于适配屏幕的问题_1 在以前，只要虽然苹果就由3.5寸跟4寸屏，但是宽度都是没有变化的，所以适配屏幕的问题还是很好做的。 现在因为4.7寸的iPhone6和5.5寸的iPhone6 plus的宽度大了，适配起来就更加麻烦了… 在网上找了很久，很多人说的都是图像、图标的像素问题，没有提到怎么适配。在这里简单说一下 归根到底，app适配多种屏幕有3种方法： 1. 做多套的storyboard">
+  <meta name="description" content="简单谈谈iOS中的网络底层最近工作比较轻松，所以有时间来好好思考一下自己代码里面的一些架构的问题，当然了，因为自己本身其实能力还不足以当一个架构师，所以才会有那么多的架构问题，那么在这里就聊聊网络那点事。  网络是怎样连接的 iOS中的网络模块构建   网络是怎样连接的最开始的起因是在一次面试中，发现自己其实只懂得在iOS中怎么去进行网络请求、返回的json数据怎么解析等等一些业务层上的操作，而对">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS关于适配屏幕的问题_1">
-<meta property="og:url" content="https://luochuhuazai.github.io/2014/11/26/iOS关于适配屏幕的问题_1/index.html">
+<meta property="og:title" content="谈谈iOS中的网络">
+<meta property="og:url" content="https://luochuhuazai.github.io/2017/05/09/谈谈iOS中的网络/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="iOS关于适配屏幕的问题_1 在以前，只要虽然苹果就由3.5寸跟4寸屏，但是宽度都是没有变化的，所以适配屏幕的问题还是很好做的。 现在因为4.7寸的iPhone6和5.5寸的iPhone6 plus的宽度大了，适配起来就更加麻烦了… 在网上找了很久，很多人说的都是图像、图标的像素问题，没有提到怎么适配。在这里简单说一下 归根到底，app适配多种屏幕有3种方法： 1. 做多套的storyboard">
-<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif">
-<meta property="og:image" content="http://img.blog.csdn.net/20141126
-094445718?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/
-fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif">
-<meta property="og:image" content="http://img.blog.csdn.net/2014112610
-0601912?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fo
-ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:updated_time" content="2017-04-21T09:28:17.000Z">
+<meta property="og:description" content="简单谈谈iOS中的网络底层最近工作比较轻松，所以有时间来好好思考一下自己代码里面的一些架构的问题，当然了，因为自己本身其实能力还不足以当一个架构师，所以才会有那么多的架构问题，那么在这里就聊聊网络那点事。  网络是怎样连接的 iOS中的网络模块构建   网络是怎样连接的最开始的起因是在一次面试中，发现自己其实只懂得在iOS中怎么去进行网络请求、返回的json数据怎么解析等等一些业务层上的操作，而对">
+<meta property="og:image" content="https://github.com/luochuhuaZai/luochuhuaZai.github.io/blob/master/resources/images/b76b41021cfffbad.png">
+<meta property="og:image" content="https://github.com/luochuhuaZai/luochuhuaZai.github.io/blob/master/resources/images/b20c03a879a6bf86.png">
+<meta property="og:updated_time" content="2017-05-10T06:41:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS关于适配屏幕的问题_1">
-<meta name="twitter:description" content="iOS关于适配屏幕的问题_1 在以前，只要虽然苹果就由3.5寸跟4寸屏，但是宽度都是没有变化的，所以适配屏幕的问题还是很好做的。 现在因为4.7寸的iPhone6和5.5寸的iPhone6 plus的宽度大了，适配起来就更加麻烦了… 在网上找了很久，很多人说的都是图像、图标的像素问题，没有提到怎么适配。在这里简单说一下 归根到底，app适配多种屏幕有3种方法： 1. 做多套的storyboard">
-<meta name="twitter:image" content="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif">
+<meta name="twitter:title" content="谈谈iOS中的网络">
+<meta name="twitter:description" content="简单谈谈iOS中的网络底层最近工作比较轻松，所以有时间来好好思考一下自己代码里面的一些架构的问题，当然了，因为自己本身其实能力还不足以当一个架构师，所以才会有那么多的架构问题，那么在这里就聊聊网络那点事。  网络是怎样连接的 iOS中的网络模块构建   网络是怎样连接的最开始的起因是在一次面试中，发现自己其实只懂得在iOS中怎么去进行网络请求、返回的json数据怎么解析等等一些业务层上的操作，而对">
+<meta name="twitter:image" content="https://github.com/luochuhuaZai/luochuhuaZai.github.io/blob/master/resources/images/b76b41021cfffbad.png">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -164,56 +158,61 @@ ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-iOS关于适配屏幕的问题_1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-谈谈iOS中的网络" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      iOS关于适配屏幕的问题_1
+      谈谈iOS中的网络
     </h1>
   
 
         
-        <a href="/2014/11/26/iOS关于适配屏幕的问题_1/" class="archive-article-date">
-  	<time datetime="2014-11-26T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-26</time>
+        <a href="/2017/05/09/谈谈iOS中的网络/" class="archive-article-date">
+  	<time datetime="2017-05-09T06:37:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="iOS关于适配屏幕的问题-1"><a href="#iOS关于适配屏幕的问题-1" class="headerlink" title=" iOS关于适配屏幕的问题_1 "></a><a href="/u1031/article/details/41511161"> iOS关于适配屏幕的问题_1 </a></h1><p>在以前，只要虽然苹果就由3.5寸跟4寸屏，但是宽度都是没有变化的，所以适配屏幕的问题还是很好做的。</p>
-<p>现在因为4.7寸的iPhone6和5.5寸的iPhone6 plus的宽度大了，适配起来就更加麻烦了<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"><br>…</p>
-<p>在网上找了很久，很多人说的都是图像、图标的像素问题，没有提到怎么适配。在这里简单说一下</p>
-<p>归根到底，app适配多种屏幕有3种方法：</p>
-<p>1. 做多套的storyboard,在appDelegate里面判断屏幕大小， <img src="http://img.blog.csdn.net/20141126
-094445718?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/
-fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>从而判断到底到底加载哪一套storyboard,当然如果用到了xib也要做多<br>套。但是LZ用的时xcode6.1,居然发现了6、6plus的[UIScreen mainScreen].bounds.size<br>跟5s的时一模一样的…都是320x568…这到底是要闹哪样<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"><br>。。。。</p>
-<p>但是这样还是能辨别出4s跟5的,这里给出宏定义。</p>
-<pre><code>#define iPhone4inch ([UIScreen mainScreen].bounds.size.height == 568.0 &amp;&amp; [UIScreen mainScreen].bounds.size.width == 320) ? YES : NO
-
-#define iPhone3p5inch ([UIScreen mainScreen].bounds.size.height == 480.0 &amp;&amp; [UIScreen mainScreen].bounds.size.width == 320) ? YES : NO
-
-#define iPhone4p7inch ([UIScreen mainScreen].bounds.size.height == 667.0 &amp;&amp; [UIScreen mainScreen].bounds.size.width == 375) ? YES : NO
-
-#define iPhone5p5inch ([UIScreen mainScreen].bounds.size.height == 736.0 &amp;&amp; [UIScreen mainScreen].bounds.size.width == 414) ? YES : NO
-</code></pre><p>之后在两套storyboard的对应controller里面用一样的  Id <img src="http://img.blog.csdn.net/2014112610
-0601912?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fo
-ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加载的时候先加载对应的storyboard,然后再加载对应  的controller，就OK了</p>
-<pre><code>if (iPhone4inch)
-    {
-        storyboard = [UIStoryboard storyboardWithName:@&quot;Main_4inch&quot; bundle:[NSBundle mainBundle]];
-    }
-
-
-
-
-
-
-&lt;span style=&quot;font-family: Arial, Helvetica, sans-serif;&quot;&gt;self.controller = [storyboard instantiateViewControllerWithIdentifier:@&quot;1&quot;];&lt;/span&gt;
-</code></pre><p>关于如何适配iPhone6、iPhone6 plus在下一篇里面讲一下</p>
+        <h1 id="简单谈谈iOS中的网络底层"><a href="#简单谈谈iOS中的网络底层" class="headerlink" title="简单谈谈iOS中的网络底层"></a>简单谈谈iOS中的网络底层</h1><p>最近工作比较轻松，所以有时间来好好思考一下自己代码里面的一些架构的问题，当然了，因为自己本身其实能力还不足以当一个架构师，所以才会有那么多的架构问题，那么在这里就聊聊网络那点事。</p>
+<ul>
+<li><strong>网络是怎样连接的</strong></li>
+<li><strong>iOS中的网络模块构建</strong></li>
+</ul>
+<hr>
+<h2 id="网络是怎样连接的"><a href="#网络是怎样连接的" class="headerlink" title="网络是怎样连接的"></a>网络是怎样连接的</h2><p>最开始的起因是在一次面试中，发现自己其实只懂得在iOS中怎么去进行网络请求、返回的json数据怎么解析等等一些业务层上的操作，而对网络底层应该去做的一些连接步骤，三次握手的必要性等等都很是模糊不清的，所以就买了一些书好好去看了看，好歹是能说清楚网络是怎么去连接的了，话说。。。上学时没有好好学通讯基础、计算机组成原理啥的，现在很是有点伤啊(′⌒`)</p>
+<p><em>那么接下来说说网络连接的具体过程:</em></p>
+<p>生成请求 -&gt; 访问DNS服务器获取具体IP地址 -&gt; 连接接收端(传说中的三次握手就在这),Https也是在这里会进行证书下载,以便进行以后的数据加密,这块先不讲 -&gt; 根据TCP协议进行数据分割(分成包) -&gt; IP协议计算路由(也可以说是传输路径) -&gt; 通知网卡驱动准备发送 -&gt; 网卡发送数据包 -&gt; 接收端根据TCP协议,返回收到的包结果,确定需不需要重发丢失的数据包并进行数据拼接 -&gt; 接收端获取到拼接好的数据 </p>
+<p>以上就是一次网络请求的具体操作步骤，下面会好好聊聊里面的一些东西。</p>
+<p>1.TCP/IP协议</p>
+<p>TCP协议和IP协议其实是两个不同的协议,负责的内容也完全不同,通常是由TCP协议去调起IP协议,具体得关系应该如下图,但是这个真的是很大的内容,反正我是不敢说自己已经完全懂这块的内容了,就先说说我知道的一些内容吧。</p>
+<p><img src="https://github.com/luochuhuaZai/luochuhuaZai.github.io/blob/master/resources/images/b76b41021cfffbad.png" alt="TCP/IP协议"></p>
+<p>在上面其实有提到过,TCP协议其实是负责请求数据的分割,因为请求数据太大了,不能在一次传输就把所有内容全部传输过去,所以诞生了TCP协议,用以做内容分割,而对应的,接受端也要遵循TCP协议,在接受到数据包就得返回给请求端接受结果,以便确定数据包有没有丢失,是不是需要重发,而接收端在接受完了全部的内容之后(如何确定是否接受到全部的数据包当然也是TCP协议的内容),进行数据拼接。</p>
+<p>但是因为TCP协议需要保证请求数据能完整传输到接受端,需要去做大量的工作,那么对应的,就有UDP协议,把所有的内容一次性地去发送给接收端,接收端接受之后返回结果,丢失就全部重发,这样是不能做到一些日常的网络请求的,因为容量太小了,但是在某些场景会使用到。PS：应用场景我还没有想到(⊙﹏⊙)</p>
+<p>IP协议负责的是把数据包从请求端发送到接收端,包括<em>寻址</em>和<em>分段</em>这两个内容,而确定数据传输路径的是路由算法(优秀的路由算法可以大幅度提高数据传输效率,尽管分配的带宽并没有改变,所以好的路由器是很重要的 o(￣ヘ￣o#) )</p>
+<p>2.DNS服务器</p>
+<p>DNS服务器,就是把英文的域名解析成对应的主机IP地址的服务器,跟所有的服务器一样，DNS服务器上面并不仅仅是保存域名-IP地址而已,因为网络访问太过频繁的关系,基本上大型的服务器系统都会做 <em>负载均衡</em> 而负载均衡中很重要的一点就是在DNS服务器返回的时候需要其返回正确的、压力比较小的主机IP地址。但这块我并不是很熟悉,只是知道负载均衡需要从这块入手。。。。。。</p>
+<hr>
+<h2 id="iOS中的网络模块构建"><a href="#iOS中的网络模块构建" class="headerlink" title="iOS中的网络模块构建"></a>iOS中的网络模块构建</h2><p>跟其他的功能模块一样,把网络功能单独做成功能模块主要是为了减少重复代码和复用,而且在iOS中,目前比较火的网络请求框架是AFNetWorking,但是风水轮流转,起码得保证到时候需要去更换成其他的第三方框架或者直接上NSURLSession也好,工作量不会那么得大,维护起来会比较省心。</p>
+<p>所以我封装网络模块基本思路如下图：</p>
+<p><img src="https://github.com/luochuhuaZai/luochuhuaZai.github.io/blob/master/resources/images/b20c03a879a6bf86.png" alt="TCP/IP协议"></p>
+<p>1.业务层 (Manager)</p>
+<p>这一层的网络模块主要是做跟API接口的对接,通过大量的注释来作为API接口的说明和目录,而通常情况下,新增API接口或者API接口出现改动,都只需要修改这一层的东西。</p>
+<p>简单点说,这个模块是一个类(下面统称 NetworkManager),这个NetworkManager是单例的(方便进行逻辑层的连接,然后会带有几个简单的属性）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &quot;NetworkTool.h&quot;</div><div class="line">#import &quot;NetworkHandler.h&quot;</div><div class="line"></div><div class="line">@interface NetworkManger : NSObject</div><div class="line"></div><div class="line">@property (strong, nonatomic) NetworkHandler *handler;</div><div class="line"></div><div class="line">+ (instancetype)shareManger;</div><div class="line"></div><div class="line">//根据API制定网络访问方法.....这里举个🌰</div><div class="line">#pragma mark - 获取用户信息</div><div class="line">/**</div><div class="line"> *  获取用户信息</div><div class="line"> *  </div><div class="line"> *  @param userId 用户的id</div><div class="line"> *  @param result 回调</div><div class="line"> */</div><div class="line">- (void)getUserInfo:(NSInteger)userId callBack:(void (^)(id))result;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>在网络访问方法中,会使用核心层进行网络请求,然后返回的结果需要先通过逻辑层(如果API接口有要求的话,在调用核心层Tool进行请求之前,先用逻辑层handler进行数据的加密等操作),判断请求结果是否有正确,同时如果返回结果是正常的时候调用传入的block来进行数据的填充或者保存。</p>
+<p>实现的例子就不给出了,主要是要做下面几个步骤:</p>
+<p>Handler处理传入参数(例子里面就是userId) -&gt; 处理好的参数作为参数,调用Tool的GET或者POST方法(这个一般是封装的第三方请求框架) -&gt; Handler处理返回结果(response) -&gt; Handler处理后返回数据作为参数,执行回调block;</p>
+<p>2.逻辑层 (Handler)</p>
+<p>说白了,这个层其实是为了把每个API接口大同小异的错误返回进行过滤,如果是返回错误的结果,就直接使用Handler来进行处理和提示,这样就不用在功能模块外部再次判断返回的数据是否出错等问题,修改起来会比较方便。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface NetworkHandler : NSObject</div><div class="line"></div><div class="line">/**</div><div class="line"> *  处理传给API的参数</div><div class="line"> */</div><div class="line">+ (NSDictionary *)handleParams;</div><div class="line"></div><div class="line">/**</div><div class="line"> *  对API返回的数据进行处理;</div><div class="line"> *  </div><div class="line"> *  @param networkData API返回数据</div><div class="line"> *  @param result      返回结果正确时候的回调</div><div class="line"> */</div><div class="line">+ (void)handleNetworkResult:(id)networkData callback:(void (^)(id))result;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>3.核心层</p>
+<p>核心层只需要负责根据参数和URL进行对应的GET和POST操作就结束了,它的存在意义是在需要进行网络方法更换的时候不需要去修改太多的东西。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@interface NetWorkTool : NSObject</div><div class="line"></div><div class="line">/**</div><div class="line"> *  POST的访问</div><div class="line"> *</div><div class="line"> *  @param URLString  URL地址</div><div class="line"> *  @param parameters Dicionary(nil),参数</div><div class="line"> *  @param sucess     成功回调</div><div class="line"> *  @param failure    失败回调</div><div class="line"> */</div><div class="line">+ (void)POST:(NSString *)URLString parameters:(id)parameters success:(void (^)(id))sucess failure:(void (^)(NSError *))failure;</div><div class="line"></div><div class="line">/**</div><div class="line"> *  POST的访问</div><div class="line"> *</div><div class="line"> *  @param URLString  URL地址</div><div class="line"> *  @param parameters Dicionary(nil),参数</div><div class="line"> *  @param sucess     成功回调</div><div class="line"> *  @param failure    失败回调</div><div class="line"> */</div><div class="line">+ (void)GET:(NSString *)URLString parameters:(id)parameters success:(void (^)(id))sucess failure:(void (^)(NSError *))failure;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 
       
 
@@ -283,7 +282,7 @@ ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2014/11/26/iOS关于适配屏幕的问题_1/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/05/09/谈谈iOS中的网络/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,20 +296,15 @@ ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加
   
 <nav id="article-nav">
   
-    <a href="/2014/11/23/用MobileVLCKit播放rmvb视频/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/05/03/移动支付/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          用MobileVLCKit播放rmvb视频
+          支付宝支付SDK集成
         
       </div>
     </a>
   
-  
-    <a href="/2014/11/26/iOS关于适配屏幕的问题_2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS关于适配屏幕的问题_2</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
@@ -321,7 +315,7 @@ ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="iOS关于适配屏幕的问题_1" data-title="iOS关于适配屏幕的问题_1" data-url="https://luochuhuazai.github.io/2014/11/26/iOS关于适配屏幕的问题_1/"></div>
+	<div class="ds-thread" data-thread-key="谈谈iOS中的网络" data-title="谈谈iOS中的网络" data-url="https://luochuhuazai.github.io/2017/05/09/谈谈iOS中的网络/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -155,6 +155,198 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-用XMPP协议来创建自己的即时聊天app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/">用XMPP协议来创建自己的即时聊天app</a>
+    </h1>
+  
+
+        
+        <a href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/" class="archive-article-date">
+  	<time datetime="2015-03-15T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="用XMPP协议来创建自己的即时聊天app"><a href="#用XMPP协议来创建自己的即时聊天app" class="headerlink" title=" 用XMPP协议来创建自己的即时聊天app "></a><a href="/u1031/article/details/44277871"> 用XMPP协议来创建自己的即时聊天app </a></h1><p>因为在之前项目需要用到即时聊天的功能.在逛了好多论坛之后,才终于实现了即时聊天的功能。</p>
+<p>使用xmpp+openfire+iOS客户端来制作聊天app的demo、教程网上都有很多，在这里简单地说一下核心做法。</p>
+<p>1.<br>首先就要制作服务器，这块我是用的openfire的服务器，数据库也不是用嵌入在openfire里面的，而是用的mySQL，性能相当不错，而且不会丢消息。</p>
+<p>1.1 到<a href="http://www.igniterealtime.org/downloads/index.jsp去下载最新的openfire" target="_blank" rel="external">http://www.igniterealtime.org/downloads/index.jsp去下载最新的openfire</a></p>
+<p><img src="http://img.blog.csdn.net/20150315162637702?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>为了验证服务器搭建完成没有，或者验证app到底能不能正常通信，可以下Spqrk来试验，它就是一个聊天工具，等登陆上且能给手机模拟器正常聊天，那聊天功能就成<br>功了！</p>
+<p>1.2 安装openfire，本人是在Mac10.10下安装的，之后去用户偏好里面就能打开设置页，设置好了就能够拿电脑当服务器使了，而windows跟lin<br>ux的没有用过，不过网上很多  教程这里转发一个：<a href="http://wiki.jabbercn.org/Openfire:%E5%AE%89%E8%A3%85%" target="_blank" rel="external">http://wiki.jabbercn.org/Openfire:%E5%AE%89%E8%A3%85%</a><br>E6%8C%87%E5%8D%97</p>
+<p>再发一个在mac上搭建的教程： <a href="http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html" target="_blank" rel="external">http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html</a></p>
+<p>好了，到这里服务器应该已经搭建好了，使用spark去登陆一下。</p>
+<p>2. iOS端制作</p>
+<p>2.1 导入框架，iOS端使用xmpp需要导入对应的库: XMPPFramework<br>，这个库在Github、code4app上面都有，导入过程也不复杂，但是本人还是习惯性的去使用CocoaPods,</p>
+<p>毕竟用来导入实在太方便了。CocoaPods是一种开发工具，在终端上几行代码就能够给项目导入好库，有依赖的库也会给导入好，具体教程网上一抓一大把。</p>
+<p>2.2  大家应该已经猜出来了，其实就是使用XMPPFramework里面的代理方法和xmppStream来跟服务器发送和收到消息。</p>
+<p>先建立跟服务器的连接：</p>
+<p><img src="http://img.blog.csdn.net/20150315165118816?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>然后连接服务器：</p>
+<p><img src="http://img.blog.csdn.net/20150315165135586?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/SouthEast" alt=""></p>
+<p>PS：如果服务器不是自己电脑，需要把Server给改成服务器的IP地址。</p>
+<p>记得给实现XMPPStreamDelegate,当服务器发送消息，比如别人发的消息、好友上线消息等都会回调里面的方法，之前建立连接的时候设定的delegat<br>e就是让服务  器回调的时候能有回调的方法给执行。</p>
+<p>需要实现的有：</p>
+<pre><code>#pragma mark -- XMPPStream Delegate 
+//连接服务器
+- (void)xmppStreamDidConnect:(XMPPStream *)sender{
+
+    NSLog(@&quot;did Connected&quot;);
+    NSError *error = nil;
+    //验证密码
+    if (![[self xmppStream] authenticateWithPassword:password error:&amp;error]){
+        NSLog(@&quot;Authenticate Error: %@&quot;, [[error userInfo] description]);
+    }
+}
+
+//验证通过
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender{
+
+    NSLog(@&quot;验证已通过.........&quot;);
+    [self goOnline];
+}
+
+//收到消息
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
+
+    //    NSLog(@&quot;message = %@&quot;, message);
+
+    NSString *msg = [[message elementForName:@&quot;body&quot;] stringValue];
+    NSString *from = [[message attributeForName:@&quot;from&quot;] stringValue];
+
+    NSLog(@&quot;receive message :%@ from :%@&quot;,msg, from);
+
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:msg forKey:@&quot;MSG&quot;];
+    [dict setObject:from forKey:@&quot;SENDER&quot;];
+
+    //消息委托,就是收到的消息怎么处理
+    [self.messageViewController MessageReceived:dict];
+}
+
+//收到好友状态
+- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence{
+
+    //取得好友状态
+    NSString *presenceType = [presence type]; //online/offline
+    //当前用户
+    NSString *userId = [[sender myJID] user];
+    //在线用户
+    NSString *presenceFromUser = [[presence from] user];
+
+
+    NSLog(@&quot;id: %@&quot;,userId);
+    NSLog(@&quot;user: %@&quot;, presenceFromUser);
+    NSLog(@&quot;type: %@&quot;, presenceType);
+
+    /*这里应该做当有好友上线之后的操作，比如改变对应头像颜色之类的*/
+}
+
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
+    NSLog(@&quot;did not authenticate....error :%@&quot;, error);
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@&quot;错误&quot; message:@&quot;账号/密码输入出错！&quot; delegate:nil cancelButtonTitle:@&quot;cancel&quot; otherButtonTitles:nil];
+    [alertView show];
+}
+</code></pre><p>做到这里就能收到消息了，建议都给放在appDelegate上面，这样xmppStream不会被释放掉</p>
+<p>下面是发送消息功能的实现</p>
+<pre><code>- (IBAction)sendClick:(id)sender {
+
+    NSString *message = self.messageTextField.text;
+    NSMutableString *toName = [NSMutableString stringWithString:self.toTextField.text];
+    [toName appendString:@&quot;@127.0.0.1&quot;];
+
+    //xmpp通过kissxmpp来上传消息
+    if (message.length &gt; 0) {
+
+        //下面几行就是自己发送消息之后做的事(屏幕上给出现自己发的消息)
+        NSMutableString *messages =  [NSMutableString stringWithString:self.messageTextView.text];
+        NSString *selfName = [[NSUserDefaults standardUserDefaults] stringForKey:@&quot;USERID&quot;];
+
+        [messages appendString:[NSString stringWithFormat:@&quot;\n          %@&quot;,selfName]];
+        [messages appendString:[NSString stringWithFormat:@&quot;\n          %@&quot;, self.messageTextField.text]];
+        self.messageTextView.text = messages;
+
+        //生成&lt;body&gt;文档
+        NSXMLElement *body = [NSXMLElement elementWithName:@&quot;body&quot;];
+        [body setStringValue:message];
+
+        //生成XML消息文档
+        NSXMLElement *mes = [NSXMLElement elementWithName:@&quot;message&quot;];
+        //消息类型
+        [mes addAttributeWithName:@&quot;type&quot; stringValue:@&quot;chat&quot;];
+        //发送给谁
+        [mes addAttributeWithName:@&quot;to&quot; stringValue:toName];
+
+        //由谁发送
+        [mes addAttributeWithName:@&quot;from&quot; stringValue:[[NSUserDefaults standardUserDefaults] stringForKey:@&quot;USERID&quot;]];
+        //组合
+        [mes addChild:body];
+
+        //发送消息
+        [[self xmppStream] sendElement:mes];
+
+        self.messageTextField.text = @&quot;&quot;;
+        [self.messageTextField resignFirstResponder];
+    }
+
+}
+</code></pre><p>最后声明，本人自学中，感谢各大网络网友的支持，有疑问请联系：384345982(QQ)，不过能力有限，望大家不要见怪。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/tongue.gif" alt="吐舌头"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/03/15/用XMPP协议来创建自己的即时聊天app/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-UIScrollView的视差滚动实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -381,6 +573,86 @@ videoRequest = request
 
 
   
+    <article id="post-iOS关于适配屏幕的问题_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/26/iOS关于适配屏幕的问题_2/">iOS关于适配屏幕的问题_2</a>
+    </h1>
+  
+
+        
+        <a href="/2014/11/26/iOS关于适配屏幕的问题_2/" class="archive-article-date">
+  	<time datetime="2014-11-26T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iOS关于适配屏幕的问题-2"><a href="#iOS关于适配屏幕的问题-2" class="headerlink" title=" iOS关于适配屏幕的问题_2 "></a><a href="/u1031/article/details/41511983"> iOS关于适配屏幕的问题_2 </a></h1><p>上一篇说了怎么适配iPhone4S 跟 iPhone5的问题。。。因为用[UIScreen<br>mainScreen].bounds.size居然不能识别iPhone6和iPhone6 plus，</p>
+<p>这里说一下怎么让一套storyboard适配iPhone5、6、plus的屏幕,当然也可以用这种方法来适应所有屏幕。。缺点下面会说</p>
+<p>2. 先用4inch的storyboard或者xib来构建UI界面，然后通过给各个view添加约束来控制view的位置、大小，而当屏幕变大时，view会根<br>据屏幕的大小来自动拉伸变大，或者改  变位置。</p>
+<p>步骤：1. 选中要添加约束的view：</p>
+<p><img src="http://img.blog.csdn.net/20141126103831468?watermark/2/text/aHR0cDovL2Jsb2
+cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
+0/gravity/Center" alt=""></p>
+<p>2. xcode左上方的菜单中Editor -&gt; Pin来添加约束 <img src="http://img.blog.csdn.net/20141126104025
+156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsi
+ze/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>3. 每一个约束会控制view的大小或者距离边框长度或者距离别的view的长度：（按住shift<br>选中两个view,就可以添加Pin中之前不能添加的4个约束。）</p>
+<p>这里给出用4英寸来做的适配6plus的图</p>
+<p>5s的模拟器下: <img src="http://img.blog.csdn.net/20141126104642178?watermark/2/text/aHR0c
+DovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/d
+issolve/70/gravity/Center" alt=""></p>
+<p>plus下： <img src="http://img.blog.csdn.net/20141126104650181?watermark/2/text/aHR0cDo
+vL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dis
+solve/70/gravity/Center" alt=""></p>
+<p>这时候，你应该就会说，那直接用Pin来做适配不就好了吗，当然是好的，但是Pin太太太麻烦了。。。这调约束的感觉就像在做PS啊<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"><br>。。。。</p>
+<p>3. 第三种解决适配问题的方法是最合适的：代码生成,全代码，不用interfaceBuilder,直接用代码写。但是开发会很慢，而且得出的效果很多时候会跟<br>你想的不一致。。当然，有时间的话还是建议用代码来实现,当写view的时候就这样来设置frame;</p>
+<pre><code>self.btn= [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.origin.x * 0.5, [UIScreen mainScreen].bounds.origin.y * 0.5, 100, 200)];
+</code></pre><p>这样无论什么屏幕，btn都会出现在中间。。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2014/11/26/iOS关于适配屏幕的问题_2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-iOS关于适配屏幕的问题_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -455,86 +727,6 @@ ntsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>。。在加
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2014/11/26/iOS关于适配屏幕的问题_1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-iOS关于适配屏幕的问题_2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/11/26/iOS关于适配屏幕的问题_2/">iOS关于适配屏幕的问题_2</a>
-    </h1>
-  
-
-        
-        <a href="/2014/11/26/iOS关于适配屏幕的问题_2/" class="archive-article-date">
-  	<time datetime="2014-11-26T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2014-11-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="iOS关于适配屏幕的问题-2"><a href="#iOS关于适配屏幕的问题-2" class="headerlink" title=" iOS关于适配屏幕的问题_2 "></a><a href="/u1031/article/details/41511983"> iOS关于适配屏幕的问题_2 </a></h1><p>上一篇说了怎么适配iPhone4S 跟 iPhone5的问题。。。因为用[UIScreen<br>mainScreen].bounds.size居然不能识别iPhone6和iPhone6 plus，</p>
-<p>这里说一下怎么让一套storyboard适配iPhone5、6、plus的屏幕,当然也可以用这种方法来适应所有屏幕。。缺点下面会说</p>
-<p>2. 先用4inch的storyboard或者xib来构建UI界面，然后通过给各个view添加约束来控制view的位置、大小，而当屏幕变大时，view会根<br>据屏幕的大小来自动拉伸变大，或者改  变位置。</p>
-<p>步骤：1. 选中要添加约束的view：</p>
-<p><img src="http://img.blog.csdn.net/20141126103831468?watermark/2/text/aHR0cDovL2Jsb2
-cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/7
-0/gravity/Center" alt=""></p>
-<p>2. xcode左上方的菜单中Editor -&gt; Pin来添加约束 <img src="http://img.blog.csdn.net/20141126104025
-156?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsi
-ze/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<p>3. 每一个约束会控制view的大小或者距离边框长度或者距离别的view的长度：（按住shift<br>选中两个view,就可以添加Pin中之前不能添加的4个约束。）</p>
-<p>这里给出用4英寸来做的适配6plus的图</p>
-<p>5s的模拟器下: <img src="http://img.blog.csdn.net/20141126104642178?watermark/2/text/aHR0c
-DovL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/d
-issolve/70/gravity/Center" alt=""></p>
-<p>plus下： <img src="http://img.blog.csdn.net/20141126104650181?watermark/2/text/aHR0cDo
-vL2Jsb2cuY3Nkbi5uZXQvdTEwMzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dis
-solve/70/gravity/Center" alt=""></p>
-<p>这时候，你应该就会说，那直接用Pin来做适配不就好了吗，当然是好的，但是Pin太太太麻烦了。。。这调约束的感觉就像在做PS啊<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"><br>。。。。</p>
-<p>3. 第三种解决适配问题的方法是最合适的：代码生成,全代码，不用interfaceBuilder,直接用代码写。但是开发会很慢，而且得出的效果很多时候会跟<br>你想的不一致。。当然，有时间的话还是建议用代码来实现,当写view的时候就这样来设置frame;</p>
-<pre><code>self.btn= [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.origin.x * 0.5, [UIScreen mainScreen].bounds.origin.y * 0.5, 100, 200)];
-</code></pre><p>这样无论什么屏幕，btn都会出现在中间。。。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2014/11/26/iOS关于适配屏幕的问题_2/">展开全文 >></a>
         </p>
       
 
