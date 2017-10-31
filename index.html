@@ -155,6 +155,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Swift的一些特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/26/Swift的一些特性/">Swift的一些特性</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/26/Swift的一些特性/" class="archive-article-date">
+  	<time datetime="2017-10-26T07:40:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Swift的一些特性"><a href="#Swift的一些特性" class="headerlink" title="Swift的一些特性"></a>Swift的一些特性</h1><p>转眼间，Swift 4都出来快半年了，距离当初Swift开源也2年多了。正好最近工作比较空闲，就整理一下一些我觉得Swift比较重要的特性:</p>
+<p>PS:以下代码是在Xcode9.0中build成功的,Swift版本是4.0,在终端输入<code>xcrun swift -version</code>则会显示现在xcode的swift版本</p>
+<ul>
+<li><strong>函数是一个对象</strong></li>
+<li><strong>类属性</strong></li>
+</ul>
+<hr>
+<h2 id="函数是一个对象"><a href="#函数是一个对象" class="headerlink" title="函数是一个对象"></a>函数是一个对象</h2><p>在Swift中，函数是一个对象，函数本身是可以作为传参或者返回值的，而且函数是可以赋值，如下图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">func test() &#123;</div><div class="line">    </div><div class="line">    var result:Int</div><div class="line">    var matchfunc:(Int, Int) -&gt; Int = addNum;</div><div class="line">    </div><div class="line">    result = matchfunc(2, 10);</div><div class="line">    </div><div class="line">    print(result) //显示 12</div><div class="line">    </div><div class="line">    matchfunc = mulNum;</div><div class="line">    </div><div class="line">    result = matchfunc(2, 10);</div><div class="line">    </div><div class="line">    print(result); //显示 20</div><div class="line">&#125;</div><div class="line">    </div><div class="line">//相加函数</div><div class="line">func mulNum(a:Int, b:Int) -&gt; Int &#123;</div><div class="line">    return a * b;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//相乘函数</div><div class="line">func addNum(a:Int , b:Int) -&gt; Int &#123;</div><div class="line">    </div><div class="line">    return a+b;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//函数的返回值是一个函数</div><div class="line">func makeIncrementer() -&gt; ((Int) -&gt; Int) &#123;</div><div class="line">    </div><div class="line">    func addOne(number: Int) -&gt; Int &#123;</div><div class="line">        return 1 + number</div><div class="line">        </div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    return addOne</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到，在一个函数中，是可以声明一个”函数类型”的变量的，跟block有点像，实际上，函数本身就是特殊的Block –《The Swift Programming Language》。</p>
+<p>PS：函数可以作为一个属性，但这并不意味着函数都是属性，比如直接在类T中写一个方法，在VC中并不能改变这个，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var tes:Test = Test();</div><div class="line">        </div><div class="line">tes.test();//执行方法 √</div><div class="line"></div><div class="line">var matchfunc:() -&gt; () = test; //函数作为变量赋值 √</div><div class="line"></div><div class="line">tes.test = test; //error : Cannot assign to property: &apos;test&apos; is a method</div></pre></td></tr></table></figure>
+<p>函数跟方法的区别在于： 类中的方法和一般的函数有一个重要的区别，函数的参数名只在函数内部使用，但是方法的参数名需要在调用的时候显式说明(除了第一个参数)，如图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">class Test: NSObject &#123;</div><div class="line">    </div><div class="line">    override init() &#123;</div><div class="line">        </div><div class="line">        //类的属性需要有init方法给初始值</div><div class="line">        func tttt() &#123;</div><div class="line">            print(&quot;tttt&quot;);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        //在其他方法中也可以这样赋值，可以看做就是一个普通的block属性</div><div class="line">        self.testFunc = tttt;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    var testFunc:() -&gt; (); // 函数作为对象的属性,可以被修改(当执行的时候, xx.testFunc() )</div><div class="line">        </div><div class="line">    //普通方法</div><div class="line">    func test() &#123;</div><div class="line">        </div><div class="line">        let result:Int = 100;</div><div class="line">        </div><div class="line">        print(result);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>——————————————–——————</p>
+<h2 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h2><p>类属性其实并不算是Swift的一个特性，在Objective-C里面其实也是存在的，但一是出现的比较晚；二是在OC中类属性给人的感觉其实更像是用单例的一个应用类型，总感觉跟类本身的关系其实没那么的紧密。</p>
+<p>SWift中的类属性声明，如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">import UIKit</div><div class="line"></div><div class="line">class Test: NSObject &#123;</div><div class="line">    </div><div class="line">    static var courseCount : Int = 0 //类属性 Test.courseCount这样使用</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以使用的时候就可以直接用 XXX.xx 这样赋值和使用,因为类属性是static的，所以需要自己手动去管理内存，在使用完了之后记得要赋nil；</p>
+<p>在Objective-C中，类属性的使用跟Swift没什么不同，也是通过 XXX.xx 这样的方式来获取和赋值，不同的地方在于声明；</p>
+<p>Test.h 头文件声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Test : NSObject</div><div class="line"></div><div class="line">@property (strong, nonatomic, class) NSString *testStr;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>Test.m 方法实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">#import &quot;Test.h&quot;</div><div class="line"></div><div class="line">static NSString *_testStr;</div><div class="line"></div><div class="line">@implementation Test</div><div class="line"></div><div class="line">+(void)setTestStr:(NSString *)testStr &#123;</div><div class="line">    </div><div class="line">    _testStr = testStr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+(NSString *)testStr &#123;</div><div class="line">    </div><div class="line">    return _testStr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>可以看到，在OC中，点语法其实是执行了getter和setter方法，而且类属性居然还需要我们手动去使用再构建一个static来管理，<font color="gray" size="4">类属性这个特性其实只是把setter和getter方法换了一个声明方式而已</font></p>
+<p>上面给出的 Test.h 完全可以用下面的代码来代替</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line"></div><div class="line">@interface Test : NSObject</div><div class="line"></div><div class="line">//@property (strong, nonatomic, class) NSString *testStr;</div><div class="line"></div><div class="line">+(void)setTestStr:(NSString *)testStr;</div><div class="line">+(NSString *)testStr;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>所以说类属性这个特性在OC中特别容易令人混淆，对于代码的可读性来说其实是起到反作用的那么一个效果，当然这个特性也不是不能用，只是个人建议在OC中还是用类方法来做对应的效果，就不要用这么个特性了，会降低代码的可读性。。。</p>
+<p>而在Swift中，类属性的声明相当明了，相当于在类的{}里面的static属性就能直接通过 XXX.xx 来使用了，就很直观，所以我这里是直接把类属性当做是Swift中一个比较有意思的特性的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Swift</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/26/Swift的一些特性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-谈谈iOS中的网络" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1024,101 +1112,6 @@ y/SouthEast" alt="">  </p>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/07/04/怎么用CIFilter给图片加上各种各样的滤镜/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Swift学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/19/Swift学习笔记/">Swift学习笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2015/05/19/Swift学习笔记/" class="archive-article-date">
-  	<time datetime="2015-05-19T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-05-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Swift学习笔记"><a href="#Swift学习笔记" class="headerlink" title=" Swift学习笔记 "></a><a href="/u1031/article/details/45361627"> Swift学习笔记 </a></h1><pre><code>好久没有写博客了，最近在做一个Swift的项目，项目本身比较简单，但是因为自己还是不熟悉Swift，导致各种心酸泪啊。主要把这些都写下来，大家分享分享。
-</code></pre><ol>
-<li>OC混编<br>其实Swift跟OC混编是比较容易的事情，就是在一个工程中，既有.swift文件，又有.m和.h文件。<br>因为本身在Swift中所有的.swift不用导入，能够直接使用，但是在使用OC写的类前，需要先导入头文件。<br>在Swift中导入文件并不是直接import进去的，需要一个桥文件<br>在桥文件中import进入的OC类，就可以直接在所有的.swift文件里面用了，但是在用的时候要遵循的是Swift的语法，比如 HZView *view =<br>[[HZView alloc] init]; 在swift里面就要用var view:HZView = HZView();<br><img src="http://img.blog.csdn.net/20150429175509384" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150429175647384" alt="这里写图片描述"></li>
-</ol>
-<p>在调用HZView()之后，会自动调用HZView的init方法，而如果是带有参数的方法，就把参数写在括号里面来调用，比如：<br><img src="http://img.blog.csdn.net/20150429180119542" alt="这里写图片描述"></p>
-<ol>
-<li>协议<br>跟OC不一样，虽然在Swift中还是单继承的，但是继承的类跟实现的协议名放在一起了。(0_0)!<br>如下图：<br><img src="http://img.blog.csdn.net/20150429173909421" alt="这里是继承的类和协议"><br>其中，第一个为这个类(HZSecViewController)的父类(UIViewController)，剩下的是这个类所要实现的协议。</li>
-</ol>
-<p>3. 还是OC混编</p>
-<p>这次的混编跟之前的不一样，这里是在OC文件里面引用swift文件，主要是因为在Swift中苹果给出了更多地API，这样我们可以通过这些API去做更多地事情。</p>
-<p>而且因为像CoreImage等一些框架，用swift写起来会比较方便，而如果项目的整体用OC来写，而在一些需要做效果的组件使用swift来写，</p>
-<p>那就会造成一个局面，就是</p>
-<p>1）写效果不用再像OC这么繁琐，用swift非常简洁；</p>
-<p>2）而在主体（ViewController）里面用OC写，代码容易读懂，错误也比较好修改，最起码不用烦那个该死的初始化问题<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/wronged.gif" alt="委屈"><br>。。。那个  required  init  (coder aDecoder:  NSCoder  )把我恶心的。。。。。<br><img src="http://static.blog.csdn.net/xheditor/xheditor_emot/default/crazy.gif" alt="抓狂"></p>
-<p>那么下面来说一下怎么做：</p>
-<p>1. 新建工程，建OC的工程，这个就不说了</p>
-<p>2. 新建一个Swift类：</p>
-<p><img src="http://img.blog.csdn.net/20150519100915116" alt=""></p>
-<p>这里会出现提示：系统会自动建一个桥文件，如果在swift类中要用OC类，就在这个文件里面import要用的OC类</p>
-<p><img src="http://img.blog.csdn.net/20150519100925084" alt=""></p>
-<p><img src="http://img.blog.csdn.net/20150519100933071" alt="">  </p>
-<p>3. 更改配置</p>
-<p>在build setting里面找到Packaging</p>
-<p><img src="http://img.blog.csdn.net/20150519101046715" alt="">  </p>
-<p>这时Product Name应该是项目的名字，如果不是要改成项目的名字</p>
-<p><img src="http://img.blog.csdn.net/20150519101140804" alt="">  </p>
-<p>然后去修改一下Defines Module为Yes</p>
-<p><img src="http://img.blog.csdn.net/20150519101746219" alt=""></p>
-<p>4. 在OC类中导入Swift</p>
-<p>这里要先导入之前提醒你之后系统建德桥文件，然后再导入项目名-Swift.h这个文件就好，这个文件是系统生成的，不要手贱去自己建一个啊</p>
-<p><img src="http://img.blog.csdn.net/20150519101827431" alt="">  </p>
-<p>5. OK了，现在可以在OC类里面使用Swift了</p>
-<p><img src="http://img.blog.csdn.net/20150519101915171" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Swift</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/05/19/Swift学习笔记/">展开全文 >></a>
         </p>
       
 

@@ -6,22 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://luochuhuazai.github.io">
-  <title>用GPUImage做自己的滤镜 | 罗储华的Blog</title>
+  <title>Archives: 2017/10 | 罗储华的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这篇博客主要说一下怎么用GPUImage这个库来撸一个自制滤镜。  GPUImage中滤镜主要使用OpenGL ES来对图片和视频进行渲染，当然，要自制一个滤镜并不需要你对OpenGL ES有很深入的了解，但最好还是简单了解一下。这里给出一个参考资料；  手撸一个滤镜需要算法(像：Overlay(B,A) (A &amp;lt; 128) ? (2  A  B / 255) : (255 - 2  (25">
-<meta name="keywords" content="iOS,GPUImage">
-<meta property="og:type" content="article">
-<meta property="og:title" content="用GPUImage做自己的滤镜">
-<meta property="og:url" content="https://luochuhuazai.github.io/2017/04/21/用GPUImage做自己的滤镜/index.html">
+  <meta name="description" content="一个iOS小小开发者的技术博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="罗储华的Blog">
+<meta property="og:url" content="https://luochuhuazai.github.io/archives/2017/10/index.html">
 <meta property="og:site_name" content="罗储华的Blog">
-<meta property="og:description" content="这篇博客主要说一下怎么用GPUImage这个库来撸一个自制滤镜。  GPUImage中滤镜主要使用OpenGL ES来对图片和视频进行渲染，当然，要自制一个滤镜并不需要你对OpenGL ES有很深入的了解，但最好还是简单了解一下。这里给出一个参考资料；  手撸一个滤镜需要算法(像：Overlay(B,A) (A &amp;lt; 128) ? (2  A  B / 255) : (255 - 2  (25">
-<meta property="og:image" content="http://img.blog.csdn.net/20160303155002509">
-<meta property="og:image" content="http://img.blog.csdn.net/20160303154720209">
-<meta property="og:updated_time" content="2017-04-21T08:18:43.000Z">
+<meta property="og:description" content="一个iOS小小开发者的技术博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用GPUImage做自己的滤镜">
-<meta name="twitter:description" content="这篇博客主要说一下怎么用GPUImage这个库来撸一个自制滤镜。  GPUImage中滤镜主要使用OpenGL ES来对图片和视频进行渲染，当然，要自制一个滤镜并不需要你对OpenGL ES有很深入的了解，但最好还是简单了解一下。这里给出一个参考资料；  手撸一个滤镜需要算法(像：Overlay(B,A) (A &amp;lt; 128) ? (2  A  B / 255) : (255 - 2  (25">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20160303155002509">
+<meta name="twitter:title" content="罗储华的Blog">
+<meta name="twitter:description" content="一个iOS小小开发者的技术博客">
   
     <link rel="alternative" href="/atom.xml" title="罗储华的Blog" type="application/atom+xml">
   
@@ -58,6 +53,9 @@
 		
 		<p class="header-subtitle">Little Developer</p>
 		
+		<span id="busuanzi_container_page_pv" class="header-subtitle" fontsize='10px'>
+  				Total <span id="busuanzi_value_page_pv"></span> views.
+		</span>
 
 		<nav class="header-menu">
 			<ul>
@@ -65,6 +63,8 @@
 				<li><a href="/">主页</a></li>
 	        
 				<li><a href="/tags/iOS/">iOS</a></li>
+	        
+				<li><a href="/tags/GPUImage/">GPUImage</a></li>
 	        
 			</ul>
 		</nav>
@@ -77,7 +77,7 @@
     			
             
     			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">true</a>
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
     			
             
 		</nav>
@@ -86,8 +86,8 @@
 				
 					<a class="github" target="_blank" href="https://github.com/luochuhuaZai" title="github"><i class="icon-github"></i></a>
 		        
-					<a class="csdn" target="_blank" href="http://blog.csdn.net/u1031?viewmode=list" title="csdn"><i class="icon-csdn"></i></a>
-		        
+
+		        <a class="github" target="_blank" href="/简历.docx" title="github" download="罗储华的简历"><i class="icon-link"></i></a>
 			</div>
 		</nav>
 	</header>		
@@ -118,6 +118,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -125,18 +127,18 @@
 					
 						<a class="github" target="_blank" href="https://github.com/luochuhuaZai" title="github"><i class="icon-github"></i></a>
 			        
-						<a class="csdn" target="_blank" href="http://blog.csdn.net/u1031?viewmode=list" title="csdn"><i class="icon-csdn"></i></a>
-			        
 				</div>
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/iOS/">iOS</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/iOS/">iOS</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/tags/GPUImage/">GPUImage</a></li>
 		        
 				</ul>
 			</nav>
@@ -151,74 +153,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-用GPUImage做自己的滤镜" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      用GPUImage做自己的滤镜
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/10/26/Swift的一些特性/" class="archive-article-date">
+  	<time datetime="2017-10-26T07:40:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-26</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/10/26/Swift的一些特性/">Swift的一些特性</a>
     </h1>
   
 
-        
-        <a href="/2017/04/21/用GPUImage做自己的滤镜/" class="archive-article-date">
-  	<time datetime="2017-04-21T08:15:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这篇博客主要说一下怎么用GPUImage这个库来撸一个自制滤镜。</p>
-<ol>
-<li><p>GPUImage中滤镜主要使用OpenGL ES来对图片和视频进行渲染，当然，要自制一个滤镜并不需要你对OpenGL ES有很深入的了解，但最好还是简单了解一下。这里给出一个<a href="http://www.apkbus.com/blog-99192-39584.html" target="_blank" rel="external">参考资料</a>；</p>
-</li>
-<li><p>手撸一个滤镜需要算法(像：Overlay(B,A) (A &lt; 128) ? (2 <em> A </em> B / 255) : (255 - 2 <em> (255 - A) </em> (255 - B) / 255) [强光混合算法])。</p>
-</li>
-<li><p>GPUImage里面手撸滤镜通过使用vec4来表示一个像素点的颜色，即rgb和a(RGB色通道和透明度)；</p>
-</li>
-</ol>
-<p>先写一个超级简单的例子，写一个把亮度改成0.5的滤镜</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//这里写2个,一个用手撸的滤镜，一个用GPUImage的，来验证效果</div><div class="line">_upGPUImageView = [[GPUImageView alloc] initWithFrame:_imgViewUp.frame];</div><div class="line">   _downGPUImageView = [[GPUImageView alloc] </div><div class="line">        initWithFrame:_imgViewDown.frame];</div><div class="line">   [self.view addSubview:_upGPUImageView];</div><div class="line">   [self.view addSubview:_downGPUImageView];</div><div class="line">   </div><div class="line">   UIImage *demoImg = [UIImage imageNamed:@&quot;demo.jpg&quot;];</div><div class="line">   _upGPUImagePicture = [[GPUImagePicture alloc] initWithImage:demoImg];</div><div class="line">   _downGPUImagePicture = [[GPUImagePicture alloc] initWithImage:demoImg];</div></pre></td></tr></table></figure>
-<p>来手撸一个滤镜<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//一定要是const的，不是常量可是会报错的</div><div class="line">NSString *const kGPUImageHalfBrightnessShaderString = SHADER_STRING</div><div class="line">    (</div><div class="line">    //这两个是输入,表示输入图片的像素</div><div class="line">     varying highp vec2 textureCoordinate;</div><div class="line">     </div><div class="line">     uniform sampler2D inputImageTexture;</div><div class="line">     </div><div class="line">     //main函数里面对像素进行处理</div><div class="line">     void main()</div><div class="line">     &#123;</div><div class="line">	     //这个textureColor就是结合了输入之后,表示图片像素的vec4</div><div class="line">        lowp vec4 textureColor = texture2D(inputImageTexture, textureCoordinate);</div><div class="line">        //w即透明度(我也不知道为什么不用a)</div><div class="line">        //这样就能让rgb的输入变成+0.5,也就是让亮度+0.5</div><div class="line">        gl_FragColor = vec4((textureColor.rgb + vec3(0.5)), textureColor.w);</div><div class="line">     &#125;</div><div class="line">    );</div><div class="line">    </div><div class="line">    //使用上面的函数来构建滤镜,之后就可以当GPUImageFilter直接用了</div><div class="line">    _upBrightnessFilter = [[GPUImageFilter alloc] initWithFragmentShaderFromString:kGPUImageHalfBrightnessShaderString];</div></pre></td></tr></table></figure></p>
-<p>也可以通过文件来手撸</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">_upBrightnessFilter = [[GPUImageFilter alloc] initWithFragmentShaderFromFile:@&quot;custonShader&quot;];</div></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20160303155002509" alt="这里写图片描述"></p>
-<p>这个是对比组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">_downBrightnessFilter = [[GPUImageBrightnessFilter alloc] init];</div><div class="line">   _downBrightnessFilter.brightness = 0.5;</div></pre></td></tr></table></figure></p>
-<p>添加好target，看效果吧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[_upGPUImagePicture addTarget:_upBrightnessFilter];</div><div class="line">   [_upBrightnessFilter addTarget:_upGPUImageView];</div><div class="line">   [_downGPUImagePicture addTarget:_downBrightnessFilter];</div><div class="line">   [_downBrightnessFilter addTarget:_downGPUImageView];</div><div class="line">   </div><div class="line">   [_downGPUImagePicture processImage];</div><div class="line">   [_upGPUImagePicture processImage];</div></pre></td></tr></table></figure></p>
-<p><img src="http://img.blog.csdn.net/20160303154720209" alt="这里写图片描述"></p>
-<p>好了，下次有空的时候会写一篇关于怎么用GPUImage手撸2个输入和3输入的滤镜。。。。。。一个不小心又给自己挖了个坑。。。希望这次有时间填上。。。</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -228,99 +192,25 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GPUImage</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Swift</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://luochuhuazai.github.io/2017/04/21/用GPUImage做自己的滤镜/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/04/21/UIWebView的间距和加载iFrame的坑/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          UIWebView的间距和加载iFrame的坑
-        
-      </div>
-    </a>
   
   
-</nav>
-
-
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -343,8 +233,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
@@ -384,7 +274,7 @@
       
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">true</a></li>
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -410,6 +300,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">GPUImage</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Swift</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">视频播放</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
               </li>
             
             <div class="clearfix"></div>
@@ -460,7 +362,7 @@
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自广州的胖子&lt;br&gt;&lt;br&gt;现在魔都做着iOS开发&lt;br&gt;真正的理想是吃吃吃</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">一枚来自广州的胖子&lt;br&gt;&lt;br&gt;现在魔都做着iOS开发&lt;br&gt;真正的理想是吃吃吃&lt;br&gt;联系方式:384345982(QQ)&lt;br&gt;简历可以在左边最下面的链接icon处下载</div>
   	  	
     	</section>
     
